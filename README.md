@@ -10,6 +10,7 @@ To learn Machine Learning, I will be using a variety of resources including onli
 * [Machine Learning Specialization by Andrew Ng](https://www.coursera.org/specializations/machine-learning-introduction?)
 * [Mathematics for Machine Learning and Data Science Specialization by DeepLearning.AI](https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science?)
 * [Microsoft's Machine Learning Course](https://github.com/ali-izhar/ML-For-Beginners)
+* [Practical Deep Learning for Coders](https://fastai.github.io/fastbook2e/)
 
 ## Repository Structure
 This repository will be structured in the following way:
