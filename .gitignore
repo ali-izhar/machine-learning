@@ -130,3 +130,9 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+
+## ignore data and model files
+./data/*
+./models/*
+*.pt 
