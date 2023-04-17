@@ -133,6 +133,6 @@ dmypy.json
 
 
 ## ignore data and model files
-./data/*
-./models/*
+.data/*
+.models/*
 *.pt 
