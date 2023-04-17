@@ -133,6 +133,6 @@ dmypy.json
 
 
 ## ignore data and model files
-*.data/*
-*.models/*
+mini_projects/movies_reviews_classification/.models
+mini_projects/movies_reviews_classification/.data
 *.pt 
