@@ -130,3 +130,9 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+
+## ignore data and model files
+mini_projects/movies_reviews_classification/.models
+mini_projects/movies_reviews_classification/.data
+*.pt 
