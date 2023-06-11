@@ -39,7 +39,7 @@ The Gaussian distribution, also known as the normal distribution, is a continuou
 
 $$PDF = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{x - \mu}{\sigma})^2}$$
 
-where $\mu$ is the mean and $\sigma$ is the standard deviation. The mean is the center of the distribution, while the standard deviation is the measure of the spread of the distribution.The Gaussian distribution is parameterized by the mean and standard deviation. If $X$ is a random variable with a Gaussian distribution, then $X \sim \mathcal{N}(\mu, \sigma)$. The CDF of the Gaussian distribution cannot be expressed in terms of elementary functions. However, it can be expressed in terms of the error function, which is defined as:
+where $\mu$ is the mean and $\sigma$ is the standard deviation. The mean is the center of the distribution, while the standard deviation is the measure of the spread of the distribution. The Gaussian distribution is parameterized by the mean and standard deviation. If $X$ is a random variable with a Gaussian distribution, then $X \sim \mathcal{N}(\mu, \sigma)$. The CDF of the Gaussian distribution doesn't have a closed analytical expression, therefore, the closed formula uses a function called the Gaussian error function, denoted as $\text{erf}$. The CDF of the Gaussian distribution is defined as:
 
 $$y = F(x) = \frac{1}{2} \left[ 1 + \text{erf} \left( \frac{x - \mu}{\sigma \sqrt{2}} \right) \right]$$
 
@@ -47,8 +47,8 @@ where $\text{erf}$ is the error function. The error function is defined as:
 
 $$\text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt$$
 
-Denoting the error function as $\text{erf}$, the inverse CDF of the Gaussian distribution is:
+The inverse CDF of the Gaussian distribution is:
 
 $$F^{-1}(y) = \mu + \sigma \sqrt{2} \text{erf}^{-1}(2y - 1)$$
 
-where $\text{erf}^{-1}$ is the inverse error function.
+> More on the Gaussian error function at [scipy.special.erf](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.erf.html) and [scipy.special.erfinv](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.erfinv.html#scipy.special.erfinv). There is also a python implementation from the Python math library at [math.erf](https://docs.python.org/3/library/math.html#math.erf).
