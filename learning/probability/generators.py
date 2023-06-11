@@ -1,5 +1,7 @@
 import numpy as np
-from inverse import inverse_cdf_gaussian
+from inverse import inverse_cdf_gaussian, inverse_cdf_binomial
+
+__all__ = ['Generator']
 
 class Generator(object):
     def __init__(self):
@@ -31,4 +33,21 @@ class Generator(object):
 
         # Use the inverse CDF technique to generate an array of normally distributed random numbers
         array = inverse_cdf_gaussian(u, mu, sigma)
+        return array
+    
+    def binomial_generator(self, n, p, num_samples=100):
+        """
+        Generates an array of binomially distributed random numbers with n trials and probability of
+        success p.
+        :param n (int): Number of trials in the binomial distribution.
+        :param p (float): Probability of success in each trial.
+        :param size (int): Number of samples to generate (default: 100).
+        :return: Array of binomially distributed random numbers.
+        """
+
+        # Generate an array of uniformly distributed random numbers in the range [0, 1)
+        u = self.uniform_generator(0, 1, num_samples)
+
+        # Use the inverse CDF technique to generate an array of binomially distributed random numbers
+        array = inverse_cdf_binomial(u, n, p)
         return array
