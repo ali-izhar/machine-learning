@@ -24,17 +24,31 @@ The value of the CDF always ranges from 0 to 1. The CDF is a monotonically incre
 Inverse Transform Sampling is a method for generating random numbers with a specified probability distribution.
 
 > If $X$ is a random variable with CDF $F$, then $F(X)$ has a uniform distribution on $[0, 1]$. The uniform distribution here means that any value in the range $[0, 1]$ is equally likely to occur. This is due to the properties of the CDF, which by definition, ranges from 0 to 1 and is monotonically increasing.
-
+>
 > If you have a uniformly distributed random value $y$ from $[0, 1]$, you can transform this value into a value that follows any desired distribution using the inverse CDF of that distribution. The inverse CDF is the value $x$ such that $F(x) = y$. In essence, we're essentially "mapping back" from the uniform distribution on $[0, 1]$ to the original distribution of $X$.
-
-> Therefore, if $Y$ is a random variable with a uniform distribution on $[0, 1]$, then $F^{-1}(Y)$ has the same distribution as $X$.
-
-The method is as follows:
-
-1. Generate a random number $u$ from a uniform distribution between 0 and 1.
-2. Find the value $x$ such that $F(x) = u$ where $F(x)$ is the CDF of the desired distribution.
-3. $x$ is a random number from the desired distribution.
-
+>
+> Therefore, if $Y$ is a random variable with a uniform distribution on $[0, 1]$, then $F^{-1}(Y)$ has the same distribution as $X$. This is the basis of inverse transform sampling.
 
 ## Generating Data
+The process of generating data from a specified distribution is as follows:
+1. Generate a uniformly distributed random value $y$ from $[0, 1]$ using a random number generator (RNG). This is implemented in the `generators.py` file as the `uniform_generator()` function.
+2. Transform $y$ into a value $x$ that follows the desired distribution using the inverse CDF of that distribution. That is, $x = F^{-1}(y)$. In order to do this, we need to know the inverse CDF of the distribution. This is implemented in the `inverse.py` file for the gaussian and binomial distributions.
 
+## Gaussian Distribution
+The Gaussian distribution, also known as the normal distribution, is a continuous probability distribution that is symmetric about the mean. The Gaussian distribution is defined by the following probability density function:
+
+$$PDF = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{x - \mu}{\sigma})^2}$$
+
+where $\mu$ is the mean and $\sigma$ is the standard deviation. The mean is the center of the distribution, while the standard deviation is the measure of the spread of the distribution.The Gaussian distribution is parameterized by the mean and standard deviation. If $X$ is a random variable with a Gaussian distribution, then $X \sim \mathcal{N}(\mu, \sigma)$. The CDF of the Gaussian distribution cannot be expressed in terms of elementary functions. However, it can be expressed in terms of the error function, which is defined as:
+
+$$y = F(x) = \frac{1}{2} \left[ 1 + \text{erf} \left( \frac{x - \mu}{\sigma \sqrt{2}} \right) \right]$$
+
+where $\text{erf}$ is the error function. The error function is defined as:
+
+$$\text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt$$
+
+Denoting the error function as $\text{erf}$, the inverse CDF of the Gaussian distribution is:
+
+$$F^{-1}(y) = \mu + \sigma \sqrt{2} \text{erf}^{-1}(2y - 1)$$
+
+where $\text{erf}^{-1}$ is the inverse error function.
