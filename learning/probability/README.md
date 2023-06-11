@@ -43,7 +43,7 @@ where $\mu$ is the mean and $\sigma$ is the standard deviation. The mean is the 
 
 $$y = F(x) = \frac{1}{2} \left[ 1 + \text{erf} \left( \frac{x - \mu}{\sigma \sqrt{2}} \right) \right]$$
 
-where $\text{erf}$ is the error function. The error function is defined as:
+where $\text{erf}$ is the error function defined as:
 
 $$\text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} dt$$
 
@@ -52,3 +52,14 @@ The inverse CDF of the Gaussian distribution is:
 $$F^{-1}(y) = \mu + \sigma \sqrt{2} \text{erf}^{-1}(2y - 1)$$
 
 > More on the Gaussian error function at [scipy.special.erf](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.erf.html) and [scipy.special.erfinv](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.erfinv.html#scipy.special.erfinv). There is also a python implementation from the Python math library at [math.erf](https://docs.python.org/3/library/math.html#math.erf).
+
+## Binomial Distribution
+The Binomial distribution is a discrete probability distribution that describes the number of successes in a sequence of $n$ independent experiments, each asking a yes-no question, and each with its own boolean-valued outcome. The binomial distribution is defined by the following probability mass function:
+
+$$PMF = \binom{n}{k} p^k (1 - p)^{n - k}$$
+
+where $n$ is the number of trials, $k$ is the number of successes, and $p$ is the probability of success. The binomial distribution is parameterized by $n$ and $p$. If $X$ is a random variable with a binomial distribution, then $X \sim \text{Binomial}(n, p)$. The CDF of the binomial distribution is defined as:
+
+$$y = F(x) = \sum_{i = 0}^{k} \binom{n}{i} p^i (1 - p)^{n - i}$$
+
+> There is no closed-form expression for the inverse CDF of the binomial distribution. However, statistical libraries provide implementations of the inverse CDF using [generalized quantile functions](https://en.wikipedia.org/wiki/Cumulative_distribution_function#Inverse_distribution_function_.28quantile_function.29). You can refer to the [scipy.stats.binom](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html) documentation for more information.
