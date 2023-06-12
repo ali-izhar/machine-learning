@@ -1,5 +1,5 @@
 # Generating synthetic data utilizing the generator functions
-We will utilize the generator functions (see [here](../../learning/probability/generators.py)) to generate synthetic data for the naive bayes classifier. The dataset will contain information about three different dog breeds. Once we have prepared the dataset, we will train the naive bayes classifier to classify the dog breeds based on the features of the dogs.
+We will utilize the [generator functions](./probability/generators.py) to generate synthetic data for the naive bayes classifier. The dataset will contain information about three different dog breeds. Once we have prepared the dataset, we will train the naive bayes classifier to classify the dog breeds based on the features of the dogs.
 
 ## Generating the dataset
 The dataset will contain information about three different dog breeds. The features of the dogs will be the following:
@@ -9,4 +9,24 @@ The dataset will contain information about three different dog breeds. The featu
 - ear_head_ratio, which is the ratio between the length of the ears and the length of the head, which follows a uniform distribution.
 
 $$FEATURES = ['height', 'weight', 'bark_days', 'ear_head_ratio']$$
+
+## Naive Bayes Algorithm
+Let $X$ be a set of training data. An element $x \in X$ is a tuple of the form $(x_1, x_2, ..., x_n)$, where $x_i$ is the value of the $i$-th feature. For instance, in our example, $x = (height, weight, bark\_days, ear\_head\_ratio)$. Let $C$ be a set of classes that we want to classify the elements of $X$ to. In our example, $C$ is the set of dog breeds.
+
+Suppose there are $m$ classes $C_1, C_2, ..., C_m$. Suppose there are $m=5$ different types of dog breeds in the training data. The idea is to predict the class of a sample $x \in X$ by calculating the probability of $x$ belonging to each class $C_i$ and then choosing the class with the highest probability.
+
+$$\text{predicted class for } x = \underset{C_i \in C}{\operatorname{argmax}} P(C_i | x)$$
+
+So, if the highest value of $P(C_i | x)$ is $P(C_3 | x)$, then the predicted class for $x$ is $C_3$.
+
+### Calculating the probability of a class
+The probability of a class $C_i$ is calculated as follows:
+
+$$P(C_i | x) = \frac{P(x | C_i) P(C_i)}{P(x)}$$
+
+Note that $P(x)$ is the same for all classes (it is positive and constant) for every class $C_i$, therefore, to maximize $P(C_i | x)$, we only need to maximize $P(x | C_i) P(C_i)$. The term $P(x | C_i)$ is called the `likelihood` and the term $P(C_i)$ is called the `class prior` probability and it denotes how likely a random sample from $X$ (without knowing any of its features) belongs to the class $C_i$. This value is usually not known and can be estimated by the frequency of the class in the training data. However, if the training set is too small, it is common to assume that each class is equally likely to occur, i.e. $P(C_i) = \frac{1}{m}$ for all $i=1,2,...,m$, thus only maximizing $P(x | C_i)$ remains.
+
+In general, it would be computationally expensive to calculate $P(x | C_i)$ for all $i=1,2,...,m$ and then choose the class with the highest probability. However, the naive bayes algorithm makes the assumption of `class-conditional independence`. This assumption states that each attribute is independent of each other attribute with each class. In other words, the value of one feature does not depend on the value of another feature. This assumption allows us to calculate $P(x | C_i)$ as follows:
+
+$$P(x | C_i) = P(x_1, x_2, ..., x_n | C_i) = \prod_{j=1}^{n} P(x_j | C_i)$$
 
