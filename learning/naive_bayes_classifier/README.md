@@ -15,20 +15,20 @@ Let $X$ be a set of training data. An element $x \in X$ is a tuple of the form $
 
 Suppose there are $m$ classes $C_1, C_2, ..., C_m$. Suppose there are $m=5$ different types of dog breeds in the training data. The idea is to predict the class of a sample $x \in X$ by calculating the probability of $x$ belonging to each class $C_i$ and then choosing the class with the highest probability.
 
-$$\text{predicted class for } x = \arg \max \limits_{i=1,2,...,m} P(C_i | x)$$
+$$\text{predicted class for } x = \arg \max \limits_{i=1,2,...,m} P(C_i \mid x)$$
 
-So, if the highest value of $P(C_i | x)$ is $P(C_3 | x)$, then the predicted class for $x$ is $C_3$.
+So, if the highest value of $P(C_i \mid x)$ is $P(C_3 \mid x)$, then the predicted class for $x$ is $C_3$.
 
-### Calculating the probability of a class
+## Calculating the probability of a class
 The probability of a class $C_i$ is calculated as follows:
 
-$$P(C_i | x) = \frac{P(x | C_i) P(C_i)}{P(x)}$$
+$$P(C_i \mid x) = \frac{P(x \mid C_i) P(C_i)}{P(x)}$$
 
-Note that $P(x)$ is the same for all classes (it is positive and constant) for every class $C_i$, therefore, to maximize $P(C_i | x)$, we only need to maximize $P(x | C_i) P(C_i)$. The term $P(x | C_i)$ is called the `likelihood` and the term $P(C_i)$ is called the `class prior` probability and it denotes how likely a random sample from $X$ (without knowing any of its features) belongs to the class $C_i$. This value is usually not known and can be estimated by the frequency of the class in the training data. However, if the training set is too small, it is common to assume that each class is equally likely to occur, i.e. $P(C_i) = \frac{1}{m}$ for all $i=1,2,...,m$, thus only maximizing $P(x | C_i)$ remains.
+Note that $P(x)$ is the same for all classes (it is positive and constant) for every class $C_i$, therefore, to maximize $P(C_i \mid x)$, we only need to maximize $P(x \mid C_i) P(C_i)$. The term $P(x \mid C_i)$ is called the `likelihood` and the term $P(C_i)$ is called the `class prior` probability and it denotes how likely a random sample from $X$ (without knowing any of its features) belongs to the class $C_i$. This value is usually not known and can be estimated by the frequency of the class in the training data. However, if the training set is too small, it is common to assume that each class is equally likely to occur, i.e. $P(C_i) = \frac{1}{m}$ for all $i=1,2,...,m$, thus only maximizing $P(x \mid C_i)$ remains.
 
-In general, it would be computationally expensive to calculate $P(x | C_i)$ for all $i=1,2,...,m$ and then choose the class with the highest probability. However, the naive bayes algorithm makes the assumption of `class-conditional independence`. This assumption states that each attribute is independent of each other attribute with each class. In other words, the value of one feature does not depend on the value of another feature. This assumption allows us to calculate $P(x | C_i)$ as follows:
+In general, it would be computationally expensive to calculate $P(x \mid C_i)$ for all $i=1,2,...,m$ and then choose the class with the highest probability. However, the naive bayes algorithm makes the assumption of `class-conditional independence`. This assumption states that each attribute is independent of each other attribute with each class. In other words, the value of one feature does not depend on the value of another feature. This assumption allows us to calculate $P(x \mid C_i)$ as follows:
 
-$$P(x | C_i) = P(x_1, x_2, ..., x_n | C_i) = \prod_{j=1}^{n} P(x_j | C_i)$$
+$$P(x \mid C_i) = P(x_1, x_2, ..., x_n \mid C_i) = \prod_{j=1}^{n} P(x_j \mid C_i)$$
 
 The probabilities $\mathbf P(x_k \mid C_i)$ can be estimated from the training data. The computation of $\mathbf P(x_k \mid C_i)$ depends on whether $x_k$ is categorical or not.
 

@@ -63,3 +63,21 @@ where $n$ is the number of trials, $k$ is the number of successes, and $p$ is th
 $$y = F(x) = \sum_{i = 0}^{k} \binom{n}{i} p^i (1 - p)^{n - i}$$
 
 > There is no closed-form expression for the inverse CDF of the binomial distribution. However, statistical libraries provide implementations of the inverse CDF using [generalized quantile functions](https://en.wikipedia.org/wiki/Cumulative_distribution_function#Inverse_distribution_function_.28quantile_function.29). You can refer to the [scipy.stats.binom](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html) documentation for more information.
+
+# Probabilty Distribution Functions
+The probability distribution functions are implemented in the `distributions.py` file.
+
+## Uniform PDF
+If $X \sim \text{Uniform}(a, b)$, then the probability density function (PDF) of $X$ is defined as:
+
+$$f_X(x) = \begin{cases} \frac{1}{b - a} & \text{if } a \leq x \leq b \\ 0 & \text{otherwise} \end{cases}$$
+
+## Gaussian PDF
+If $X \sim \mathcal{N}(\mu, \sigma)$, then the probability density function (PDF) of $X$ is defined as:
+
+$$f_X(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{x - \mu}{\sigma})^2}$$
+
+## Binomial PMF
+If $X \sim \text{Binomial}(n, p)$, then the probability mass function (PMF) of $X$ is defined as:
+
+$$f_X(x) = \binom{n}{k} p^k (1 - p)^{n - k} \text{ where } k = 0, 1, 2, ..., n$$
