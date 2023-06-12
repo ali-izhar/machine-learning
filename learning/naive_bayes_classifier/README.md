@@ -15,7 +15,7 @@ Let $X$ be a set of training data. An element $x \in X$ is a tuple of the form $
 
 Suppose there are $m$ classes $C_1, C_2, ..., C_m$. Suppose there are $m=5$ different types of dog breeds in the training data. The idea is to predict the class of a sample $x \in X$ by calculating the probability of $x$ belonging to each class $C_i$ and then choosing the class with the highest probability.
 
-$$\text{predicted class for } x = \arg \max \left\{ \mathbf P(C_1 \mid x), \mathbf P(C_2 \mid x), \ldots, \mathbf P(C_m \mid x) \right\}$$
+$$\text{predicted class for } x = \arg \max \limits_{i=1,2,...,m} P(C_i | x)$$
 
 So, if the highest value of $P(C_i | x)$ is $P(C_3 | x)$, then the predicted class for $x$ is $C_3$.
 
