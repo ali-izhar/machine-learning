@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from generators import Generator
+from probability.generators import Generator
 
 __all__ = ['plot_gaussian_distributions', 'plot_binomial_distributions']
 
