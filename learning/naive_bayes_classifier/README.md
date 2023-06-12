@@ -36,4 +36,4 @@ The probabilities $\mathbf P(x_k \mid C_i)$ can be estimated from the training d
 
 - If $x_k$ is continuous-valued or discrete-valued, we need to make an assumption about its distribution and estimate its parameters using the training data. For instance, if $x_k$ is continuous-valued, we can assume that $\mathbf P(x_k \mid C_i)$ follows a Gaussian distribution with parameters $\mu_{C_i}$ and $\sigma_{C_i}$. Therefore, we need to estimate $\mu$ and $\sigma$ from the training data, and then
 
-$$\mathbf P(x_k \mid C_i) = \text{PDF}_{\text{gaussian}}(x_k, \mu_{C_i}, \sigma_{C_i})$$
+$$\mathbf P(x_k \mid C_i) = \frac{1}{\sqrt{2 \pi \sigma_{C_i}^2}} \exp \left( - \frac{(x_k - \mu_{C_i})^2}{2 \sigma_{C_i}^2} \right)$$
