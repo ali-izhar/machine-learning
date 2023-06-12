@@ -8,14 +8,14 @@ The dataset will contain information about three different dog breeds. The featu
 - bark_days, representing the number of days (out of 30) that the dog barked, which follows a binomial distribution with $n=30$.
 - ear_head_ratio, which is the ratio between the length of the ears and the length of the head, which follows a uniform distribution.
 
-$$FEATURES = ['height', 'weight', 'bark_days', 'ear_head_ratio']$$
+`FEATURES = ['height', 'weight', 'bark_days', 'ear_head_ratio']`
 
 ## Naive Bayes Algorithm
 Let $X$ be a set of training data. An element $x \in X$ is a tuple of the form $(x_1, x_2, ..., x_n)$, where $x_i$ is the value of the $i$-th feature. For instance, in our example, $x = (height, weight, bark\_days, ear\_head\_ratio)$. Let $C$ be a set of classes that we want to classify the elements of $X$ to. In our example, $C$ is the set of dog breeds.
 
 Suppose there are $m$ classes $C_1, C_2, ..., C_m$. Suppose there are $m=5$ different types of dog breeds in the training data. The idea is to predict the class of a sample $x \in X$ by calculating the probability of $x$ belonging to each class $C_i$ and then choosing the class with the highest probability.
 
-$$\text{predicted class for } x = \underset{C_i \in C}{\operatorname{argmax}} P(C_i | x)$$
+$$\text{predicted class for } x = \arg \max \left\{ \mathbf P(C_1 \mid x), \mathbf P(C_2 \mid x), \ldots, \mathbf P(C_m \mid x) \right\}$$
 
 So, if the highest value of $P(C_i | x)$ is $P(C_3 | x)$, then the predicted class for $x$ is $C_3$.
 
@@ -30,3 +30,8 @@ In general, it would be computationally expensive to calculate $P(x | C_i)$ for 
 
 $$P(x | C_i) = P(x_1, x_2, ..., x_n | C_i) = \prod_{j=1}^{n} P(x_j | C_i)$$
 
+The probabilities $\mathbf P(x_k \mid C_i)$ can be estimated from the training data. The computation of $\mathbf P(x_k \mid C_i)$ depends on whether $x_k$ is categorical or not.
+
+- If $x_k$ is categorical, then $\mathbf P(x_k \mid C_i)$ is the number of samples in $X$ that have attribute $x_k$ divided by the number of samples in class $C_i$.
+
+- If $x_k$ is continuous-valued or discrete-valued, we need to make an assumption about its distribution and estimate its parameters using the training data. For instance, if $x_k$ is continuous-valued, we can assume that $\mathbf P(x_k \mid C_i)$ follows a Gaussian distribution with parameters $\mu_{C_i}$ and $\sigma_{C_i}$. Therefore, we need to estimate $\mu$ and $\sigma$ from the training data, and then $\mathbf P(x_k \mid C_i) = \text{PDF}_{\text{gaussian}}(x_k, \mu_{C_i}, \sigma_{C_i})$.
