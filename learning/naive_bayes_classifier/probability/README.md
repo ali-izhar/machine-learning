@@ -70,7 +70,7 @@ The probability distribution functions are implemented in the `distributions.py`
 ## Uniform PDF
 If $X \sim \text{Uniform}(a, b)$, then the probability density function (PDF) of $X$ is defined as:
 
-$$f_X(x) = \begin{cases} \frac{1}{b - a} & \text{if } a \leq x \leq b \\ 0 & \text{otherwise} \end{cases}$$
+$$f_X(x) = \begin{cases} \frac{1}{b - a} & \text{if } a \leq x \leq b,  \\ 0 & \text{otherwise} \end{cases}$$
 
 ## Gaussian PDF
 If $X \sim \mathcal{N}(\mu, \sigma)$, then the probability density function (PDF) of $X$ is defined as:
