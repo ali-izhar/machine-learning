@@ -1,28 +1,27 @@
-# Exploring the Art of Predictive Modeling: My Journey Through Machine Learning
-This is a repository to document my journey in learning Machine Learning. I will update this repository as I learn new concepts, techniques, and tools in Machine Learning.
+# Discovering Machine Learning: A Predictive Modeling Odyssey
+This repository serves as a chronicle of my exploration into the world of Machine Learning. As I delve into new concepts, tools, and methodologies in Machine Learning, I will keep updating this repository with my findings.
 
 ## Table of Contents
-* [Code](#Code)
-* [Learning](#Learning)
-* [Projects](#Projects)
+* [Educational Content](#educational-content)
+* [Practical Projects](#practical-projects)
+* [Learning Resources](#learning-resources)
+* [Motivation](#motivation)
+* [Contributors](#contributors)
 
-## Code
-This folder contains code related to the topics that I am learning or [collaborating](#contributors) on with others. The code is written in Python - mostly through Jupyter Notebooks for ease of use and readability.
+## Educational Content
+This section comprises of my attempts at implementing various Machine Learning algorithms and techniques. Drawing from a wide array of resources, I design each Python module to encapsulate the material learned. Every module is self-contained with a corresponding README that elucidates the underlying mathematical concepts and implementation strategies. For example, the [Naive Bayes classifier](/learning/naive_bayes_classifier/) module is used for spam detection. These modules are designed for reusability across different projects.
 
-## Learning
-This folder contains implementations of Machine Learning algorithms and techniques that I am learning from various [resources](#learning-resources).
-
-## Projects
-This folder contains mini projects that I am working or [collaborating](#contributors) on to apply concepts and techniques. The projects are based on real-world problems and datasets.
+## Practical Projects
+This section features mini-projects where I apply the concepts and techniques learned. These projects, which include my solo efforts and collaborations, make extensive use of the modules implemented in the Educational Content section. Emulating real-world scenarios, these projects leverage actual datasets to solve problems.
 
 ## Learning Resources
-To learn Machine Learning, I will be using a variety of resources including online courses, books, and tutorials. Some of the resources that I am currently using are:
+My journey into Machine Learning is guided by an assortment of resources. These include online courses, books, and tutorials. Currently, my main sources of knowledge are:
 * [Machine Learning Specialization by Andrew Ng](https://www.coursera.org/specializations/machine-learning-introduction?)
 * [Mathematics for Machine Learning and Data Science Specialization by DeepLearning.AI](https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science?)
 * [Introduction to Deep Learning by MIT](http://introtodeeplearning.com)
 
 ## Motivation
-As a student of computer science and mathematics, I have always been drawn to programming and the exciting possibilities that arise from predictive modeling. My passion for understanding how machines can learn from data to make decisions and predictions has led me to embark on a journey into the world of Machine Learning. I am eager to explore the concepts and apply them to real-world problems, building on my foundation in programming and mathematical thinking.
+As an avid learner of computer science and mathematics, the intriguing cross-section of programming and predictive modeling has captivated my attention. This fascination for understanding how machines interpret data to make decisions has led me to embark on this Machine Learning journey. I am eager to unravel these concepts and apply them to solve real-world problems, thereby building upon my solid foundation in programming and mathematical thinking.
 
 ## Contributors
 * [Izhar Ali](https://github.com/ali-izhar)
