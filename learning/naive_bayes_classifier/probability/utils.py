@@ -1,7 +1,9 @@
+import numpy as np
 import matplotlib.pyplot as plt
 from probability.generators import Generator
+from probability.simulations import Dice
 
-__all__ = ['plot_gaussian_distributions', 'plot_binomial_distributions']
+__all__ = ['plot_gaussian_distributions', 'plot_binomial_distributions', 'plot_dice_hist', 'plot_dice_stats']
 
 generator = Generator()
 
@@ -62,4 +64,58 @@ def plot_binomial_distributions(binomal_distributions):
     ax.legend()
 
     # Show the plot
+    plt.show()
+
+
+def plot_dice_hist(sides, rolls, condition=None):
+    """
+    Plot a histogram of the roll results.
+    Args:
+    sides (int): The number of sides on the die.
+    rolls (int): The number of rolls.
+    condition (function, optional): A condition function that takes the result of a roll and returns a boolean.
+    """
+    dice = Dice(sides)
+    rolls = dice.roll_many(rolls, condition)
+    plt.hist(rolls, bins=np.arange(2 * dice.sides + 2), edgecolor='black', align='left')
+    plt.show()
+
+
+def plot_dice_stats(n_sides_range, n_rolls):
+    """
+    Plot the mean, variance, and covariance of the sum of dice rolls for a range of dice sides.
+    Args:
+    n_sides_range (range): A range of dice sides.
+    n_rolls (int): The number of rolls.
+    """
+    means, vars, covs = [], [], []
+    for n_sides in n_sides_range:
+        dice = Dice(n_sides)
+        rolls = dice.roll_many(n_rolls)
+        sums = np.sum(rolls.reshape(-1, 2), axis=1)
+        means.append(np.mean(sums))
+        vars.append(np.var(sums))
+        covs.append(np.cov(rolls[::2], rolls[1::2])[0, 1])
+
+    plt.figure(figsize=(15,5))
+
+    plt.subplot(131)
+    plt.plot(n_sides_range, means, marker='o')
+    plt.title('Mean of the sum')
+    plt.xlabel('Number of sides')
+    plt.ylabel('Mean')
+
+    plt.subplot(132)
+    plt.plot(n_sides_range, vars, marker='o')
+    plt.title('Variance of the sum')
+    plt.xlabel('Number of sides')
+    plt.ylabel('Variance')
+
+    plt.subplot(133)
+    plt.plot(n_sides_range, covs, marker='o')
+    plt.title('Covariance of the joint distribution')
+    plt.xlabel('Number of sides')
+    plt.ylabel('Covariance')
+
+    plt.tight_layout()
     plt.show()
