@@ -137,3 +137,7 @@ learning/naive_bayes_classifier/data/
 mini_projects/movies_reviews_classification/.models
 mini_projects/movies_reviews_classification/.data
 *.pt 
+
+#api keys
+api.json
+projects/course_recommendation/data/Coursera_embeddings2.csv
