@@ -1,44 +1,46 @@
 import numpy as np
 from typing import List, Tuple
 
-__all__ = ['compute_cost', 'compute_gradient', 'gradient_descent', 'predict', 'stochastic_gradient_descent', 'minibatch_gradient_descent']
+__all__ = ['compute_cost', 'compute_gradient', 'gradient_descent', 'predict']
 
-def compute_cost(x: np.ndarray, y: np.ndarray, w: float, b: float) -> float:
+def compute_cost(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float) -> float:
     """
     Computes the squared error cost function for linear regression.
     """
-    m = x.shape[0]
-    cost = (1/(2*m)) * np.sum((np.dot(x, w) + b - y)**2)
+    m = X.shape[0]
+    cost = (1/(2*m)) * np.sum((np.dot(X, w) + b - y)**2)
     return cost
     
 
-def compute_gradient(x: np.ndarray, y: np.ndarray, w: float, b: float) -> Tuple[float, float]:
+def compute_gradient(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float) -> Tuple[np.ndarray, float]:
     """
     Computes the gradient of the squared error cost function for linear regression.
     """
-    m = x.shape[0]
-    dw = (1/m) * np.sum((np.dot(x, w) + b - y) * x)
-    db = (1/m) * np.sum(np.dot(x, w) + b - y)
+    m = X.shape[0]
+    dw = (1/m) * np.dot((np.dot(X, w) + b - y), X)
+    db = (1/m) * np.sum(np.dot(X, w) + b - y)
     return dw, db
 
 
-def gradient_descent(x: np.ndarray, y: np.ndarray, w: float, b: float, learning_rate: float, num_iterations: int) -> Tuple[float, float, List[float]]:
+def gradient_descent(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float, learning_rate: float, num_iterations: int, verbose=False) -> Tuple[np.ndarray, float, List[float]]:
     """
     Performs gradient descent to learn w and b
     """
     cost_history = []
     params_history = []
-    for _ in range(num_iterations):
-        dw, db = compute_gradient(x, y, w, b)
-        w = w - learning_rate * dw
-        b = b - learning_rate * db
-        cost = compute_cost(x, y, w, b)
+    for i in range(num_iterations):
+        dw, db = compute_gradient(X, y, w, b)
+        w -= learning_rate * dw
+        b -= learning_rate * db
+        cost = compute_cost(X, y, w, b)
         cost_history.append(cost)
         params_history.append((w, b))
+        if verbose and i % (num_iterations // 10) == 0:
+            print(f"Iteration {i}: Cost {cost}")
     return w, b, cost_history, params_history
 
 
-def predict(x: np.ndarray, w: float, b: float) -> np.ndarray:
+def predict(x: np.ndarray, w: np.ndarray, b: float) -> np.ndarray:
     """
     Predicts the labels for the data x given the parameters w and b.
     """
