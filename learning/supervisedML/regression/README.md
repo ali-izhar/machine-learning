@@ -3,9 +3,6 @@ Linear regression is a supervised learning algorithm used for predicting a conti
 
 Linear regression can be categorized into two types based on the number of predictor variables used: simple linear regression (one predictor) and multiple linear regression (more than one predictor).
 
-## Model
-A model refers to the mathematical construct that uses input data to generate predictions. In the case of linear regression, the model is a function $f$ which predicts the target variable $(y)$ based on one or more predictor variables $(x)$.
-
 ## Loss Function (Cost Function)
 A loss function measures the difference between the model's predictions and the actual values. In linear regression, we typically use the Mean Squared Error (MSE) as the loss function, defined as:
 
