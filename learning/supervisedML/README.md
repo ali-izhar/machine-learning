@@ -9,16 +9,13 @@ When dealing with multiple features, each row represents a training example and 
 
 Here is a table representing a dataset with four training examples ($m=4$) and three features ($n=3$):
 
-\begin{tabular}{|c|c|c|}
-\hline
-$x_1^{(i)}$ & $x_2^{(i)}$ & $x_3^{(i)}$ \
-\hline
-$x_1^{(1)}$ & $x_2^{(1)}$ & $x_3^{(1)}$ \
-$x_1^{(2)}$ & $x_2^{(2)}$ & $x_3^{(2)}$ \
-$x_1^{(3)}$ & $x_2^{(3)}$ & $x_3^{(3)}$ \
-$x_1^{(4)}$ & $x_2^{(4)}$ & $x_3^{(4)}$ \
-\hline
-\end{tabular}
+|         | Feature 1 | Feature 2 | Feature 3 |
+|---------|-----------|-----------|-----------|
+| Example 1 | $x_1^{(1)}$ | $x_2^{(1)}$ | $x_3^{(1)}$ |
+| Example 2 | $x_1^{(2)}$ | $x_2^{(2)}$ | $x_3^{(2)}$ |
+| Example 3 | $x_1^{(3)}$ | $x_2^{(3)}$ | $x_3^{(3)}$ |
+| Example 4 | $x_1^{(4)}$ | $x_2^{(4)}$ | $x_3^{(4)}$ |
+
 
 In this table, each row represents a training example, and each column is a feature. For example, $x_2^{(3)}$ denotes the second feature of the third training example.
 
