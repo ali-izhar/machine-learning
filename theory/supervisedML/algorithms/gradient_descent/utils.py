@@ -1,55 +1,50 @@
 import numpy as np
+import pandas as pd
 from matplotlib import pyplot as plt
-from typing import List, Tuple
-from .linear_regression_gd import predict, compute_cost
+from typing import List, Tuple, Callable
+from .linear_regression_gd import compute_cost
 
-__all__ = ['plot_data', 'plot_cost_history', 'plot_data_and_cost', 'plot_data_and_predictions', 'plot_contour']
+__all__ = ['plot_data', 'plot_cost_history', 'plot_data_and_predictions', 'plot_contour']
 
-def plot_data(x: np.ndarray, y: np.ndarray, w: float, b: float) -> None:
+
+def plot_data(x: np.ndarray, y: np.ndarray, predict_fn: Callable, 
+              x_label='x', y_label='y', title='Data', color='blue') -> None:
     """
-    Plots the data and the linear regression line.
-    """
-    plt.scatter(x, y)
-    plt.plot(x, predict(x, w, b), color='red')
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.title('Data')
+    Plots the data and the prediction line.
+    """    
+    order = np.argsort(x)
+    x_ordered, y_ordered = x[order], y[order]
+    
+    plt.scatter(x_ordered, y_ordered, color=color)
+    plt.plot(x_ordered, predict_fn(x_ordered), color='red')
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.title(title)
     plt.show()
     return None
 
 
-def plot_cost_history(cost_history: List[float]) -> None:
+def plot_cost_history(cost_history: List[float], x_label='Iterations', y_label='Cost', title='Cost history') -> None:
     """
     Plots the cost history.
     """
-    plt.plot(cost_history)
-    plt.xlabel('Iterations')
-    plt.ylabel('Cost')
-    plt.title('Cost history')
+    plt.plot(cost_history, alpha=0.3)
+    plt.plot(pd.Series(cost_history).rolling(window=int(len(cost_history)*0.02)+1).mean()) # for smoothed line
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.title(title)
     plt.show()
     return None
 
 
-def plot_data_and_cost(x: np.ndarray, y: np.ndarray, w: float, b: float, cost_history: List[float]) -> None:
+def plot_data_and_predictions(x_train: np.ndarray, y_train: np.ndarray, x_test: np.ndarray, y_test: np.ndarray, predict_fn: Callable,
+                               x_label='x', y_label='y', title='Data and predictions') -> None:
     """
-    Plots the data and the linear regression line.
+    Plots the data and the prediction line.
     """
-    plot_data(x, y, w, b)
-    plot_cost_history(cost_history)
-    return None
-
-
-def plot_data_and_predictions(x: np.ndarray, y: np.ndarray, w: float, b: float, x_test: np.ndarray, y_test: np.ndarray) -> None:
-    """
-    Plots the data and the linear regression line.
-    """
-    plot_data(x, y, w, b)
-    plt.scatter(x_test, y_test, color='green')
-    plt.plot(x_test, predict(x_test, w, b), color='red')
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.title('Data and predictions')
-    plt.show()
+    plot_data(x_train, y_train, predict_fn, x_label, y_label, title, color='blue')
+    plot_data(x_test, y_test, predict_fn, x_label, y_label, title, color='green')
+    plt.legend(['Train', 'Test'])
     return None
 
 
