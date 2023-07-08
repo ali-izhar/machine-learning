@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error
 from typing import List, Tuple, Callable
 from .linear_regression_gd import compute_cost
 
-__all__ = ['plot_data', 'plot_cost_history', 'plot_data_and_predictions', 'plot_contour']
+__all__ = ['plot_scatter_data', 'plot_scatter_with_best_fit', 'plot_cost_history', 'plot_contour']
 
 
 def plot_scatter_data(X: np.ndarray, Y: np.ndarray, size=(8, 6)) -> None:

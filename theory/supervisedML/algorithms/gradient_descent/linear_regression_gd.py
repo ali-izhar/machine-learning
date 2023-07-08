@@ -36,7 +36,7 @@ def gradient_descent(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float, lear
         cost_history.append(cost)
         params_history.append((w, b))
         if verbose and i % (num_iterations // 10) == 0:
-            print(f"Iteration {i}: Cost {cost}")
+            print(f"Iteration {i}: Cost {round(cost, 3)}")
     return w, b, cost_history, params_history
 
 
