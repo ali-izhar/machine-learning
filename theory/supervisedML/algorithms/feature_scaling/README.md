@@ -10,21 +10,24 @@ Many machine learning algorithms perform better or converge faster when features
 ### Feature Scaling Methods
 There are several methods to scale features. The most common ones are:
 
-#### Min-Max Scaling (Normalization)
+#### 1. Min-Max Scaling (Normalization)
+<hr>
 The simplest method is to rescale the range of features to [0, 1] or [-1,1]. This is called `min-max scaling` or `normalization`.
 
 $$ X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}} $$
 
 In this formula, $X$ is the original feature vector, $X_min$ is the minimum value of the feature, $X_max$ is the maximum value. The result is a new feature vector $X_norm$ which lies between 0 and 1 (inclusive).
 
-#### Mean Normalization
+#### 2. Mean Normalization
+<hr>
 Mean normalization is a more sophisticated method which not only scales the features to a similar range but also ensures that the distribution is centered around zero (mean = 0).
 
 $$ X_{norm} = \frac{X - \mu}{X_{max} - X_{min}} $$
 
 In this formula, $X$ is the original feature vector, $\mu$ is the mean of the feature vector.
 
-#### Z-Score Normalization (Standardization)
+#### 3. Z-Score Normalization (Standardization)
+<hr>
 Z-score normalization (also known as standardization) is a scaling technique that calculates the number of standard deviations away each point is from the mean. The result is that the features are rescaled to ensure the mean and the standard deviation to be 0 and 1, respectively.
 
 $$ X_{norm} = \frac{X - \mu}{\sigma} $$
