@@ -1,25 +1,39 @@
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+from sklearn.metrics import mean_squared_error
 from typing import List, Tuple, Callable
 from .linear_regression_gd import compute_cost
 
 __all__ = ['plot_data', 'plot_cost_history', 'plot_data_and_predictions', 'plot_contour']
 
 
-def plot_data(x: np.ndarray, y: np.ndarray, predict_fn: Callable, 
-              x_label='x', y_label='y', title='Data', color='blue') -> None:
+def plot_scatter_data(X: np.ndarray, Y: np.ndarray, size=(8, 6)) -> None:
     """
-    Plots the data and the prediction line.
-    """    
-    order = np.argsort(x)
-    x_ordered, y_ordered = x[order], y[order]
-    
-    plt.scatter(x_ordered, y_ordered, color=color)
-    plt.plot(x_ordered, predict_fn(x_ordered), color='red')
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
-    plt.title(title)
+    Plots the scatter plot of the data.
+    """
+    plt.style.use('_mpl-gallery')
+    plt.figure(figsize=(size[0], size[1]))
+    plt.scatter(X, Y)
+    plt.show()
+    return None
+
+
+def plot_scatter_with_best_fit(X: np.ndarray, Y: np.ndarray, prediction_function: Callable, w: float, b: float, size=(8, 6)) -> None:
+    """
+    Plots the scatter plot of the data with the best fit line.
+    """
+    plt.figure(figsize=(size[0], size[1]))
+    plt.scatter(X, Y, label='Actual')
+
+    Y_pred = prediction_function(X, w, b)
+    mse = mean_squared_error(Y, Y_pred)
+
+    plt.plot(X, Y_pred, color='red', label=f'Predicted (y = {w:.2f}x + {b:.2f}, MSE = {mse:.2f})')
+    plt.style.use('_mpl-gallery')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.legend()
     plt.show()
     return None
 
@@ -34,17 +48,6 @@ def plot_cost_history(cost_history: List[float], x_label='Iterations', y_label='
     plt.ylabel(y_label)
     plt.title(title)
     plt.show()
-    return None
-
-
-def plot_data_and_predictions(x_train: np.ndarray, y_train: np.ndarray, x_test: np.ndarray, y_test: np.ndarray, predict_fn: Callable,
-                               x_label='x', y_label='y', title='Data and predictions') -> None:
-    """
-    Plots the data and the prediction line.
-    """
-    plot_data(x_train, y_train, predict_fn, x_label, y_label, title, color='blue')
-    plot_data(x_test, y_test, predict_fn, x_label, y_label, title, color='green')
-    plt.legend(['Train', 'Test'])
     return None
 
 
