@@ -44,3 +44,24 @@ $$L(f_{w,b}(x^{(i)}), y^{(i)}) = \begin{cases}
 The loss function for the entire training set is the average of the loss function for each training example:
 
 $$J(w,b) = \frac{1}{m}\sum_{i=1}^{m}L(f_{w,b}(x^{(i)}), y^{(i)})$$
+
+### Cost Function Intuition
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+def cost_function(y, y_hat):
+    return -y * np.log(y_hat) - (1 - y) * np.log(1 - y_hat)
+
+y = 1
+y_hat = np.linspace(0.001, 0.999, 100)
+cost = cost_function(y, y_hat)
+
+plt.plot(y_hat, cost)
+plt.xlabel('y_hat')
+plt.ylabel('cost')
+plt.show()
+```
