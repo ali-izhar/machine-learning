@@ -32,6 +32,7 @@ In this table, each row represents a training example, and each column is a feat
 - **Epoch:** An epoch is a single pass through the entire training set. In other words, one epoch is a single step of gradient descent.
 
 - **Classes or Categories:** The goal of classification is to predict the category or class of a given set of data points. In case of binary classification, there are only two possible classes that are denoted as:
+
 | Class 1 | Class 2 |
 |---------|---------|
 | 0       | 1       |
