@@ -19,8 +19,7 @@ Here is a table representing a dataset with four training examples ($m=4$) and t
 
 In this table, each row represents a training example, and each column is a feature. For example, $x_2^{(3)}$ denotes the second feature of the third training example.
 
-## Regression
-- **Model:** A model refers to the mathematical construct that uses input data to generate predictions. In the case of linear regression, the model is a function $f$ which predicts the target variable $(y)$ based on one or more predictor variables $(x)$.
+- **Model:** A model refers to the mathematical construct that uses input data to generate predictions.
 
 - **Parameters:** Parameters are the coefficients of the model. In the case of linear regression, the parameters are the slope $w$ and the intercept $b$.
 
@@ -32,8 +31,7 @@ In this table, each row represents a training example, and each column is a feat
 
 - **Epoch:** An epoch is a single pass through the entire training set. In other words, one epoch is a single step of gradient descent.
 
-## Classification
-The goal of classification is to predict the category or class of a given set of data points. In case of binary classification, there are only two possible classes that are denoted as:
+- **Classes or Categories:** The goal of classification is to predict the category or class of a given set of data points. In case of binary classification, there are only two possible classes that are denoted as:
 | Class 1 | Class 2 |
 |---------|---------|
 | 0       | 1       |
@@ -44,4 +42,3 @@ The goal of classification is to predict the category or class of a given set of
 In case of multi-class classification, there are more than two possible classes. For example, if we are trying to classify images of handwritten digits, the possible classes are the digits 0 through 9.
 
 - **Decision Boundary:** A decision boundary is a hypersurface that separates the input space into two or more regions. In binary classification, the decision boundary is a curve that separates the input space into two regions, one for each class. In multi-class classification, the decision boundary is a hypersurface that separates the input space into multiple regions, one for each class.
-

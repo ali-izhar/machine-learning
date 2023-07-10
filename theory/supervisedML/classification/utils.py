@@ -1,6 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+class CustomLinearClassifier:
+    def __init__(self, w0, w1, b):
+        self.w0 = w0
+        self.w1 = w1
+        self.b = b
+
+    def predict(self, X):
+        # apply linear decision rule
+        return (X[:, 0]*self.w0 + X[:, 1]*self.w1 + self.b > 0).astype(int)
+
 def plot_sigmoid(interval: np.ndarray, size: list = [10, 4]):
 
     def _sigmoid(z):
@@ -22,3 +32,42 @@ def plot_sigmoid(interval: np.ndarray, size: list = [10, 4]):
     ax.set_title('Sigmoid function with decision boundary')
     ax.legend()
     plt.show()
+
+def plot_decision_boundary(X: np.ndarray, y: np.ndarray, clf, size: list = [10, 4]):
+    """
+    Plot decision boundary of a classifier clf.
+    """
+    # Create a grid of points
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.1),
+                         np.arange(y_min, y_max, 0.1))
+
+    # Make predictions across the grid
+    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+
+    fig, ax = plt.subplots(figsize=size)
+    
+    # Plot the decision boundary
+    ax.contourf(xx, yy, Z, alpha=0.8, cmap='cividis')
+    # Plot the points
+    scatter = ax.scatter(X[:, 0], X[:, 1], c=y.ravel(), cmap='plasma', alpha=0.5, edgecolor='k', label='data points')
+
+    ax.set_xlabel('x1')
+    ax.set_ylabel('x2')
+    ax.set_title('Decision boundary')
+    legend1 = ax.legend(*scatter.legend_elements(), title="Classes")
+    ax.add_artist(legend1)
+    plt.show()
+
+
+
+if __name__ == '__main__':
+    interval = np.linspace(-10, 10, 100)
+    plot_sigmoid(interval)
+
+    X = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
+    y = np.array([0, 0, 0, 1, 1, 1]).reshape(-1,1) 
+    clf = CustomLinearClassifier(w0=1, w1=1, b=-3)
+    plot_decision_boundary(X, y, clf)
