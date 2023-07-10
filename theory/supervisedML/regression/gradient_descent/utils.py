@@ -3,7 +3,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn.metrics import mean_squared_error
 from typing import List, Tuple, Callable
-from .linear_regression_gd import compute_cost
+from .linear_reg import compute_cost
 
 __all__ = ['plot_scatter_data', 'plot_scatter_with_best_fit', 'plot_cost_history', 'plot_contour']
 
