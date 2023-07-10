@@ -40,3 +40,8 @@ The goal of classification is to predict the category or class of a given set of
 | false   | true    |
 | no      | yes     |
 | negative class| positive class|
+
+In case of multi-class classification, there are more than two possible classes. For example, if we are trying to classify images of handwritten digits, the possible classes are the digits 0 through 9.
+
+- **Decision Boundary:** A decision boundary is a hypersurface that separates the input space into two or more regions. In binary classification, the decision boundary is a curve that separates the input space into two regions, one for each class. In multi-class classification, the decision boundary is a hypersurface that separates the input space into multiple regions, one for each class.
+
