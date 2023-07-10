@@ -64,8 +64,6 @@ The graph of $-log(1-f_{w,b}(x^{(i)}))$ is shown below:
 
 In this case, if $f_{w,b}(x) = 0$, the loss is 0. If $f_{w,b}(x) \rightarrow 1$, the loss goes to infinity. Therefore, the model will try to predict a probability close to 0 for $y=0$ and penalize the model heavily if it predicts a probability close to 1.
 
-# write the above 2 cases in a 2-column layout supported in github markdown
-
 | $y=1$ | $y=0$ |
 | --- | --- |
 | The graph of $-log(f_{w,b}(x^{(i)}))$ is shown below: | The graph of $-log(1-f_{w,b}(x^{(i)}))$ is shown below: |
