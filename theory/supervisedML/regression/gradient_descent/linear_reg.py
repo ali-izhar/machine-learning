@@ -12,13 +12,16 @@ def compute_cost(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float) -> float
     return cost
     
 
-def compute_gradient(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float) -> Tuple[np.ndarray, float]:
+def compute_gradient(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float, 
+                     regularization: bool = False, lambda_: float = 1.0) -> Tuple[np.ndarray, float]:
     """
     Computes the gradient of the squared error cost function for linear regression.
     """
     m = X.shape[0]
-    dw = (1/m) * np.dot((np.dot(X, w) + b - y), X)
+    dw = (1/m) * np.dot(X.T, (np.dot(X, w) + b - y))
     db = (1/m) * np.sum(np.dot(X, w) + b - y)
+    if regularization:
+        dw += (lambda_/m) * w
     return dw, db
 
 

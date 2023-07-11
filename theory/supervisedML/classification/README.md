@@ -41,14 +41,17 @@ $$L(f_{w,b}(x^{(i)}), y^{(i)}) = \begin{cases}
 -log(1-f_{w,b}(x^{(i)})) & \text{if } y^{(i)} = 0 
 \end{cases}$$
 
+A more compact way to write the loss function is:
+
+$$J(w,b) = -\frac{1}{m}\sum_{i=1}^{m}y^{(i)}log(f_{w,b}(x^{(i)})) + (1-y^{(i)})log(1-f_{w,b}(x^{(i)}))$$
+
+This is because when $y^{(i)}=1$, the second term $(1-y^{(i)})log(1-f_{w,b}(x^{(i)}))$ becomes 0. Similarly, when $y^{(i)}=0$, the first term $y^{(i)}log(f_{w,b}(x^{(i)}))$ becomes 0.
+
 The loss function for the entire training set is the average of the loss function for each training example:
 
-$$J(w,b) = \frac{1}{m}\sum_{i=1}^{m}L(f_{w,b}(x^{(i)}), y^{(i)})$$
+$$J(w,b) = -\frac{1}{m}\sum_{i=1}^{m}y^{(i)}log(f_{w,b}(x^{(i)})) + (1-y^{(i)})log(1-f_{w,b}(x^{(i)}))$$
 
 ## Cost Function Intuition
-The negative log function is a convex function shown below. This means that gradient descent will always converge to the global minimum.
-
-### Cost Function Intuition
 The negative log function is a convex function shown below. This means that gradient descent will always converge to the global minimum.
 
 - **Case 1:** $y=1$
@@ -62,3 +65,23 @@ The graph of $-log(1-f_{w,b}(x^{(i)}))$ is shown below:
 <img src="media/negative_log2.png" width=250px>
 
 In this case, if $f_{w,b}(x) = 0$, the loss is 0. If $f_{w,b}(x) \rightarrow 1$, the loss goes to infinity. Therefore, the model will try to predict a probability close to 0 for $y=0$ and penalize the model heavily if it predicts a probability close to 1.
+
+## Gradient Descent
+The gradient descent algorithm for logistic regression is the same as the one for linear regression. The only difference is that the hypothesis is defined as:
+
+$$f_{w,b}(x) = \sigma(w^Tx + b)$$
+
+where $\sigma$ is the sigmoid function.
+
+Therefore, the gradient descent update rule is:
+
+$$w := w - \alpha \frac{\partial J(w,b)}{\partial w}$$
+
+$$b := b - \alpha \frac{\partial J(w,b)}{\partial b}$$
+
+where $\alpha$ is the learning rate and $J(w,b)$ is the cost function.
+
+## Logistic Regression with Regularization
+The cost function for logistic regression with L2 regularization is:
+
+$$J(w,b) = -\frac{1}{m}\sum_{i=1}^{m}y^{(i)}log(f_{w,b}(x^{(i)})) + (1-y^{(i)})log(1-f_{w,b}(x^{(i)})) + \frac{\lambda}{2m}\sum_{j=1}^{n}w_j^2$$
