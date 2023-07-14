@@ -6,13 +6,38 @@ In essence, a neural network takes in inputs, which are then processed in hidden
 
 ## Terminology
 - **Input Layer**: The input layer is the first layer of the neural network. It takes in the input data and passes it to the hidden layers.
+
 - **Hidden Layer**: The hidden layers are the layers between the input and output layers. They process the input data and pass it to the output layer.
+
 - **Output Layer**: The output layer is the last layer of the neural network. It outputs the prediction of the model.
+
 - **Neuron**: A neuron is a node in a neural network. It takes in input, applies a function to that input, and then passes the output to nodes in the next layer.
+
 - **Activation Function**: An activation function is a function that is applied to the input of a neuron. It is used to introduce non-linearity into the model.
+
 - **Weights**: Weights are values that are assigned to the connections between neurons. They are adjusted during training in order to find patterns in the data.
+
 - **Bias**: Bias is a constant value that is added to the input of a neuron. It is used to adjust the output of the activation function.
+
 - **Epoch**: An epoch is a single iteration of the training data through the neural network.
+
 - **Batch**: A batch is a subset of the training data that is used to train the neural network. The weights are updated after each batch.
+
 - **Optimizer**: An optimizer is an algorithm that is used to minimize the loss function. It is used to adjust the weights of the neural network.
+
 - **Backpropagation**: Backpropagation is a technique that is used to adjust the weights of the neural network. It is used to minimize the loss function.
+
+
+## Notation
+- **X**: Input data
+- **Y**: Output data
+- **W**: Weights
+- **b**: Bias
+- **a**: Activation function
+- **L**: Number of layers
+- **l**: Layer number
+- **n**: Number of neurons in a layer
+- **m**: Number of training examples
+- **A**: Output of activation function
+- **σ**: Sigmoid function
+
