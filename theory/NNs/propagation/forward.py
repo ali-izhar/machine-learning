@@ -3,37 +3,12 @@ import numpy as np
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
-def dense(a_in, W, b, g):
-    """
-    Computes dense layer
-    Args:
-      a_in (ndarray (n, )) : Activation values of previous layer, n units 
-      W    (ndarray (n,j)) : Weight matrix, n features per unit, j units
-      b    (ndarray (j, )) : bias vector, j units
-      g    (function)      : activation function
-    Returns
-      a_out (ndarray (j,))  : j units|
-    """
-    units = W.shape[1]              # j units
-    a_out = np.zeros(units)         # j units
-    for j in range(units):          # for each unit
-        w = W[:,j]                  # weights for jth unit
-        z = np.dot(w, a_in) + b[j]
-        a_out[j] = g(z)             # activation of jth unit
-    return (a_out)
-
+def dense(A_in, W, B, g):
+    Z = np.matmul(A_in, W) + B
+    A_out = g(Z)
+    return A_out
 
 def sequential(X, W, B, g):
-    """
-    Computes forward propagation for sequential NN
-    Args:
-      X (ndarray (n, )) : Input values, n features
-      W (list (L, ))    : List of weight matrices, L layers
-      B (list (L, ))    : List of bias
-      g (function)      : Activation function
-    Returns:
-      A (List (L, ))    : List of activation values for each layer
-    """
     L = len(W)                      # number of layers
     A = [X]                         # list of activation values
     for l in range(L):              # for each layer
