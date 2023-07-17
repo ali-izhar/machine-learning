@@ -28,3 +28,40 @@ def dense(A_in, W, B, g):
     A_out = g(Z)
     return A_out
 ```
+
+# Backward Propagation
+The backward propagation algorithm is used to calculate the gradient of the loss function with respect to the weights and biases of a neural network. 
+
+## Sequential Backward Propagation
+```python
+def dense_backward(dA, A_in, W, b, g_prime):
+    """
+    Calculates the gradient of the loss function with respect to the weights and biases of a dense layer.
+    """
+    units = W.shape[1]              # j units
+    dA_in = np.zeros(A_in.shape)    # i units
+    dW = np.zeros(W.shape)          # i x j weights
+    db = np.zeros(units)            # j biases
+    for j in range(units):          # for each unit
+        w = W[:,j]                  # weights for jth unit
+        z = np.dot(w, A_in) + b[j]
+        dA_in += dA[j] * w
+        dW[:,j] = dA[j] * A_in
+        db[j] = dA[j] * g_prime(z)
+    return (dA_in, dW, db)
+```
+
+## Matrix Backward Propagation
+Notice that all the input vectors are stacked into 2-D matrices. This allows for matrix multiplication to be used to calculate the gradient of the loss function with respect to the weights and biases of each layer. The gradient of the loss function with respect to the weights and biases of each layer is a 2-D matrix, where each row is the gradient of the loss function with respect to the weights and biases of a single input vector. This allows for parallelization of the backward propagation algorithm.
+
+```python
+def dense_backward(dA, A_in, W, B, g_prime):
+    """
+    Calculates the gradient of the loss function with respect to the weights and biases of a dense layer.
+    """
+    dZ = dA * g_prime(A_in @ W + B)
+    dA_in = dZ @ W.T
+    dW = A_in.T @ dZ
+    dB = np.sum(dZ, axis=0)
+    return (dA_in, dW, dB)
+```
