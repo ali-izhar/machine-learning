@@ -1,5 +1,6 @@
 # Model Training Steps
-1. Model Architecture
+
+### 1. Model Architecture
 Specify how to compute the output of the model for a given input. Consider the following neural network model with 2 hidden layers (25 and 15 neurons) and 1 output layer (1 neuron):
 
 ```python
@@ -14,12 +15,11 @@ model = Sequential([
 ])
 ```
 
-2. Loss and Cost Functions
+### 2. Loss and Cost Functions
 Specify a loss function to measure how well the model fits the data. In binary classification, the loss function is called the `logistic loss` which, in statistics, is called the `binary cross-entropy` loss function. The binary cross-entropy loss function is given by:
 
 ```python
 from tensorflow.keras.losses import BinaryCrossentropy
-
 model.compile(loss=BinaryCrossentropy())
 ```
 
@@ -27,11 +27,10 @@ For a regression problem, we can specify the `mean squared error` loss function:
 
 ```python
 from tensorflow.keras.losses import MeanSquaredError
-
 model.compile(loss=MeanSquaredError())
 ```
 
-3. Gradient Descent
+### 3. Gradient Descent
 Specify an optimization algorithm to minimize the loss function. The most common optimization algorithm is `gradient descent`. In order to compute the gradient of the loss function with respect to the weights and biases of the model, we need to use the `backpropagation` algorithm. The backpropagation algorithm is an efficient way to compute the gradient of the loss function with respect to the weights and biases of a neural network. The backpropagation algorithm is given by:
 
 ```python
