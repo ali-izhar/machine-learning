@@ -5,14 +5,14 @@ Neural networks, inspired by the human brain, comprise interconnected layers of 
 Neural networks ingest inputs, process them in hidden layers using adjustable weights, and produce a prediction. Weights are modified during training to recognize patterns, enhancing prediction accuracy. Techniques like `backpropagation` and `gradient descent` adjust these weights to minimize the difference between actual and predicted outputs.
 
 ## Key Concepts
-The `network's` depth refers to its layer count, excluding the input layer. `Width` denotes the number of neurons in a layer. Input layer neurons equal the dataset's feature count, and output layer neurons match the dataset's class count. The user-specified architecture is the number of hidden layers and their neurons.
+The network's `depth` refers to its layer count, excluding the input layer. `Width` denotes the number of neurons in a layer. Input layer neurons equal the dataset's feature count, and output layer neurons match the dataset's class count. The user-specified architecture is the number of hidden layers and their neurons.
 
 ## Activation Function
 Activation functions introduce non-linearity into neural networks, transforming the weighted sum of inputs and bias. 
 
 > Applied to each hidden layer neuron, and in the output layer for classification models, activation functions have diverse forms, each suited to different tasks.
 
-- **Sigmoid:** The sigmoid function, expressed as $σ(x) = 1 / (1 + e^-x)$, squashes its input into the range (0,1). Its output can be interpreted as a probability, making it ideal for binary classification tasks. However, sigmoid can suffer from the vanishing gradient problem, where the gradients become too small to effectively update the weights during training.
+- **Sigmoid:** The sigmoid function, expressed as $σ(x) = 1 / (1 + e^{-x})$, squashes its input into the range (0,1). Its output can be interpreted as a probability, making it ideal for binary classification tasks. However, sigmoid can suffer from the vanishing gradient problem, where the gradients become too small to effectively update the weights during training.
 
 - **ReLU (Rectified Linear Unit):** The ReLU function, expressed as $f(x) = max(0,x)$, allows positive inputs to pass through unaltered, while zeroing out negative inputs. This encourages sparse activation, speeding up computation and learning. However, neurons can "die" if they output zero, rendering them inactive during training.
 
@@ -20,7 +20,7 @@ Activation functions introduce non-linearity into neural networks, transforming 
 
 Each activation function transforms the "activation value" as:
 
-$$a_j^l = g(w_j^l \cdot a_j^{l-1} + b_j^l)$$
+$$a_j^{[l]} = g(w_j^{[l]} \cdot a_j^{[l-1]} + b_j^{[l]})$$
 
 ## Choosing the Right Activation Function
 Selecting the appropriate activation function depends on the nature of the problem and the type of output you're predicting.
