@@ -1,4 +1,4 @@
-# Machine Learning - Probability
+# Probability
 This section focuses on the probability theory and its applications in machine learning.
 
 ## Random Variable

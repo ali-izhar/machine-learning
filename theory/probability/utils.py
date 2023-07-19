@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from probability.generators import Generator
-from probability.simulations import Dice
+from .Generators import Generator
+from .Simulations import Dice
 
 __all__ = ['plot_gaussian_distributions', 'plot_binomial_distributions', 'plot_dice_hist', 'plot_dice_stats']
 
