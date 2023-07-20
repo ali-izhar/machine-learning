@@ -41,9 +41,7 @@ The cost function for softmax regression is defined as follows:
 
 $$J(w, b) = \frac{1}{m} \sum_{i=1}^m L(a_1^{(i)}, a_2^{(i)}, \ldots, a_K^{(i)}, y^{(i)})$$
 
-$$\begin{align}
-J(\mathbf{w},b) = -\frac{1}{m} \left[ \sum_{i=1}^{m} \sum_{j=1}^{N}  1\left\{y^{(i)} == j\right\} \log \frac{e^{z^{(i)}_j}}{\sum_{k=1}^N e^{z^{(i)}_k} }\right] \tag{4}
-\end{align}$$
+$$J(w, b) = -\frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{N} y_{ij} \log(p_{ij})$$
 
 where $1\{y^{(i)} == j\}$ is an indicator function that is $1$ if $y^{(i)} = j$ and $0$ otherwise.
 
