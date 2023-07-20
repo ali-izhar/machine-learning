@@ -51,6 +51,20 @@ Specify an optimization algorithm to minimize the loss function. The most common
 model.fit(X, y, epochs=10)
 ```
 
+## Neural Network Layers
+In neural networks, different types of layers are used depending on the kind of problem we're trying to solve. Two commonly used layer types are **Dense (fully connected)** layers and **Convolutional layers**.
+
+- **Dense Layer**: Dense layers, also known as fully connected layers, are the 'traditional' type of layer that are used in multi-layer perceptron neural networks. In a dense layer, each neuron is connected to every neuron in the previous layer, and each connection has its own weight. This is a totally general purpose connection pattern and makes no assumptions about the features in the input data thus not spatially aware. These layers are often placed towards the end of the network architecture.
+
+- **Convolutional Layer**: Convolutional layers, on the other hand, use a different pattern of connections. Instead of being fully connected to all neurons in the previous layer, neurons in a convolutional layer are only connected to a smaller number of nearby neurons in the previous layer. This local receptive field concept allows the network to focus on low-level features such as edges and textures in the early layers, and then assemble these into higher level features (like shapes or objects) in later layers. Convolutional layers are particularly effective for tasks where spatial relationships matter, such as image and video processing tasks.
+
+### Key Differences
+- **Spatial Awareness:** Dense layers are not spatially aware and treat input pixels which are far apart and close together on equal footing. On the other hand, convolutional layers have neurons that only connect to a subset of the input data, and are therefore spatially aware, making them more suitable for tasks such as image recognition where spatial relationships matter.
+
+- **Parameter Efficiency:** Dense layers might not be parameter efficient when dealing with images because they connect each neuron to every neuron in the previous layer, which can be a large number for high-resolution images. Convolutional layers share weights across space in a translationally invariant manner, drastically reducing the number of parameters, and making them more efficient.
+
+- **Usage in Network Architecture:** Dense layers are typically used towards the end of a neural network architecture, often for final classification. Convolutional layers, on the other hand, are usually used in the earlier stages of the network for feature extraction.
+
 ### Definitions
 - **X**: Input data
 - **Y**: Output data
