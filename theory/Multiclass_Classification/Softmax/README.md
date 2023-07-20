@@ -41,11 +41,18 @@ The cost function for softmax regression is defined as follows:
 
 $$J(w, b) = \frac{1}{m} \sum_{i=1}^m L(a_1^{(i)}, a_2^{(i)}, \ldots, a_K^{(i)}, y^{(i)})$$
 
-$$J(w, b) = -\frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K 1\{y^{(i)} = k\} \log \frac{e^{z_k^{(i)}}}{\sum_{j=1}^K e^{z_j^{(i)}}}$$
+$$\begin{align}
+J(\mathbf{w},b) = -\frac{1}{m} \left[ \sum_{i=1}^{m} \sum_{j=1}^{N}  1\left\{y^{(i)} == j\right\} \log \frac{e^{z^{(i)}_j}}{\sum_{k=1}^N e^{z^{(i)}_k} }\right] \tag{4}
+\end{align}$$
+
+where $1\{y^{(i)} == j\}$ is an indicator function that is $1$ if $y^{(i)} = j$ and $0$ otherwise.
 
 In tensorflow, we can use the `SparseCategoricalCrossentropy` function to compute the cost function. The name `SparseCategoricalCrossentropy` means that the labels are integers instead of one-hot vectors (i.e. $y \in \{1, 2, \ldots, K\}$ instead of $y \in \{0, 1\}^K$).
 
 > The word "sparse" in `SparseCategoricalCrossentropy` means that the labels are integers instead of one-hot vectors. The word "categorical" means that we are doing multiclass classification.
+
+- **SparseCategorialCrossentropy:** expects the target to be an integer corresponding to the index. For example, if there are 10 potential target values, y would be between 0 and 9. 
+- **CategoricalCrossEntropy:** Expects the target value of an example to be one-hot encoded where the value at the target index is 1 while the other N-1 entries are zero. An example with 10 potential target values, where the target is 2 would be `[0,0,1,0,0,0,0,0,0,0]`.
 
 ## Tensorflow Implementation
 ```python
@@ -103,7 +110,9 @@ model = Sequential([
 model.compile(loss=SparseCategoricalCrossentropy(from_logits=True))
 model.fit(X, Y, epochs=10)
 logit = model(X)
-f_x = tf.nn.sigmoid(logit)
+f_x = tf.nn.softmax(logit)
 ```
 
-Since we're not computing the middle step of computing $a = \sigma(z)$, we're not applying any activation function to the last layer. Therefore, we need to use `activation='linear'` instead of `activation='softmax'` and also set `from_logits=True` in `SparseCategoricalCrossentropy`.
+Since we're not computing the middle step of computing $a = \sigma(z)$, we're not applying any activation function to the last layer. Therefore, we need to use `activation='linear'` instead of `activation='softmax'` and also set `from_logits=True` in `SparseCategoricalCrossentropy` (the name `from_logits` means that the input to the loss function is the logits instead of the probabilities).
+
+Notice that the output of the model is the logits. We can compute the probabilities by applying the softmax function to the logits.
