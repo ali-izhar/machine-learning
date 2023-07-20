@@ -26,7 +26,13 @@ $$\vdots$$
 
 $$a_K = \sigma(z)_K = \frac{e^{z_K}}{e^{z_1} + e^{z_2} + \ldots + e^{z_K}} = P(y = K | x)$$
 
-$$L(a_1, a_2, \ldots, a_K, y) = \cases{-\log(a_1) & if $y = 1$ \cr -\log(a_2) & if $y = 2$ \cr \vdots & \vdots \cr -\log(a_K) & if $y = K$}$$
+$$L(a_1, a_2, \ldots, a_K, y) = 
+\begin{cases}
+-\log(a_1) & \text{if } y = 1 \\
+-\log(a_2) & \text{if } y = 2 \\
+\vdots \\
+-\log(a_K) & \text{if } y = K
+\end{cases}$$
 
 Notice that $\text{loss} = -\log(a_i) \text{ if } y = i$. If we plot the graph of $-\log(x)$, we can see that the loss is high when $x$ is close to $0$ and low when $x$ is close to $1$. This is called the **cross-entropy loss**.
 
