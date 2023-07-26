@@ -20,16 +20,16 @@ Consider a dataset that we want to fit a model to. We have a few options:
 ## Bias-Variance Trade-off
 The concepts of bias and variance are tied to the model's performance on the training set and the cross-validation set:
 
-- When a model underfits (high bias), it performs poorly on both the training set (J_train is high) and the cross-validation set (J_cv is high).
+- When a model underfits (high bias), it performs poorly on both the training set (J_train is high) and the cross-validation set ($J_{cv}$ is high).
 > $$J_{train} \approx J_{cv} \approx \text{high}$$
 
-- When a model overfits (high variance), it performs well on the training set (J_train is low) but poorly on the cross-validation set (J_cv is high).
+- When a model overfits (high variance), it performs well on the training set (J_train is low) but poorly on the cross-validation set ($J_{cv}$ is high).
 > $$J_{cv} >> J_{train}$$
 
 - These different scenarios lead to the famous bias-variance trade-off in machine learning: models with a lower bias have a higher variance, and vice versa.
 
-As the model complexity increases (degree of the polynomial increases), the training error (J_train) decreases — the model fits the training data better.
+As the model complexity increases (degree of the polynomial increases), the training error ($J_{train}$) decreases — the model fits the training data better.
 
-However, the cross-validation error (J_cv) decreases initially, reaches a minimum, and then starts increasing. When the model is too simple, it underfits the data, leading to high J_cv. When the model is too complex, it overfits the training data, and J_cv increases.
+However, the cross-validation error ($J_{cv}$) decreases initially, reaches a minimum, and then starts increasing. When the model is too simple, it underfits the data, leading to high $J_{cv}$. When the model is too complex, it overfits the training data, and $J_{cv}$ increases.
 
 Choosing the right complexity for the model, such that both the training and cross-validation errors are minimized, is key to building a successful machine learning model.
