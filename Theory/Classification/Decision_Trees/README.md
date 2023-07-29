@@ -62,4 +62,4 @@ Information gain is the reduction in entropy achieved by partitioning the sample
 ### Information Gain: The Details
 Information gain is calculated by comparing the entropy of the dataset before and after a split. We define a function that calculates the entropy of a given set as:
 
-![information gain](../media/information_gain_2.png)
+![information gain 2](../media/information_gain_2.png)
