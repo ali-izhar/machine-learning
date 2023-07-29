@@ -25,6 +25,8 @@ Entropy is a measure of the purity of a node or, in other words, how mixed the l
 ### Entropy: The Basics
 Given a set of six examples, three cats and three dogs, we define $p_1$ as the fraction of examples that are cats. In this case, $p_1 = \frac{3}{6}$.
 
+![entropy](../media/entropy.png)
+
 Impurity of a dataset is measured using the entropy function, conventionally denoted as $H(p_1)$. The function resembles a curve where the horizontal axis is $p_1$ (the fraction of cats) and the vertical axis is the value of the entropy. The highest point of the curve indicates the maximum impurity (an entropy of 1) when the set of examples is a 50-50 mix. When all examples are cats or not cats, the entropy is zero.
 
 ### Further Understanding Entropy
@@ -36,8 +38,28 @@ Impurity of a dataset is measured using the entropy function, conventionally den
 ### The Entropy Function
 The entropy function $H(p_1)$ is defined as:
 
-$$H(p_1) = -p_1log_2(p_1) - p_0log_2(p_0)$$
-
 $$H(p_1) = -p_1log_2(p_1) - (1 - p_1)log_2(1 - p_1)$$
 
-where $p_0$ is equal to the fraction of examples that are not cats $(1 - p_1)$. Logarithms are taken to the base two for the sake of convention. It's important to note that the function will consider $0log(0)$ as 0 for the purpose of computing entropy. While the entropy function bears resemblance to the logistic loss function, understanding this is not critical for the class. The entropy function or the Gini criteria can be effectively used to build decision trees. 
+where $p_0$ is equal to the fraction of examples that are not cats $(1 - p_1)$. Logarithms are taken to the base two for the sake of convention. It's important to note that the function will consider $0log(0)$ as 0 for the purpose of computing entropy. The entropy function or the Gini criteria can be effectively used to build decision trees.
+
+## Information Gain
+Information gain is the measure of the difference in entropy from before to after the set is split on an attribute. Constructing a decision tree is all about finding attribute that returns the highest information gain (i.e., the most homogeneous branches).
+
+### Entropy and Information Gain
+Entropy is a measure of the impurity or disorder of the samples at a node. A high entropy means that the samples are mixed, not purely one label or another, while low entropy implies the samples are mostly of the same label.
+
+Information gain is the reduction in entropy achieved by partitioning the samples based on a feature. The larger the information gain, the more the feature reduces entropy and therefore the more useful it is for making decisions in our tree.
+
+### How to compute Information Gain
+- Start with the entropy at the root node, which is the entropy with all the samples and their labels.
+- Consider each feature and calculate the entropy for each of the resulting branches if the node was split using that feature.
+- Compute a weighted average of these entropy values based on the number of samples in each branch.
+- The information gain for a feature is the difference between the root node's entropy and this weighted average entropy.
+- Repeat the process for all the features, and the feature with the highest information gain is the best choice for the node split.
+
+![information gain](../media/information_gain.png)
+
+### Information Gain: The Details
+Information gain is calculated by comparing the entropy of the dataset before and after a split. We define a function that calculates the entropy of a given set as:
+
+![information gain](../media/information_gain_2.png)
