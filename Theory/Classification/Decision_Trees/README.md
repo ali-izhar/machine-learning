@@ -65,3 +65,23 @@ Information gain is calculated by comparing the entropy of the dataset before an
 ![information gain 2](../media/information_gain2.png)
 
 where $p_i$ is the fraction of examples in class $i$.
+
+## Decision Tree Learning Algorithm
+The decision tree learning algorithm is a greedy, top-down algorithm that recursively splits the training examples into partitions based on a chosen feature. The algorithm is as follows:
+
+- Start with all the training examples in the root node.
+- Calculate information gain for all the features, and choose the feature with the highest information gain.
+- Partition the examples based on the chosen feature, and create left and right branches of the tree.
+- Keep splitting until we reach a stopping criterion:
+    - If all the examples belong to the same class, return the single-node tree with the label of that class.
+    - If there are no more features to split on, return a leaf node with the most common label.
+    - When splitting a node will result in the tree exceeding a certain depth threshold.
+    - When splitting a node will result in the creation of a node containing too few training examples (e.g., fewer than five).
+    - When splitting a node will not result in an information gain threshold being met.
+
+### Decision Tree Hyperparameters
+- **Maximum depth:** The maximum depth of a decision tree is the maximum number of nodes from the root node to the leaf node. This parameter is useful for avoiding overfitting. The default value is `None`, which means nodes are expanded until all leaves are pure or until all leaves contain less than `min_samples_split` samples.
+
+- **Minimum number of samples to split:** The minimum number of samples to split is the minimum number of samples required to split an internal node. This parameter is useful for avoiding overfitting. The default value is 2, which means that nodes with only one sample will not be split.
+
+- **Minimum impurity decrease:** A node will be split if this split induces a decrease of the impurity greater than or equal to this value. This parameter is useful for avoiding overfitting. The default value is 0, which means that all splits will be made regardless of impurity decrease.
