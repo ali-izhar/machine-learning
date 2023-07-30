@@ -24,21 +24,36 @@ The first step in generating a tree ensemble is to create a bootstrap sample of 
 ## Bagged Decision Trees
 ```python
 # the choice of B is arbitrary, usually between 64 and 100.
-B = 64
-models = []
-predictions = []
-
-for b in range(1, B+1):
+for b = 1 to B:
+    # create a bootstrap sample of the training data
     bootstrap_sample = train.sample(n=len(train), replace=True)
-    tree = DecisionTreeClassifier(max_depth=3)
-    tree.fit(bootstrap_sample[features], bootstrap_sample[target])
-    models.append(tree)
-
-for tree in models:
-    predictions.append(tree.predict(test[features]))
-
-bagged_predictions = np.round(np.sum(predictions, axis=0)/B)
+    # train a decision tree on the bootstrap sample
+    tree = DecisionTreeClassifier()
+    tree.fit(bootstrap_sample)
 ```
 
 ### Further randomization of bagged decision trees
-At each node, when choosing a feature to use to split, if $n$ features are available, pick a random subset of $k \leq n$ features and allow the algorithm to only choose from that subset of features.
+At each node, when choosing a feature to use to split, if $n$ features are available, pick a random subset of $k \leq n$ features and allow the algorithm to only choose from that subset of features. If n is large, then k is usually set to $\sqrt{n}$.
+
+## XGBoost
+XGBoost is an implementation of gradient boosted decision trees designed for speed and performance. XGBoost stands for `Extreme Gradient Boosting.` It is a decision-tree-based ensemble Machine Learning algorithm that uses a gradient boosting framework. In prediction problems involving unstructured data (images, text, etc.) artificial neural networks tend to outperform all other algorithms or frameworks. However, when it comes to small-to-medium structured/tabular data, decision tree based algorithms are considered best-in-class right now. Please note that XGBoost is not an actual tree ensemble method, but it is a gradient boosting library that also uses decision trees as its base learners.
+```python
+for b = 1 to B:
+    # create a bootstrap sample of the training data
+    bootstrap_sample = train.sample(n=len(train), replace=True)
+    # instead of picking from all examples with (1/m) probability,
+    # make it more likely to pick examples with high error or pick
+    # misclassified examples from previous trained trees
+    tree = DecisionTreeClassifier()
+    tree.fit("new dataset")
+```
+
+## When to use Decision Tree Ensembles
+| Decision Tree Ensembles | Neural Networks |
+| --- | --- |
+| Works well on tabular (structured) data | Works well on all types of data, including tabular (structured) and unstructured data (images, text, audio, etc.) |
+| Works well on small-to-medium sized data | Works well on large data |
+| Fast to train | May be slower than decision tree ensembles to train |
+| Small decision trees may be human interpretable | Not human interpretable |
+| - | Works well with transfer learning |
+| - | When building a system of multiple models working together, it is easier to integrate neural networks |
