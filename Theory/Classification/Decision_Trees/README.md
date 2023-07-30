@@ -102,4 +102,3 @@ We can then calculate the information gain for each of these thresholds and choo
 Decision trees can also be used for regression tasks. The algorithm is similar to the one for classification, except that instead of predicting a class label, we predict a continuous value.
 
 ![regression tree](../media/regression_split.png)
-
