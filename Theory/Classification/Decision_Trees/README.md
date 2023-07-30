@@ -85,3 +85,21 @@ The decision tree learning algorithm is a greedy, top-down algorithm that recurs
 - **Minimum number of samples to split:** The minimum number of samples to split is the minimum number of samples required to split an internal node. This parameter is useful for avoiding overfitting. The default value is 2, which means that nodes with only one sample will not be split.
 
 - **Minimum impurity decrease:** A node will be split if this split induces a decrease of the impurity greater than or equal to this value. This parameter is useful for avoiding overfitting. The default value is 0, which means that all splits will be made regardless of impurity decrease.
+
+## Splitting Data based on Continuous Features
+When splitting data based on continuous features, we need to consider all possible thresholds for each feature. For example, if we have a feature with values `[1, 2, 3, 4, 5]`, we can consider the following thresholds:
+
+- $1.5: [1], [2, 3, 4, 5]$
+- $2.5: [1, 2], [3, 4, 5]$
+- $3.5: [1, 2, 3], [4, 5]$
+- $4.5: [1, 2, 3, 4], [5]$
+
+We can then calculate the information gain for each of these thresholds and choose the one with the highest information gain.
+
+![splitting data](../media/cont_split.png)
+
+## Decision Tree for Regression
+Decision trees can also be used for regression tasks. The algorithm is similar to the one for classification, except that instead of predicting a class label, we predict a continuous value.
+
+![regression tree](../media/regression_split.png)
+
