@@ -23,43 +23,21 @@ The algorithm repeats the assignment and update steps until the positions of the
 Throughout this iterative process, some data points may change their cluster membership as the centroids shift. The algorithm continues to run until it reaches a point where no changes are observed in the assignment of points to clusters or the positions of centroids.
 
 ## K-means Algorithm
-$$
-\begin{align}
-\text{Initialize centroids } \mu_1, \mu_2, \dots, \mu_k \text{ randomly} \\
-\text{Repeat until convergence:} \\
-\quad \text{for } i = 1 \text{ to } m: \\
-\comment{Cluster assignment step} \\
-\quad \quad c^{(i)} := \text{index (from 1 to K) of cluster centroid closest to } x^{(i)} \\
-\comment{Move centroid step} \\
-\quad \text{for } k = 1 \text{ to } K: \\
-\quad \quad \mu_k := \frac{\sum_{i=1}^m 1\{c^{(i)} = k\}x^{(i)}}{\sum_{i=1}^m 1\{c^{(i)} = k\}}
-\end{align}
-$$
+Here's a pseudocode implementation of the K-means algorithm:
 
+```
+Randomly initialize K cluster centroids $μ_1, μ_2, ..., μ_K \in \mathbb{R}^n$
 
+Repeat {
+    # assign points to clusters
+    for i = 1 to m {
+        c(i) := index (from 1 to K) of cluster centroid closest to x(i)
+        # $\text{argmin}_k ||x^{(i)} - \mu_k||^2$
+    }
 
-
-```python
-def k_means(data, k):
-    # Initialize centroids
-    centroids = initialize_centroids(data, k)
-    
-    # Initialize clusters
-    clusters = [[] for _ in range(k)]
-    
-    # Initialize old_centroids
-    old_centroids = None
-    
-    # Iterate until centroids converge
-    while not has_converged(centroids, old_centroids):
-        # Assign data points to clusters
-        clusters = assign_points(data, centroids)
-        
-        # Save old centroids
-        old_centroids = centroids
-        
-        # Recalculate centroids
-        centroids = recalculate_centroids(clusters)
-        
-    return clusters
+    # move centroids to average of assigned points
+    for k = 1 to K {
+        $\mu_k$ := average (mean) of points assigned to cluster k
+    }
+}
 ```
