@@ -26,18 +26,21 @@ Throughout this iterative process, some data points may change their cluster mem
 Here's a pseudocode implementation of the K-means algorithm:
 
 ```
-Randomly initialize K cluster centroids $μ_1, μ_2, ..., μ_K \in \mathbb{R}^n$
+Randomly initialize K cluster centroids (μ1, μ2, ..., μK) ∈ ℝn
 
 Repeat {
     # assign points to clusters
     for i = 1 to m {
         c(i) := index (from 1 to K) of cluster centroid closest to x(i)
-        # $\text{argmin}_k ||x^{(i)} - \mu_k||^2$
+        # min ||x(i) - μk||^2
     }
 
     # move centroids to average of assigned points
     for k = 1 to K {
-        $\mu_k$ := average (mean) of points assigned to cluster k
+        μk := average (mean) of points assigned to cluster k
     }
 }
 ```
+
+Corner cases:
+- If a cluster ends up with no points assigned to it, then the centroid is not updated. This is because the average of zero points is undefined. In this case, it's best to randomly reinitialize the centroid or remove the cluster altogether and run the algorithm again with $K-1$ clusters.
