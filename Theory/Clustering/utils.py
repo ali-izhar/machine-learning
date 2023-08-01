@@ -1,32 +1,39 @@
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 
-from scipy.spatial import ConvexHull
-from kmeans import kmeans_random_init, run_kmeans, find_closest_centroids
+from kmeans import kmeans_random_init, run_kmeans
 
-def plot_clusters(X, idx, centroids, K, num_iters):
+def plot_clusters(X, idx, centroids, old_centroids, K):
     """
     Plots the data points with colors assigned to each centroid.
     arguments:
         X (ndarray): (m, n) matrix of training examples
         idx (ndarray): (m, ) vector of centroid assignments (i.e. each entry in range [0, K-1])
         centroids (ndarray): (K, n) matrix of centroids
+        old_centroids (ndarray): (K, n) matrix of old centroids
         K (int): number of clusters
         num_iters (int): number of iterations
     """
-    # plot the data
+
     plt.figure(figsize=(10, 6))
-    plt.scatter(X[:, 0], X[:, 1], c=idx, cmap='viridis', alpha=0.5)
-    # plot the centroids as black x's
-    plt.scatter(centroids[:, 0], centroids[:, 1], c='black', s=100, alpha=0.5)
-    # plot the history of the centroids with lines
-    for i in range(K):
-        plt.plot(centroids[:i+1, 0], centroids[:i+1, 1], c='black', alpha=0.5)
-    plt.title('Iteration number {}'.format(num_iters))
-    plt.show()
+    plt.scatter(X[:, 0], X[:, 1], c=idx, cmap='viridis', alpha=0.8)
     
+    # Draw lines between old and new centroids
+    for i in range(K):
+        plt.plot([old_centroids[i, 0], centroids[i, 0]], [old_centroids[i, 1], centroids[i, 1]], 'k-')
+    
+    # Use different marker for centroids
+    plt.scatter(centroids[:, 0], centroids[:, 1], c='black', s=100, alpha=1, marker='*', label='Centroids')
+    
+    # Annotate the centroids
+    for i, centroid in enumerate(centroids):
+        plt.annotate(i, (centroid[0], centroid[1]), color='red')
+
+    plt.xlabel('X1')
+    plt.ylabel('X2')
+    plt.legend()
+    plt.grid(False)
+    plt.show()
 
 
 if __name__ == '__main__':
@@ -54,4 +61,4 @@ if __name__ == '__main__':
     centroids, idx = run_kmeans(X, initial_centroids, max_iters)
 
     # plot the final clusters
-    plot_clusters(X, idx, centroids, K, max_iters)
+    plot_clusters(X, idx, centroids, initial_centroids, K)
