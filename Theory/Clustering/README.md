@@ -44,3 +44,34 @@ Repeat {
 
 Corner cases:
 - If a cluster ends up with no points assigned to it, then the centroid is not updated. This is because the average of zero points is undefined. In this case, it's best to randomly reinitialize the centroid or remove the cluster altogether and run the algorithm again with $K-1$ clusters.
+
+## K-means Optimization Objective
+The K-means optimization objective is the **in-cluster variance**. It is computed as the sum of the squared Euclidean distances between each data point and the centroid of its assigned cluster. This cost function is the same as the one used in linear regression, except that the hypothesis function $h_\theta(x)$ is replaced by the centroid $\mu_c$.
+
+$$ J(c^{(1)}, ..., c^{(m)}, \mu_1, ..., \mu_K) = \frac{1}{m} \sum_{i=1}^m ||x^{(i)} - \mu_{c^{(i)}}||^2 $$
+
+where $c^{(i)}$ is the index of the cluster (1, 2, ..., K) to which example $x^{(i)}$ is assigned, and $\mu_{c^{(i)}}$ is the centroid itself. This cost function is also known as the **distortion** of the dataset. The goal of K-means is to minimize the distortion of the dataset. This is done by finding the optimal values of $c^{(1)}, ..., c^{(m)}$ and $\mu_1, ..., \mu_K$.
+
+## K-means Initialization
+K-means is prone to local optima, so it's important to run the algorithm multiple times with different initializations. The algorithm is run for a fixed number of iterations, and the initialization that produces the lowest distortion is chosen.
+
+![Random Initialization](media/random-initialization.png)
+
+- **Random initialization**: Randomly select $K$ data points from the dataset and set them as the initial centroids. This method is simple and fast, but it can produce suboptimal results if the initial centroids are chosen poorly.
+
+```
+# this range can be between 50 and 1000
+For i = 1 to 100 {
+    Randomly initialize K cluster centroids (μ1, μ2, ..., μK) ∈ ℝn
+    Run K-means to get (c1, ..., cm, μ1, ..., μK)
+    Compute cost function (distortion) J(c1, ..., cm, μ1, ..., μK)
+}
+
+Pick clustering that gave lowest cost J
+```
+
+## Choosing the Number of Clusters $(K)$
+The number of clusters $K$ is a hyperparameter of the K-means algorithm. It is chosen by the data scientist, and it is not learned by the algorithm. There are two main methods for choosing $K$:
+
+### Elbow Method
+The elbow method is a heuristic for choosing $K$ based on the distortion of the dataset. The distortion is computed for different values of $K$, and the value of $K$ at which the distortion starts to decrease more slowly is chosen. The name "elbow method" comes from the shape of the plot of distortion vs. $K$, which resembles an elbow.
