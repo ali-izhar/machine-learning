@@ -71,7 +71,7 @@ Pick clustering that gave lowest cost J
 ```
 
 ## Choosing the Number of Clusters $(K)$
-The number of clusters $K$ is a hyperparameter of the K-means algorithm. It is chosen by the data scientist, and it is not learned by the algorithm. There are two main methods for choosing $K$:
+The number of clusters $K$ is a hyperparameter of the K-means algorithm. It is chosen by the data scientist, and it is not learned by the algorithm.
 
 ### Elbow Method
 The elbow method is a heuristic for choosing $K$ based on the distortion of the dataset. The distortion is computed for different values of $K$, and the value of $K$ at which the distortion starts to decrease more slowly is chosen. The name "elbow method" comes from the shape of the plot of distortion vs. $K$, which resembles an elbow.
