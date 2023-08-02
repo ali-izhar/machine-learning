@@ -62,3 +62,14 @@ Notice that the squared error is summed only over movies rated by user $j$ denot
 To learn parameters $w^{(j)}, b^{(j)}$ for all the users, we need to minimize the cost function $J(w^{(j)}, b^{(j)})$ for all the users. The overall cost function is given by:
 
 $$J(w^{(1)}, b^{(1)}, ..., w^{(n_u)}, b^{(n_u)}) = \frac{1}{2} \sum_{j=1}^{n_u} \sum_{i:r(i,j)=1} ((w^{(j)}) x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2$$
+
+## Collaborative Filtering
+In the table above, we have features for the movies that we can use to learn the parameters. What if we don't have the features? We can use collaborative filtering to learn the features. In collaborative filtering, we learn the features from the data. It is a technique used by recommender systems and is based on the assumption that people who agreed in the past will agree in the future, and that they will like similar kinds of items as they liked in the past.
+
+Given the parameters $w^{(j)}, b^{(j)}$ for all the users, we can learn the features $x^{(i)}$ for all the movies by minimizing the cost function $J(x^{(1)}, ..., x^{(n_m)})$ given by:
+
+$$J(x^{(1)}, ..., x^{(n_m)}) = \frac{1}{2} \sum_{i=1}^{n_m} \sum_{j:r(i,j)=1} ((w^{(j)}) x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{i=1}^{n_m} \sum_{k=1}^n (x_k^{(i)})^2$$
+
+Notice that in learning the features, we assume that the parameters $w^{(j)}, b^{(j)}$ are fixed. We can learn the parameters and the features simultaneously by minimizing the cost function $J(w^{(1)}, b^{(1)}, ..., w^{(n_u)}, b^{(n_u)}, x^{(1)}, ..., x^{(n_m)})$ given by:
+
+$$J(w^{(1)}, b^{(1)}, ..., w^{(n_u)}, b^{(n_u)}, x^{(1)}, ..., x^{(n_m)}) = \frac{1}{2} \sum_{(i,j):r(i,j)=1} ((w^{(j)}) x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2 + \frac{\lambda}{2} \sum_{i=1}^{n_m} \sum_{k=1}^n (x_k^{(i)})^2$$
