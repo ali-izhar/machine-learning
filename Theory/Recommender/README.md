@@ -73,3 +73,12 @@ $$J(x^{(1)}, ..., x^{(n_m)}) = \frac{1}{2} \sum_{i=1}^{n_m} \sum_{j:r(i,j)=1} ((
 Notice that in learning the features, we assume that the parameters $w^{(j)}, b^{(j)}$ are fixed. We can learn the parameters and the features simultaneously by minimizing the cost function $J(w^{(1)}, b^{(1)}, ..., w^{(n_u)}, b^{(n_u)}, x^{(1)}, ..., x^{(n_m)})$ given by:
 
 $$J(w^{(1)}, b^{(1)}, ..., w^{(n_u)}, b^{(n_u)}, x^{(1)}, ..., x^{(n_m)}) = \frac{1}{2} \sum_{(i,j):r(i,j)=1} ((w^{(j)}) x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2 + \frac{\lambda}{2} \sum_{i=1}^{n_m} \sum_{k=1}^n (x_k^{(i)})^2$$
+
+## Gradient Descent
+In addition to the parameters $w^{(j)}, b^{(j)}$ for all the users, we also have the features $x^{(i)}$ for all the movies. We can learn the parameters and the features simultaneously by minimizing the cost function $J(w^{(1)}, b^{(1)}, ..., w^{(n_u)}, b^{(n_u)}, x^{(1)}, ..., x^{(n_m)})$ using gradient descent. The gradient descent update equations for the parameters and the features are given by:
+
+$$w_i^{(j)} := w_i^{(j)} - \alpha \partial J(w, b, x) / \partial w_i^{(j)}$$
+
+$$b^{(j)} := b^{(j)} - \alpha \partial J(w, b, x) / \partial b^{(j)}$$
+
+$$x_k^{(i)} := x_k^{(i)} - \alpha \partial J(w, b, x) / \partial x_k^{(i)}$$
