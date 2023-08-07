@@ -82,3 +82,10 @@ $$w_i^{(j)} := w_i^{(j)} - \alpha \partial J(w, b, x) / \partial w_i^{(j)}$$
 $$b^{(j)} := b^{(j)} - \alpha \partial J(w, b, x) / \partial b^{(j)}$$
 
 $$x_k^{(i)} := x_k^{(i)} - \alpha \partial J(w, b, x) / \partial x_k^{(i)}$$
+
+## Binary Labels
+In the table above, we have ratings from 1 to 5. What if we have binary labels like "like" and "dislike"? We can use logistic regression to learn the parameters. The cost function (with regularization) for the ecommender system using logistic regression is given by:
+
+$$J(w^{(j)}, b^{(j)}) = - \frac{1}{m^{(j)}} \sum_{i:r(i,j)=1} \left[ y^{(i,j)} \log (h_w(x^{(i)})) + (1 - y^{(i,j)}) \log (1 - h_w(x^{(i)})) \right] + \frac{\lambda}{2} \sum_{k=1}^n (w_k^{(j)})^2$$
+
+where $h_w(x^{(i)}) = g(w^{(j)} x^{(i)} + b^{(j)})$ and $g(z) = 1 / (1 + e^{-z})$ is the sigmoid function. Notice that the regularization term is summed over all the features. We've also eliminated division by $m^{(j)}$ since it is a constant and does not affect the optimization.
