@@ -89,3 +89,40 @@ In the table above, we have ratings from 1 to 5. What if we have binary labels l
 $$J(w^{(j)}, b^{(j)}) = - \frac{1}{m^{(j)}} \sum_{i:r(i,j)=1} \left[ y^{(i,j)} \log (h_w(x^{(i)})) + (1 - y^{(i,j)}) \log (1 - h_w(x^{(i)})) \right] + \frac{\lambda}{2} \sum_{k=1}^n (w_k^{(j)})^2$$
 
 where $h_w(x^{(i)}) = g(w^{(j)} x^{(i)} + b^{(j)})$ and $g(z) = 1 / (1 + e^{-z})$ is the sigmoid function. Notice that the regularization term is summed over all the features. We've also eliminated division by $m^{(j)}$ since it is a constant and does not affect the optimization.
+
+## Mean Normalization
+In the table above, we have ratings from 1 to 5. What if we have a new user who has not rated any movie? Let's add user no. 5 to the table above. User no. 5 has not rated any movie. If we use the original cost function to learn parameters for the new user, we will get $w^{(5)} = 0$ and $b^{(5)} = 0$. This is because the cost function is given by:
+
+$$J(w^{(5)}, b^{(5)}) = \frac{1}{2} \sum_{i:r(i,5)=1} ((w^{(5)}) x^{(i)} + b^{(5)} - y^{(i,5)})^2 + \frac{\lambda}{2} \sum_{k=1}^n (w_k^{(5)})^2$$
+
+Since user no. 5 has not rated any movie, we have $r(i,5) = 0$ for all $i$. Therefore, the first term in the cost function is zero. The second term in the cost function is given by:
+
+$$\frac{\lambda}{2} \sum_{k=1}^n (w_k^{(5)})^2 = \frac{\lambda}{2} \left[ (w_1^{(5)})^2 + (w_2^{(5)})^2 + ... + (w_n^{(5)})^2 \right]$$
+
+Since we want to minimize the cost function, we can set $w^{(5)} = 0$ and $b^{(5)} = 0$ to get the minimum cost. Therefore, we will get $w^{(5)} = 0$ and $b^{(5)} = 0$ for the new user.
+
+| Movie/User | 1 | 2 | 3 | 4 | 5 | Mean |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 5 | 5 | 0 | 0 | ? | 2.5 |
+| 2 | 5 | ? | ? | 0 | ? | 2.5 |
+| 3 | ? | 4 | 0 | ? | ? | 2 |
+| 4 | 0 | 0 | 5 | 4 | ? | 2.25 |
+| 5 | 0 | 0 | 5 | 0 | ? | 1.25 |
+
+However, this is not what we want. We want to learn the parameters for the new user. We can do this by mean normalization. We can subtract the mean rating for each movie from the ratings given by the new user.
+
+$$\mu = \matr{2.5 \\ 2.5 \\ 2 \\ 2.25 \\ 1.25}$$
+
+To apply mean normalization, we can subtract $\mu$ from the ratings given by the new user. Let's write the above table in a matrix form.
+
+$$Y = \matr{5 & 5 & 0 & 0 & ? \\ 5 & ? & ? & 0 & ? \\ ? & 4 & 0 & ? & ? \\ 0 & 0 & 5 & 4 & ? \\ 0 & 0 & 5 & 0 & ?} - \matr{2.5 \\ 2.5 \\ 2 \\ 2.25 \\ 1.25}$$
+
+This is called row-wise mean normalization. We can also do column-wise mean normalization in certain cases.
+
+$$Y = \matr{2.5 & 2.5 & -2.5 & -2.5 & ? \\ 2.5 & ? & ? & -2.5 & ? \\ ? & 2 & 0 & ? & ? \\ -2.25 & -2.25 & 2.75 & 1.75 & ? \\ -1.25 & -1.25 & 3.75 & -1.25 & ?}$$
+
+To predict the rating for the new user, we can use the following formula:
+
+$$h_w(x^{(i)}) = w^{(5)} x^{(i)} + b^{(5)} + \mu_i$$
+
+where $\mu_i$ is the mean rating for movie $i$. We add the mean rating to the predicted rating to get the final rating because a rating cannot be negative.
