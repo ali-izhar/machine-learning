@@ -126,3 +126,15 @@ To predict the rating for the new user, we can use the following formula:
 $$h_w(x^{(i)}) = w^{(5)} x^{(i)} + b^{(5)} + \mu_i$$
 
 where $\mu_i$ is the mean rating for movie $i$. We add the mean rating to the predicted rating to get the final rating because a rating cannot be negative.
+
+## Finding Related Items
+The features learned by the recommender system can be used to find related items. To find an item $k$ related to item $i$, we can compute the squared distance between the features of item $i$ and item $k$.
+
+$$\sum_{l=1}^n (x_l^{(k)} - x_l^{(i)})^2 = ||x^{(k)} - x^{(i)}||^2$$
+
+## Limitations of Collaborative Filtering
+- Cold start problem
+    - How to rank new items that few users have rated?
+    - How to show something reasonable to new users who have not rated anything or have rated very few items?
+- Use side information about items or users
+    - Collaborative filtering is based only on ratings and does not use any side information about items or users like genre, director, actor, etc, which can be very useful in recommending items to users.

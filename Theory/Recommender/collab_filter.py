@@ -17,7 +17,7 @@ class CollaborativeFiltering:
 
         for iter in range(iterations):
             with tf.GradientTape() as tape:
-                cost_value = cofiCostFuncV(
+                cost_value = collab_filter_cost_ftn(
                     self.X, self.W, self.b, Y, R, self.num_users, self.num_movies, self.lambda_
                 )
 
@@ -30,4 +30,3 @@ class CollaborativeFiltering:
 
     def predict(self, X, R):
         return tf.matmul(self.X, tf.transpose(self.W)) + self.b
-    
