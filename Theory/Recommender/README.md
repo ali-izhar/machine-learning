@@ -111,7 +111,14 @@ Since we want to minimize the cost function, we can set $w^{(5)} = 0$ and $b^{(5
 
 However, this is not what we want. We want to learn the parameters for the new user. We can do this by mean normalization. We can subtract the mean rating for each movie from the ratings given by the new user.
 
-$$\mu = \matr{2.5 \\ 2.5 \\ 2 \\ 2.25 \\ 1.25}$$
+$$\mu = 
+\begin{pmatrix}
+2.5 \\
+2.5 \\
+2 \\
+2.25 \\
+1.25 \\
+\end{pmatrix}$$
 
 To apply mean normalization, we can subtract $\mu$ from the ratings given by the new user. Let's write the above table in a matrix form.
 
