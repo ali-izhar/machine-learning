@@ -29,18 +29,18 @@ where $V_u^{(j)}$ is the feature vector for user $j$ computed from the user feat
 
 $$V_u =
 \begin{pmatrix}
-4.9 (likes) \\
-0.1 (likes) \\
+4.9 \quad (likes) \\
+0.1 \quad (likes) \\
 ... \\
-3.0 (likes)\\
+3.0 \quad (likes)\\
 \end{pmatrix}$$
 
 $$V_m =
 \begin{pmatrix}
-4.5 (romance) \\
-0.2 (action) \\
+4.5 \quad (romance) \\
+0.2 \quad (action) \\
 ... \\
-3.5 (comedy) \\
+3.5 \quad (comedy) \\
 \end{pmatrix}$$
 
 We could interpret the dot product $V_u^{(j)} \dot V_m^{(i)}$ as the similarity between the user and the movie. In this case, the user likes romance movies and the movie is a romance movie, so the dot product will be high ($4.9 \times 4.5 = 22.05$). If the user likes romance movies and the movie is an action movie, then the dot product will be low ($4.9 \times 0.2 = 0.98$).
@@ -77,10 +77,10 @@ If we have a large catalogue of movies, running the dot product layer for every 
 
 **Retrieval**:
 - Generate a large list of plausible candidates (e.g. 1000 movies)
-    - 1. For each of the last 10 movies watched by the user, find the 20 most similar movies
-    - 2. For most viewed 3 genres, find the top 10 movies
-    - 3. For each of the 5 most viewed directors, find the top 10 movies
-    - 4. Top 20 movies in the country
+    - For each of the last 10 movies watched by the user, find the 20 most similar movies
+    - For most viewed 3 genres, find the top 10 movies
+    - For each of the 5 most viewed directors, find the top 10 movies
+    - Top 20 movies in the country
 - Combine retrieved items into a list, remove duplicates, and remove already watched / purchased items
 
 **Ranking**:
