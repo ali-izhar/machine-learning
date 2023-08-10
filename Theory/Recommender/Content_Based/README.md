@@ -6,7 +6,7 @@ Content-based filtering is a technique used to recommend items based on their si
 | Recommend items to you based on ratings of users who gave similar ratings as you | Recommend items to you based on features of user and item to find a good match |
 
 ## Examples of user and item features
-| User Features $x_u^{(j)} for user $j$ | Item Features $x_m^{(i)} for movie $i$ |
+| User Features $x_u^{(j)}$ for user $j$ | Item Features $x_m^{(i)}$ for movie $i$ |
 | --- | --- |
 | Age | Genre |
 | Gender | Director |
@@ -31,7 +31,7 @@ $$V_u =
 \begin{pmatrix}
 4.9 (likes) \\
 0.1 (likes) \\
-\ellipses \\
+... \\
 3.0 (likes)\\
 \end{pmatrix}$$
 
@@ -39,7 +39,7 @@ $$V_m =
 \begin{pmatrix}
 4.5 (romance) \\
 0.2 (action) \\
-\ellipses \\
+... \\
 3.5 (comedy) \\
 \end{pmatrix}$$
 
@@ -48,13 +48,13 @@ We could interpret the dot product $V_u^{(j)} \dot V_m^{(i)}$ as the similarity 
 ## Neural Network Architecture
 A good way to develop a content-based filtering model is to use a neural network. The neural network architecture is as follows:
 
-<img src="../media/nn_arch.png" width="300">
+<img src="../media/nn_arch.png" width="500">
 
 Here's we have drawn two separate networks: a user network and a movie network. The user network takes in the user features $x_u^{(j)}$ and outputs the user feature vector $V_u^{(j)}$. The movie network takes in the movie features $x_m^{(i)}$ and outputs the movie feature vector $V_m^{(i)}$. The user and movie feature vectors are then fed into a dot product layer, which outputs the predicted rating $\hat{y}^{(i,j)}$.
 
 We can actually draw the user and movie networks as one network:
 
-<img src="../media/single_nn_arch.png" width="300">
+<img src="../media/single_nn_arch.png" width="500">
 
 The upper half of the network is the user network and the lower half of the network is the movie network. 
 
