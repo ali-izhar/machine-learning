@@ -24,15 +24,42 @@ In reinforcement learning, the agent is in a state $s_t$ at time $t$. The agent 
 A Markov decision process (MDP) is a discrete-time stochastic control process. It provides a mathematical framework for modeling decision making in situations where outcomes are partly random and partly under the control of a decision maker. MDPs are useful for studying optimization problems solved via dynamic programming and reinforcement learning.
 
 ## State-Action Value Function
-The state-action value function $Q(s,a)$ is the expected total reward (or return) that the agent will receive starting from state $s$ and taking action $a$. The state-action value function is also called the Q-function.
+The state-action value function $Q(s, a)$ is the expected total reward (or return) that the agent will receive starting from state $s$ and taking action $a$. The state-action value function is also called the Q-function.
 
 $Q(s, a) =$ Return if you start in state $s$, take action $a$ (once), and then behave optimally after that (i.e., follow the optimal policy). The optimal policy is the policy that maximizes the total reward (or return) given the current state: $\max_{a} Q(s, a)$.
+
+$Q(s, a)$ is the expected total reward that the agent will receive starting from state $s$ and taking action $a$ and is also given by:
+
+$$Q(s, a) = R_1 + \gamma R_2 + \gamma^2 R_3 + \gamma^3 R_4 + \cdots$$
+
+$$Q(s, a) = R_1 + \gamma (R_2 + \gamma R_3 + \gamma^2 R_4 + \cdots)$$
+
+$$Q(s, a) = R_1 + \gamma Q(s', a')$$
+
+where $R_1$ is the reward for the current state $s$ (also called the immediate reward), $R_2$ is the reward for the next state $s'$, and so on.
 
 ## Bellman Equation
 The Bellman equation is a necessary and sufficient condition for optimality associated with the mathematical optimization method known as dynamic programming. It writes the relationship for the value of a decision problem at one point in time, in terms of the payoff from some initial choices and the value of the remaining decision problem that results from those initial choices.
 
-The Bellman equation for the state-action value function $Q(s,a)$ is given by:
+The Bellman equation for the state-action value function $Q(s, a)$ is given by:
 
-$$Q(s, a) = \mathbb{E}[r + \gamma \max_{a'} Q(s', a') | s, a]$$
+$$Q(s, a) = R(s) + \gamma \max_{a'} Q(s', a')$$
 
-where $r$ is the reward, $\gamma$ is the discount factor, $s'$ is the next state, and $a'$ is the next action.
+where $R(s)$ is the reward for the current state $s$, $\gamma$ is the discount factor, $s'$ is the next state, and $a'$ is the next action. Consider the following illustration with $\gamma = 0.5$:
+
+<img src="media/bellman.png" width="500">
+
+If the agent is in state 2 and takes action $\rightarrow$, then the agent will receive a reward of 0 and will transition to state 3. The return for this action is given by:
+
+$$Q(2, \rightarrow) = R(2) + 0.5 \max_{a'} Q(3, a') = 0 + 0.5 \max(25, 6.25) = 12.5$$
+
+Similarly, if the agent is in state 4 and takes action $\leftarrow$, then the agent will receive a reward of 0 and will transition to state 3. The return for this action is given by:
+
+$$Q(4, \leftarrow) = R(4) + 0.5 \max_{a'} Q(3, a') = 0 + 0.5 \max(25, 6.25) = 12.5$$
+
+## Stochastic Environment
+In a stochastic environment, the next state $s'$ and the reward $R(s)$ are random variables. For example, if the agent is in state 2 and takes action $\rightarrow$, then the agent will transition to state 3 with probability 0.8 and will transition to state 1 with probability 0.2 (due to factors like wind, friction, etc.). In this case, the return is a random variable and therefore, the state-action value function $Q(s, a)$ is also a random variable. Therefore, instead of maximizing the state-action value function $Q(s, a)$, we maximize the expected (or average) state-action value function $\mathbb{E}[Q(s, a)]$ given by:
+
+$$Q(s, a) = R(s) + \gamma \max_{a'} \mathbb{E}[Q(s', a')]$$
+
+where $\mathbb{E}[R(s)]$ is the expected reward for the current state $s$, $\gamma$ is the discount factor, $s'$ is the next state, and $a'$ is the next action.
