@@ -48,13 +48,13 @@ We could interpret the dot product $V_u^{(j)} \dot V_m^{(i)}$ as the similarity 
 ## Neural Network Architecture
 A good way to develop a content-based filtering model is to use a neural network. The neural network architecture is as follows:
 
-<img src="../media/nn_arch.png" width="500">
+<img src="../media/nn_arch.png" width="500" style="align: center"/>
 
 Here's we have drawn two separate networks: a user network and a movie network. The user network takes in the user features $x_u^{(j)}$ and outputs the user feature vector $V_u^{(j)}$. The movie network takes in the movie features $x_m^{(i)}$ and outputs the movie feature vector $V_m^{(i)}$. The user and movie feature vectors are then fed into a dot product layer, which outputs the predicted rating $\hat{y}^{(i,j)}$.
 
 We can actually draw the user and movie networks as one network:
 
-<img src="../media/single_nn_arch.png" width="500">
+<img src="../media/single_nn_arch.png" width="500" style="align: center"/>
 
 The upper half of the network is the user network and the lower half of the network is the movie network. 
 
