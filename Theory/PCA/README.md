@@ -15,14 +15,17 @@ PCA is a linear dimensionality reduction technique that seeks to maximize the va
 Consider the following data points in 2D space that we wish to project onto a single dimension. The red line represents the hyperplane that lies closest to the data.
 
 <img src="media/axis1.png" width="400" style="align: center"/>
+
 > This is not a bad choice, but it is not the best choice either. The hyperplane should be chosen such that it preserves the maximum amount of variance.
 
 In this case, the `hyperplane` or `principal component` is the line that passes through the origin and bisects the data, maximizing the variance of the projected data. The `principal component` is the direction along which the data varies the most. The `second principal component` is the direction orthogonal to the first principal component that accounts for the next highest variance, and so on.
 
 <img src="media/axis2.png" width="400" style="align: center"/>
+
 > This is the worst choice of hyperplane as it squishes the data points together, resulting in a loss of variance.
 
 <img src="media/axis3.png" width="400" style="align: center"/>
+
 > This is the best choice of hyperplane as it preserves the maximum amount of variance.
 
 ## Projection onto the Hyperplane
@@ -51,6 +54,6 @@ PCA is often confused with linear regression. However, the two are very differen
 ## Applications of PCA
 - **Visualizing High-dimensional Data:** PCA is often used to visualize high-dimensional data in 2D or 3D. For instance, PCA is used to visualize the MNIST dataset, which comprises 784 features (dimensions), in 2D or 3D.
 
-> **Less Frequently Used Applications**<hr>
+> **Less Frequently Used Applications**
 > - PCA is often used to speed up machine learning algorithms by reducing the number of features. For instance, PCA is used to reduce the number of features in the MNIST dataset from 784 to 154 while preserving 95% of the variance.
 > - PCA can be used to filter out noise from datasets. For instance, PCA is used to remove noise from images.
