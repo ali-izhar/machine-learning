@@ -30,3 +30,9 @@ $Q(s, a) =$ Return if you start in state $s$, take action $a$ (once), and then b
 
 ## Bellman Equation
 The Bellman equation is a necessary and sufficient condition for optimality associated with the mathematical optimization method known as dynamic programming. It writes the relationship for the value of a decision problem at one point in time, in terms of the payoff from some initial choices and the value of the remaining decision problem that results from those initial choices.
+
+The Bellman equation for the state-action value function $Q(s,a)$ is given by:
+
+$$Q(s, a) = \mathbb{E}[r + \gamma \max_{a'} Q(s', a') | s, a]$$
+
+where $r$ is the reward, $\gamma$ is the discount factor, $s'$ is the next state, and $a'$ is the next action.
