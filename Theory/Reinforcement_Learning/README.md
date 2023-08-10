@@ -1,6 +1,13 @@
 # Reinforcement Learning
 Reinforcement learning is a type of machine learning that enables an agent to learn in an interactive environment by trial and error using feedback from its own actions and experiences. Reinforcement learning is different from supervised learning in a way that in supervised learning the training data has the answer key with it so the model is trained with the correct answer itself whereas in reinforcement learning, there is no answer but the reinforcement agent decides what to do to perform the given task. In the absence of training dataset, it is bound to learn from its experience.
 
+## Applications
+- Controlling robots
+- Playing games
+- Factory automation
+- Self-driving cars
+- Financial (stock) trading
+
 ## Reinforcement Learning Terminologies
 * **Agent**: The learner or decision-maker is called the agent. The agent takes actions (that is, interacts with the environment) and in return, it receives rewards/penalties.
 * **Environment**: The world in which the agent is placed is called the environment. The environment is the interface between the agent and the outside world. The agent sends an action to the environment and the environment responds back with an observation and a reward (or penalty).
@@ -16,9 +23,10 @@ In reinforcement learning, the agent is in a state $s_t$ at time $t$. The agent 
 ## Markov Decision Process
 A Markov decision process (MDP) is a discrete-time stochastic control process. It provides a mathematical framework for modeling decision making in situations where outcomes are partly random and partly under the control of a decision maker. MDPs are useful for studying optimization problems solved via dynamic programming and reinforcement learning.
 
-## Applications
-- Controlling robots
-- Playing games
-- Factory automation
-- Self-driving cars
-- Financial (stock) trading
+## State-Action Value Function
+The state-action value function $Q(s,a)$ is the expected total reward (or return) that the agent will receive starting from state $s$ and taking action $a$. The state-action value function is also called the Q-function.
+
+$Q(s, a) =$ Return if you start in state $s$, take action $a$ (once), and then behave optimally after that (i.e., follow the optimal policy). The optimal policy is the policy that maximizes the total reward (or return) given the current state: $\max_{a} Q(s, a)$.
+
+## Bellman Equation
+The Bellman equation is a necessary and sufficient condition for optimality associated with the mathematical optimization method known as dynamic programming. It writes the relationship for the value of a decision problem at one point in time, in terms of the payoff from some initial choices and the value of the remaining decision problem that results from those initial choices.
