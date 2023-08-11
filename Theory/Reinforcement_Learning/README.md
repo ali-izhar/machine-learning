@@ -63,3 +63,43 @@ In a stochastic environment, the next state $s'$ and the reward $R(s)$ are rando
 $$Q(s, a) = R(s) + \gamma \max_{a'} \mathbb{E}[Q(s', a')]$$
 
 where $\mathbb{E}[R(s)]$ is the expected reward for the current state $s$, $\gamma$ is the discount factor, $s'$ is the next state, and $a'$ is the next action.
+
+## Continuous State Space
+In a continuous state space, the state $s$ is a continuous variable. For example, the state $s$ can be the position and velocity of a car. In this case, the state-action value function $Q(s, a)$ is also a continuous variable.
+
+## Learning Algorithm
+The learning algorithm is used to learn the state-action value function $Q(s, a)$. The learning algorithm is given by:
+
+- Initialize neural network randomly as guess of $Q(s, a)$
+- Repeat:
+    - Take actions to get experience: $(s, a, R(s), s')$
+    - Store experience in replay memory or `experience replay buffer.` The replay memory is a list of tuples $(s, a, R(s), s')$ (for instance, 10,000 most recent tuples) that is used to train the neural network.
+    - Train model:
+        - Create training data by sampling from replay memory using $x = (s, a)$ and $y = R(s) + \gamma \max_{a'} Q(s', a')$
+        - Train $Q_new$ such that $Q_new(s, a) \approx y$ for all $(s, a)$ in training data
+    - Update $Q(s, a) = Q_new(s, a)$
+
+In practice, we would use mini-batch learning to train the neural network instead of training the neural network on the entire replay memory. So, instead of using all 10,000 tuples in the replay memory to train the neural network, we would use a mini-batch of, say, 1000 tuples to train the neural network.
+
+In the last step of the learning algorithm, we update $Q(s, a)$ with $Q_new(s, a)$. However, we don't want to update $Q(s, a)$ with $Q_new(s, a)$ immediately especially if $Q_new(s, a)$ is very different or a little worse than $Q(s, a)$. Instead, we want to update $Q(s, a)$ with $Q_new(s, a)$ gradually. This is called the `soft update` and is given by:
+
+$$Q(s, a) = (1 - \tau) Q(s, a) + \tau Q_{new}(s, a)$$
+
+where $\tau$ is a small number between 0 and 1, usually 0.001. Here, we are updating $Q(s, a)$ with $Q_{new}(s, a)$ by 1.0% (if $\tau = 0.01$). The soft update method ensures that the learning algorithm converges in a stable manner and makes it less likely for the learning algorithm to oscillate, diverge, or have other stability issues.
+
+## $\epsilon$-Greedy Policy
+The $\epsilon$-greedy policy is a policy that selects the action that maximizes the state-action value function $Q(s, a)$ with probability $1 - \epsilon$ and selects a random action with probability $\epsilon$. The $\epsilon$-greedy policy is given by:
+
+$$\pi(s) = \begin{cases}
+\text{random action} & \text{with probability } \epsilon \\
+\arg\max_{a} Q(s, a) & \text{with probability } 1 - \epsilon
+\end{cases}$$
+
+where $\epsilon$ is a small number between 0 and 1, usually 0.05.
+
+**Why do we need the $\epsilon$-greedy policy?** The $\epsilon$-greedy policy is used to explore the environment. Suppose there's some strange reason that $Q(s, a)$ was initialized randomly so that the learning algorithm thinks that the best action for state $s$ is $a_1$. If the learning algorithm always selects action $a_1$, then it will never know that action $a_2$ is better than action $a_1$. Therefore, the learning algorithm needs to explore the environment by selecting random actions. The $\epsilon$-greedy policy allows the learning algorithm to explore the environment by selecting random actions with probability $\epsilon$. This is called the exploration-exploitation tradeoff.
+
+- With probability $\epsilon$, the agent explores the environment by selecting a random action. This is called `exploration.`
+- With probability $1 - \epsilon$, the agent exploits the environment by selecting the action that maximizes the state-action value function $Q(s, a)$. This is called `exploitation` or `greedy` action.
+
+To start off, the agent selects random actions with a high probability (e.g., $\epsilon = 0.9$) and then gradually decreases the probability of selecting random actions (e.g., $\epsilon = 0.05$) as the agent learns more about the environment.
