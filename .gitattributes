@@ -1,1 +1,2 @@
 mini_projects/course_recommendation/data/Coursera_embeddings.csv filter=lfs diff=lfs merge=lfs -text
+Projects/course_recommendation/data/Coursera_embeddings.csv filter=lfs diff=lfs merge=lfs -text

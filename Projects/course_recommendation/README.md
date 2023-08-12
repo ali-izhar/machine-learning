@@ -1,0 +1,2 @@
+# Course Recommendation System
+The jupyter notebook in this repo is an experimental setup for generating embeddings for courses from the Coursera catalog. For an interactive demo using the Flask framework, please visit [this repo](https://github.com/ali-izhar/course-recommender).
