@@ -1,0 +1,2 @@
+# Content-Based Filtering
+Content-based filtering uses item features to recommend other items similar to what the user likes, based on their previous actions or explicit feedback. It is based on the idea that if a user likes a particular item, he or she will also like an item that is similar to it. The similarity of two items can be determined by comparing the content attributes of each item.

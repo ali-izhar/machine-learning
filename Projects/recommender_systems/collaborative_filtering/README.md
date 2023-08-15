@@ -1,0 +1,2 @@
+# Collaborative Filtering
+Collaborative filtering is a technique used by recommender systems. It is based on the idea that users similar to me can be used to predict how much I will like a particular product or service those users have used/experienced but I have not. For example, collaborative filtering can be used to predict the rating that a user would give to a movie that they have not yet rated.
