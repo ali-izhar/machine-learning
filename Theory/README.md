@@ -24,10 +24,10 @@ Where each $x^{(i)}$ is a column vector representing the $i$-th sample in the da
 
 $$
 W = \begin{bmatrix}
-- & w^{(1)} & - \\
-- & w^{(2)} & - \\
+-- & w^{(1)} & -- \\
+-- & w^{(2)} & -- \\
 \vdots & \vdots & \vdots \\
-- & w^{(n)} & - \\
+-- & w^{(n)} & -- \\
 \end{bmatrix}
 $$
 
