@@ -85,6 +85,7 @@ The dimensions of the matrices in the above neural network are as follows:
 
 - Input layer: $X$ is a $2 \times 1$ matrix because there are 2 nodes in the input layer.
 - The output of the first hidden layer: $Z^{[1]}$ is a $3 \times 1$ matrix because there are 3 nodes in the first hidden layer. In the equation $Z^{[1]} = W^{[1]} \times X + b^{[1]}$, let's ignore the bias term for now.
+
 | left-hand side | right-hand side |
 | :---: | :---: |
 | $Z^{[1]}$ | $W^{[1]} \times X$ |
