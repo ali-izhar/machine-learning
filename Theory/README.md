@@ -64,3 +64,44 @@ When executing the operation $W \times X + b$:
 The outcome of this process is a new matrix, which provides the predicted outputs corresponding to the input data in $X$.
 
 > Note: For the matrix multiplication to be valid, the number of columns in $W$ must match the number of rows in $X$. That's why in many scenarios, we see the transpose of $W$ (i.e., $W^T$) being used to align the matrices properly for multiplication.
+
+## Matrix Dimensions in Neural Networks
+In neural networks, the dimensions of the matrices are determined by the number of nodes in each layer. Consider a neural network with the following architecture:
+
+- Input layer: 2 nodes
+- First hidden layer: 3 nodes
+- Second hidden layer: 5 nodes
+- Third hidden layer: 4 nodes
+- Fourth hidden layer: 2 nodes
+- Output layer: 1 node
+
+We denote the number of nodes in a layer as $n^{[l]}$, where $l$ is the layer number. For example, $n^{[1]}$ is the number of nodes in the first hidden layer, $n^{[2]}$ is the number of nodes in the second hidden layer, and so on. Recall that the output of a layer is calculated as:
+
+$$Z = W \times X + b$$
+
+Where $Z$ is the output of the layer, $W$ is the weight matrix, $X$ is the input data, and $b$ is the bias vector.
+
+The dimensions of the matrices in the above neural network are as follows:
+
+- Input layer: $X$ is a $2 \times 1$ matrix because there are 2 nodes in the input layer.
+- The output of the first hidden layer: $Z^{[1]}$ is a $3 \times 1$ matrix because there are 3 nodes in the first hidden layer. In the equation $Z^{[1]} = W^{[1]} \times X + b^{[1]}$, let's ignore the bias term for now.
+| left-hand side | right-hand side |
+| :---: | :---: |
+| $Z^{[1]}$ | $W^{[1]} \times X$ |
+| $3 \times 1$ | ($3 \times 2$) $\times$ ($2 \times 1$) |
+| $3 \times 1$ | $3 \times 1$ |
+
+Therefore, the dimensions of $W^{[1]}$ are $3 \times 2$.
+
+
+
+
+
+
+
+
+
+
+
+
+The input data $X$ is a $2 \times 1$ matrix, the weight matrix $W$ is a $3 \times 2$ matrix, and the bias vector $b$ is a $3 \times 1$ matrix. The output $Y$ is a $1 \times 1$ matrix.
