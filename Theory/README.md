@@ -65,12 +65,7 @@ The outcome of this process is a new matrix, which provides the predicted output
 
 > Note: For the matrix multiplication to be valid, the number of columns in $W$ must match the number of rows in $X$. That's why in many scenarios, we see the transpose of $W$ (i.e., $W^T$) being used to align the matrices properly for multiplication.
 
-# Matrix Dimensions in Neural Networks
-
-Understanding the dimensions of matrices is crucial when working with neural networks. This README aims to clarify how the dimensions of various matrices are determined based on the architecture of a neural network.
-
-## Network Architecture
-
+## Matrix Dimensions in Neural Networks
 Consider a neural network with the following architecture:
 
 - **Input layer**: 2 nodes
@@ -80,48 +75,35 @@ Consider a neural network with the following architecture:
 - **Fourth hidden layer**: 2 nodes
 - **Output layer**: 1 node
 
-## Notation
+To denote the number of nodes in each layer, we use the notation $n^{[l]}$. For example:
+- $n^{[1]}$ represents the number of nodes in the first hidden layer.
+- $n^{[2]}$ represents the number of nodes in the second hidden layer, and so on.
 
-We use the notation \( n^{[l]} \) to denote the number of nodes in the \( l^{th} \) layer. For example:
+The output $Z^{[l]}$ of each layer $l$ is calculated using the formula:
 
-- \( n^{[1]} \) represents the number of nodes in the first hidden layer.
-- \( n^{[2]} \) represents the number of nodes in the second hidden layer, and so on.
-
-## Output Calculation
-
-The output \( Z \) of a layer is calculated using the formula:
-
-\[
-Z = W \times X + b
-\]
+$$
+Z^{[l]} = W^{[l]} \times A^{[l-1]} + b^{[l]}
+$$
 
 Where:
+- $Z^{[l]}$ is the output of the layer.
+- $W^{[l]}$ is the weight matrix.
+- $A^{[l-1]}$ is the input matrix.
+- $b^{[l]}$ is the bias vector.
 
-- \( Z \) is the output of the layer.
-- \( W \) is the weight matrix.
-- \( X \) is the input matrix.
-- \( b \) is the bias vector.
+To understand the dimensions of the weight matrices $W$, we can use the following table:
 
-## Dimensions of Matrices
+| Layer Output $Z$ | Calculation | Dimensions | Dimensions of $W$ |
+| :--------------: | :---------: | :--------: | :---------------: |
+| $Z^{[1]}$        | $W^{[1]} \times X$ | $(3 \times 2) \times (2 \times 1) = 3 \times 1$ | $3 \times 2$ |
+| $Z^{[2]}$        | $W^{[2]} \times A^{[1]}$ | $(5 \times 3) \times (3 \times 1) = 5 \times 1$ | $5 \times 3$ |
+| $Z^{[3]}$        | $W^{[3]} \times A^{[2]}$ | $(4 \times 5) \times (5 \times 1) = 4 \times 1$ | $4 \times 5$ |
+| $Z^{[4]}$        | $W^{[4]} \times A^{[3]}$ | $(2 \times 4) \times (4 \times 1) = 2 \times 1$ | $2 \times 4$ |
+| $Z^{[5]}$        | $W^{[5]} \times A^{[4]}$ | $(1 \times 2) \times (2 \times 1) = 1 \times 1$ | $1 \times 2$ |
 
-### Weight Matrices
-
-To understand the dimensions of the weight matrices \( W \), we can use the following table:
-
-| Layer Output \( Z \) | Calculation | Dimensions |
-| :-----------------: | :---------: | :--------: |
-| \( Z^{[1]} \)       | \( W^{[1]} \times X \) | \( (3 \times 2) \times (2 \times 1) = 3 \times 1 \) |
-| \( Z^{[2]} \)       | \( W^{[2]} \times A^{[1]} \) | \( (5 \times 3) \times (3 \times 1) = 5 \times 1 \) |
-| \( Z^{[3]} \)       | \( W^{[3]} \times A^{[2]} \) | \( (4 \times 5) \times (5 \times 1) = 4 \times 1 \) |
-| \( Z^{[4]} \)       | \( W^{[4]} \times A^{[3]} \) | \( (2 \times 4) \times (4 \times 1) = 2 \times 1 \) |
-| \( Z^{[5]} \)       | \( W^{[5]} \times A^{[4]} \) | \( (1 \times 2) \times (2 \times 1) = 1 \times 1 \) |
-
-### Bias Vectors
-
-The dimensions of the bias vectors \( b \) for each layer are:
-
-- \( b^{[1]} \) is a \( 3 \times 1 \) matrix.
-- \( b^{[2]} \) is a \( 5 \times 1 \) matrix.
-- \( b^{[3]} \) is a \( 4 \times 1 \) matrix.
-- \( b^{[4]} \) is a \( 2 \times 1 \) matrix.
-- \( b^{[5]} \) is a \( 1 \times 1 \) matrix.
+The dimensions of the bias vectors $b$ for each layer are:
+- $b^{[1]}$ is a $3 \times 1$ matrix.
+- $b^{[2]}$ is a $5 \times 1$ matrix.
+- $b^{[3]}$ is a $4 \times 1$ matrix.
+- $b^{[4]}$ is a $2 \times 1$ matrix.
+- $b^{[5]}$ is a $1 \times 1$ matrix.
