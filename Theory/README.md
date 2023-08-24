@@ -65,43 +65,63 @@ The outcome of this process is a new matrix, which provides the predicted output
 
 > Note: For the matrix multiplication to be valid, the number of columns in $W$ must match the number of rows in $X$. That's why in many scenarios, we see the transpose of $W$ (i.e., $W^T$) being used to align the matrices properly for multiplication.
 
-## Matrix Dimensions in Neural Networks
-In neural networks, the dimensions of the matrices are determined by the number of nodes in each layer. Consider a neural network with the following architecture:
+# Matrix Dimensions in Neural Networks
 
-- Input layer: 2 nodes
-- First hidden layer: 3 nodes
-- Second hidden layer: 5 nodes
-- Third hidden layer: 4 nodes
-- Fourth hidden layer: 2 nodes
-- Output layer: 1 node
+Understanding the dimensions of matrices is crucial when working with neural networks. This README aims to clarify how the dimensions of various matrices are determined based on the architecture of a neural network.
 
-We denote the number of nodes in a layer as $n^{[l]}$, where $l$ is the layer number. For example, $n^{[1]}$ is the number of nodes in the first hidden layer, $n^{[2]}$ is the number of nodes in the second hidden layer, and so on. Recall that the output of a layer is calculated as:
+## Network Architecture
 
-$$Z = W \times X + b$$
+Consider a neural network with the following architecture:
 
-Where $Z$ is the output of the layer, $W$ is the weight matrix, $X$ is the input data, and $b$ is the bias vector.
+- **Input layer**: 2 nodes
+- **First hidden layer**: 3 nodes
+- **Second hidden layer**: 5 nodes
+- **Third hidden layer**: 4 nodes
+- **Fourth hidden layer**: 2 nodes
+- **Output layer**: 1 node
 
-The dimensions of the matrices in the above neural network are as follows:
+## Notation
 
-- Input layer: $X$ is a $2 \times 1$ matrix because there are 2 nodes in the input layer.
-- The output of the first hidden layer: $Z^{[1]}$ is a $3 \times 1$ matrix because there are 3 nodes in the first hidden layer. In the equation $Z^{[1]} = W^{[1]} \times X + b^{[1]}$, let's ignore the bias term for now.
-| left-hand side | right-hand side |
-| :---: | :---: |
-| $Z^{[1]}$ | $W^{[1]} \times X$ |
-| $3 \times 1$ | ($3 \times 2$) $\times$ ($2 \times 1$) |
-| $3 \times 1$ | $3 \times 1$ |
+We use the notation \( n^{[l]} \) to denote the number of nodes in the \( l^{th} \) layer. For example:
 
-Therefore, the dimensions of $W^{[1]}$ are $3 \times 2$.
+- \( n^{[1]} \) represents the number of nodes in the first hidden layer.
+- \( n^{[2]} \) represents the number of nodes in the second hidden layer, and so on.
 
+## Output Calculation
 
+The output \( Z \) of a layer is calculated using the formula:
 
+\[
+Z = W \times X + b
+\]
 
+Where:
 
+- \( Z \) is the output of the layer.
+- \( W \) is the weight matrix.
+- \( X \) is the input matrix.
+- \( b \) is the bias vector.
 
+## Dimensions of Matrices
 
+### Weight Matrices
 
+To understand the dimensions of the weight matrices \( W \), we can use the following table:
 
+| Layer Output \( Z \) | Calculation | Dimensions |
+| :-----------------: | :---------: | :--------: |
+| \( Z^{[1]} \)       | \( W^{[1]} \times X \) | \( (3 \times 2) \times (2 \times 1) = 3 \times 1 \) |
+| \( Z^{[2]} \)       | \( W^{[2]} \times A^{[1]} \) | \( (5 \times 3) \times (3 \times 1) = 5 \times 1 \) |
+| \( Z^{[3]} \)       | \( W^{[3]} \times A^{[2]} \) | \( (4 \times 5) \times (5 \times 1) = 4 \times 1 \) |
+| \( Z^{[4]} \)       | \( W^{[4]} \times A^{[3]} \) | \( (2 \times 4) \times (4 \times 1) = 2 \times 1 \) |
+| \( Z^{[5]} \)       | \( W^{[5]} \times A^{[4]} \) | \( (1 \times 2) \times (2 \times 1) = 1 \times 1 \) |
 
+### Bias Vectors
 
+The dimensions of the bias vectors \( b \) for each layer are:
 
-The input data $X$ is a $2 \times 1$ matrix, the weight matrix $W$ is a $3 \times 2$ matrix, and the bias vector $b$ is a $3 \times 1$ matrix. The output $Y$ is a $1 \times 1$ matrix.
+- \( b^{[1]} \) is a \( 3 \times 1 \) matrix.
+- \( b^{[2]} \) is a \( 5 \times 1 \) matrix.
+- \( b^{[3]} \) is a \( 4 \times 1 \) matrix.
+- \( b^{[4]} \) is a \( 2 \times 1 \) matrix.
+- \( b^{[5]} \) is a \( 1 \times 1 \) matrix.
