@@ -81,9 +81,7 @@ To denote the number of nodes in each layer, we use the notation $n^{[l]}$. For 
 
 The output $Z^{[l]}$ of each layer $l$ is calculated using the formula:
 
-$$
-Z^{[l]} = W^{[l]} \times A^{[l-1]} + b^{[l]}
-$$
+$$Z^{[l]} = W^{[l]} \times A^{[l-1]} + b^{[l]}$$
 
 Where:
 - $Z^{[l]}$ is the output of the layer.
@@ -92,6 +90,8 @@ Where:
 - $b^{[l]}$ is the bias vector.
 
 To understand the dimensions of the weight matrices $W$, we can use the following table:
+
+> Note: The dimensions of the weight matrices $W$ are influenced by the number of nodes in the current layer $n^{[l]}$ and the number of nodes in the previous layer $n^{[l-1]}$. For example, $W^{[1]}$ is a $3 \times 2$ matrix because the first hidden layer has 3 nodes and the input layer has 2 nodes.
 
 | Layer Output $Z$ | Calculation | Dimensions | Dimensions of $W$ |
 | :--------------: | :---------: | :--------: | :---------------: |
