@@ -133,10 +133,9 @@ dmypy.json
 
 
 ## ignore data and model files
-Projects/movies_reviews_classification/data/
-Projects/movies_reviews_classification/models/
-Projects/course_recommendation/data/Coursera.csv
-Projects/course_recommendation/data/Coursera_embeddings.csv
+Projects/classifiers/movies_reviews_classification/data/
+Projects/classifiers/movies_reviews_classification/models/
+Projects/recommenders/Coursera_embeddings/data/
 Theory/Probability/naive_bayes_classifier/data/
 *.pt 
 
