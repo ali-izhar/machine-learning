@@ -101,9 +101,27 @@ To understand the dimensions of the weight matrices $W$, we can use the followin
 | $Z^{[4]}$        | $W^{[4]} \times A^{[3]}$ | $(2 \times 4) \times (4 \times 1) = 2 \times 1$ | $2 \times 4$ |
 | $Z^{[5]}$        | $W^{[5]} \times A^{[4]}$ | $(1 \times 2) \times (2 \times 1) = 1 \times 1$ | $1 \times 2$ |
 
+Therefore, the general formula for calculating the dimensions of the weight matrices $W$ is:
+
+$$W^{[l]} = n^{[l]} \times n^{[l-1]}$$
+
+Where $n^{[l]}$ is the number of nodes in the current layer and $n^{[l-1]}$ is the number of nodes in the previous layer.
+
 The dimensions of the bias vectors $b$ for each layer are:
 - $b^{[1]}$ is a $3 \times 1$ matrix.
 - $b^{[2]}$ is a $5 \times 1$ matrix.
 - $b^{[3]}$ is a $4 \times 1$ matrix.
 - $b^{[4]}$ is a $2 \times 1$ matrix.
 - $b^{[5]}$ is a $1 \times 1$ matrix.
+
+Therefore, the general formula for calculating the dimensions of the bias vectors $b$ is:
+
+$$b^{[l]} = n^{[l]} \times 1$$
+
+Where $n^{[l]}$ is the number of nodes in the current layer.
+
+In calculating backpropagation, we need to calculate the derivative of the weight matrices $W$ and the bias vectors $b$. The dimensions of the derivative matrices $dW$ are the same as the dimensions of the weight matrices $W$. The dimensions of the derivative vectors $db$ are the same as the dimensions of the bias vectors $b$. That is:
+
+$$dW^{[l]} = n^{[l]} \times n^{[l-1]}$$
+
+$$db^{[l]} = n^{[l]} \times 1$$
