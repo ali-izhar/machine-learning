@@ -21,9 +21,7 @@ $$a^{[l]} = g^{[l]}(z^{[l]})$$
 When we compute forward propagation, we cache the intermediate values of $z^{[l]}$ and $a^{[l]}$ to use them in backward propagation.
 
 ## Backward Propagation
-Backward propagation computes the gradient of the loss function concerning the network's weights and biases. Traditionally, it's done sequentially, layer by layer, which isn't suitable for parallel processing. To enable parallelization, we use matrix multiplication, termed as matrix backward propagation.
-
-To compute backward propagation for layer $l$, we need the following:
+Backward propagation computes the gradient of the loss function concerning the network's weights and biases. To compute backward propagation for layer $l$, we need the following:
 
 - Inputs
     - $da^{[l]}$
@@ -38,7 +36,7 @@ $$dz^{[l]} = da^{[l]} * g'^{[l]}(z^{[l]})$$
 
 $$dW^{[l]} = dz^{[l]}a^{[l-1]T}$$
 
-$$db^{[l]} = \sum_{i=1}^{m}dz^{[l](i)}$$
+$$db^{[l]} = \sum_{i=1}^{m}dz^{[l_i]}$$
 
 $$da^{[l-1]} = W^{[l]T}dz^{[l]}$$
 
@@ -50,7 +48,7 @@ Computing forward propagation is straightforward. However, computing backward pr
 2. $a^{[l]} = g^{[l]}(z^{[l]})$
 
 ### Backward Propagation Equations
-#### Derivation of $z^{[l]}$
+#### Derivation of $z^{[l]}$ :
 To compute the gradient of the loss function $L$ with respect to $z^{[l]}$, we use the chain rule as follows:
 
 $$\frac{\partial L}{\partial z^{[l]}} = \frac{\partial L}{\partial a^{[l]}} \frac{\partial a^{[l]}}{\partial z^{[l]}}$$
@@ -59,7 +57,7 @@ In the above equation, we can compute $\frac{\partial L}{\partial a^{[l]}}$ from
 
 $$\frac{\partial L}{\partial z^{[l]}} = \frac{\partial L}{\partial a^{[l]}} \frac{\partial a^{[l]}}{\partial z^{[l]}} = \frac{\partial L}{\partial a^{[l]}} g'^{[l]}(z^{[l]}) = da^{[l]} * g'^{[l]}(z^{[l]})$$
 
-#### Derivation of $W^{[l]}$
+#### Derivation of $W^{[l]}$ :
 To compute the gradient of the loss function $L$ with respect to $W^{[l]}$, we use the chain rule as follows:
 
 $$\frac{\partial L}{\partial W^{[l]}} = \frac{\partial L}{\partial z^{[l]}} \frac{\partial z^{[l]}}{\partial W^{[l]}}$$
@@ -68,7 +66,7 @@ In the above equation, we can compute $\frac{\partial L}{\partial z^{[l]}}$ from
 
 $$\frac{\partial L}{\partial W^{[l]}} = \frac{\partial L}{\partial z^{[l]}} \frac{\partial z^{[l]}}{\partial W^{[l]}} = \frac{\partial L}{\partial z^{[l]}} a^{[l-1]T} = dz^{[l]}a^{[l-1]T}$$
 
-#### Derivation of $b^{[l]}$
+#### Derivation of $b^{[l]}$ :
 To compute the gradient of the loss function $L$ with respect to $b^{[l]}$, we use the chain rule as follows:
 
 $$\frac{\partial L}{\partial b^{[l]}} = \frac{\partial L}{\partial z^{[l]}} \frac{\partial z^{[l]}}{\partial b^{[l]}}$$
@@ -77,7 +75,7 @@ In the above equation, we can compute $\frac{\partial L}{\partial z^{[l]}}$ from
 
 $$\frac{\partial L}{\partial b^{[l]}} = \frac{\partial L}{\partial z^{[l]}} \frac{\partial z^{[l]}}{\partial b^{[l]}} = \frac{\partial L}{\partial z^{[l]}} = dz^{[l]}$$
 
-#### Derivation of $a^{[l-1]}$
+#### Derivation of $a^{[l-1]}$ :
 To compute the gradient of the loss function $L$ with respect to $a^{[l-1]}$, we use the chain rule as follows:
 
 $$\frac{\partial L}{\partial a^{[l-1]}} = \frac{\partial L}{\partial z^{[l]}} \frac{\partial z^{[l]}}{\partial a^{[l-1]}}$$
