@@ -4,11 +4,19 @@ The Receiver Operating Characteristics, or ROC, is a crucial tool used to evalua
 ## 🎯 ROC Curve 🎯
 The ROC curve is a plot of the true positive rate (TPR) against the false positive rate (FPR) for the different possible cutpoints of a diagnostic test. The area under the ROC curve (AUC) is a measure of how well a parameter can distinguish between two diagnostic groups (diseased/normal). The closer the AUC is to 1, the better the parameter is at distinguishing between the two groups. The closer the AUC is to 0.5, the less accurate the parameter is at distinguishing between the two groups.
 
-![ROC Curve Example](../../media/confusion.png)
+<p align="center">
+    <table>
+        <tr>
+            <td><img src="../../media/confusion.png" alt="ROC Curve Example" width="400" /></td>
+            <td><img src="../../media/roc_2.png" alt="ROC Curve Example" width="400" /></td>
+        </tr>
+    </table>
+</p>
 
-![ROC Curve Example](../../media/roc.png)
+<p align="center">
+    <img src="../../media/roc.png" alt="ROC Curve Example" width="400" />
+</p>
 
-![ROC Curve Example](../../media/roc2.png)
 
 ## 🎯 Key Metrics 🎯
 
