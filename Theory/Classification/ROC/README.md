@@ -7,14 +7,14 @@ The ROC curve is a plot of the true positive rate (TPR) against the false positi
 <p align="center">
     <table>
         <tr>
-            <td><img src="../../media/confusion.png" alt="ROC Curve Example" width="400" /></td>
-            <td><img src="../../media/roc_2.png" alt="ROC Curve Example" width="400" /></td>
+            <td><img src="../media/confusion.png" alt="ROC Curve Example" width="400" /></td>
+            <td><img src="../media/roc_2.png" alt="ROC Curve Example" width="400" /></td>
         </tr>
     </table>
 </p>
 
 <p align="center">
-    <img src="../../media/roc.png" alt="ROC Curve Example" width="400" />
+    <img src="../media/roc.png" alt="ROC Curve Example" width="400" />
 </p>
 
 
