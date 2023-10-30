@@ -1,21 +1,16 @@
 # Activation Function
 Activation functions introduce non-linearity into neural networks, transforming the weighted sum of inputs and bias. 
 
-> Applied to each hidden layer neuron, and in the output layer for classification models, activation functions have diverse forms, each suited to different tasks.
+| Activation Function | Equation | Derivative | Keypoints |
+| ------------------- | -------- | ---------- | -------- |
+| Sigmoid | $σ(x) = 1 / (1 + e^{-x})$ | $σ'(x) = σ(x)(1 - σ(x))$ | Saturated neurons "kill" the gradient; Sigmoid outputs are not zero-centered; Exponentials are computationally expensive |
+| ReLU | $f(x) = max(0,x)$ | $f'(x) = 1$ if $x \geq 0$ and $f'(x) = 0$ if $x < 0$ | ReLU neurons can "die" during training; Does not saturate in the + region; ReLU outputs are zero-centered |
+| Leaky ReLU | $f(x) = max(0.01x,x)$ | $f'(x) = 1$ if $x \geq 0$ and $f'(x) = 0.01$ if $x < 0$ | Leaky ReLU prevents neurons from dying; Leaky ReLU outputs are zero-centered |
+| PReLU | $f(x) = max(\alpha x,x)$ | $f'(x) = 1$ if $x \geq 0$ and $f'(x) = \alpha$ if $x < 0$ | PReLU prevents neurons from dying; PReLU outputs are zero-centered |
+| ELU | $f(x) = max(\alpha(e^x - 1),x)$ | $f'(x) = 1$ if $x \geq 0$ and $f'(x) = f(x) + \alpha$ if $x < 0$ | ELU (exponential linear units) prevents neurons from dying; ELU outputs are zero-centered |
+| TanH | $tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$ | $tanh'(x) = 1 - tanh^2(x)$ | TanH is a scaled version of the sigmoid function; TanH outputs are zero-centered | Squishes outputs to the range (-1,1) |
+| Maxout | $f(x) = max(w_1^T x + b_1, w_2^T x + b_2)$ | $f'(x) = w_1$ if $w_1^T x + b_1 > w_2^T x + b_2$ and $f'(x) = w_2$ if $w_1^T x + b_1 < w_2^T x + b_2$ | Maxout is a generalization of ReLU and Leaky ReLU; Maxout doubles the number of parameters per neuron |
 
-- **Sigmoid:** The sigmoid function, expressed as $σ(x) = 1 / (1 + e^{-x})$, squashes its input into the range (0,1). Its output can be interpreted as a probability, making it ideal for binary classification tasks. However, sigmoid can suffer from the vanishing gradient problem, where the gradients become too small to effectively update the weights during training. The derivative of the sigmoid function is $σ'(x) = σ(x)(1 - σ(x))$.
-
-- **ReLU (Rectified Linear Unit):** The ReLU function, expressed as $f(x) = max(0,x)$, allows positive inputs to pass through unaltered, while zeroing out negative inputs. This encourages sparse activation, speeding up computation and learning. However, neurons can "die" if they output zero, rendering them inactive during training. The derivative of the ReLU function is $f'(x) = 1$ if $x > 0$ and $f'(x) = 0$ if $x < 0$, or undefined if $x = 0$. However, in computer implementations, the derivative is often set to 1 if $x \geq 0$ and $0$ otherwise.
-
-- **Leaky ReLU:** The Leaky ReLU function, expressed as $f(x) = max(0.01x,x)$, is a variant of ReLU that prevents neurons from dying by allowing a small, non-zero gradient when the input is negative. This helps the network continue learning even when a neuron is not active. The derivative of the Leaky ReLU function is $f'(x) = 1$ if $x \geq 0$ and $f'(x) = 0.01$ if $x < 0$.
-
-- **TanH:** The TanH function, expressed as $tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$, is similar to the sigmoid function, but squashes its input into the range (-1,1). It is, mathematically, a scaled or shifted version of the sigmoid function. It is also prone to the vanishing gradient problem. The derivative of the TanH function is $tanh'(x) = 1 - tanh^2(x)$.
-
-- **Linear:** The linear activation function, expressed as $f(x) = x$, allows the input to pass through without transformation. It is primarily used in regression tasks where the output can be any real number. However, it lacks non-linearity, preventing the model from learning complex patterns.
-
-Each activation function transforms the "activation value" as:
-
-$$a_j^{[l]} = g(w_j^{[l]} \cdot a_j^{[l-1]} + b_j^{[l]})$$
 
 ## Choosing the Right Activation Function
 Selecting the appropriate activation function depends on the nature of the problem and the type of output you're predicting.
