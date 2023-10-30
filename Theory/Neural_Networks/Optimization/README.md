@@ -20,31 +20,12 @@
 - Note: For non-standard activations, like tanh, which might not want a unit gaussian input:
     - Updated formula: $Z_{norm}^{(i)} = \gamma \frac{Z^{(i)} - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta$, where $\gamma$ and $\beta$ are learnable parameters of the model.
 
-
-\section{Batch Normalization}
-
-Given:
-\begin{itemize}
-    \item Input values of \( x \) over a mini-batch: \( \mathbf{\beta} = \{x_1, \dots, x_m\} \)
-    \item Parameters to be learned: \( \gamma, \beta \)
-\end{itemize}
-
-The batch normalization process can be defined as:
-
-\begin{align*}
-\mu_\beta & = \frac{1}{m} \sum_{i=1}^{m} x_i & \text{ // mini-batch mean} \\
-\sigma_\beta^2 & = \frac{1}{m} \sum_{i=1}^{m} (x_i - \mu_\beta)^2 & \text{ // mini-batch variance} \\
-\hat{x}_i & = \frac{x_i - \mu_\beta}{\sqrt{\sigma_\beta^2 + \epsilon}} & \text{ // normalize} \\
-y_i & = \gamma \hat{x}_i + \beta & \text{ // scale and shift}
-\end{align*}
-
-Benefits:
-\begin{itemize}
-    \item Improves gradient flow through the network.
-    \item Allows for higher learning rates.
-    \item Reduces dependence on initialization.
-    \item Acts as a form of regularization and can reduce the need for dropout.
-\end{itemize}
+## Batch Normalization Algorithm
+- Given: A mini-batch of $m$ examples.
+- Calculate: $\mu = \frac{1}{m} \sum_{i=1}^{m} Z^{(i)}$ and $\sigma^2 = \frac{1}{m} \sum_{i=1}^{m} (Z^{(i)} - \mu)^2$.
+- Normalize: $Z_{norm}^{(i)} = \frac{Z^{(i)} - \mu}{\sqrt{\sigma^2 + \epsilon}}$.
+- Scale and shift: $Z_{norm}^{(i)} = \gamma Z_{norm}^{(i)} + \beta$, where $\gamma$ and $\beta$ are learnable parameters of the model.
+- Output: $Z^{(i)} = Z_{norm}^{(i)}$.
 
 
 # Learning Rate Update Methods
@@ -73,3 +54,31 @@ Benefits:
 ## Adam Update
 - Intuition: Combines the ideas of Momentum and RMSProp. It calculates an exponential moving average of the gradient and the squared gradient, and the parameters beta1 and beta2 control the decay rates of these moving averages.
 - Formula: $m = \beta_1 m + (1 - \beta_1) \frac{\partial L}{\partial w}$, where $m$ is the moving average of the gradient. Then, $v = \beta_2 v + (1 - \beta_2) \frac{\partial L}{\partial w} \odot \frac{\partial L}{\partial w}$, where $v$ is the moving average of the squared gradient. Then, $w = w - \frac{\alpha}{\sqrt{v + \epsilon}} m$.
+
+# Second Order Optimization Methods
+Given the loss function $L(w)$, we want to find the parameters $w$ that minimize $L(w)$. We can do this by taking the derivative of $L(w)$ with respect to $w$ and setting it to zero. This gives us the optimal parameters $w^*$.
+
+## Newton-Hessian Parameter Update
+- Intuition: The Newton-Hessian method is a second-order optimization method that uses the second derivative of the loss function to update the parameters. It is very fast, but requires calculating the second derivative, which can be expensive.
+- Formula: $w = w - H^{-1} \nabla_w L(w)$, where $H$ is the Hessian matrix of second derivatives.
+- Advantages:
+    - Fast convergence compared to first-order methods.
+    - Does not rely on hyperparameters like learning rate.
+- Challenges:
+    - Impractical for deep neural networks due to computational challenges. For instance, if there are one million parameters, the Hessian matrix becomes \(10^6 \times 10^6\), making its inversion computationally expensive.
+
+## Quasi-Newton Methods
+- Intuition: Quasi-Newton methods approximate the Hessian matrix, making it easier to compute.
+
+### BFGS (Broyden-Fletcher-Goldfarb-Shanno) Update
+- Intuition: Being the most popular, this method approximates the inverse Hessian using rank-1 updates over time, making it computationally more efficient than directly inverting the Hessian.
+- Formula: $w = w - H^{-1} \nabla_w L(w)$, where $H$ is the Hessian matrix of second derivatives.
+
+### L-BFGS (Limited Memory BFGS) Update
+- Intuition: This method is a memory-efficient version of BFGS, which approximates the inverse Hessian using rank-1 updates over time, making it computationally more efficient than directly inverting the Hessian.
+- Advantages:
+    - Avoids forming or storing the full inverse Hessian, hence the name "limited memory".
+    - Highly effective for full-batch, deterministic settings.
+- Challenges:
+    - Not suitable for mini-batch settings, where the loss function is stochastic.
+    - Not suitable for non-deterministic settings, where the loss function is non-deterministic.
