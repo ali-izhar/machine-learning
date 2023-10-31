@@ -1,7 +1,6 @@
-# Convolutaional Neural Networks (CNN)
-Convolutional Neural Networks (CNN) are a type of neural network that are used primarily for image classification. They are also used for other tasks such as object detection and image segmentation.
+# Convolutaional Neural Networks (CNNs)
+Convolutional Neural Networks (CNNs) are a type of neural networks that are used primarily for image classification. They are also used for other tasks such as object detection and image segmentation.
 
-## Basic Principle
 - CNN operates on volumes.
     - Layers aren't vectors but have spatial dimensions: width, height, depth.
     - A CNN is composed of a sequence of convolutional layers, mixed with activation functions.
@@ -13,7 +12,7 @@ Convolutional Neural Networks (CNN) are a type of neural network that are used p
     - Filters slide (or convolve) across the width and height of the input volume.
     - The convolution operation is element-wise multiplication of the filter and the input volume, then summing up the results into a single number.
     - The output of the convolution operation is a 2D array called the **activation map**.
-    - For example, if the input volume is $32x32x3$ and the filter is $5x5x3$, then the output activation map will be $28x28x1$. If we use $10$ filters, then the output will be $28x28x10$ ($10$ activation maps stacked on top of each other).
+    - For example, if the input volume is $32\times32\times3$ and the filter is $5\times5\times3$, then the output activation map will be $28\times28\times1$. If we use $10$ filters, then the output will be $28\times28\times10$ ($10$ activation maps stacked on top of each other).
 
 - **Activation Function**: The activation function is applied to the activation map. It is usually a non-linear function such as ReLU.
 
