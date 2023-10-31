@@ -5,9 +5,9 @@ Convolutional Neural Networks (CNNs) are a type of neural networks that are used
     - Layers aren't vectors but have spatial dimensions: width, height, depth.
     - A CNN is composed of a sequence of convolutional layers, mixed with activation functions.
 
-- **Input Volume**: The input volume is the image that we want to classify. It is a 3D array of size [width x height x depth].
+- **Input Volume**: The input volume is the image that we want to classify. It is a 3D array of size $\text([width \times height \times depth])$.
 
-- **Filters**: A filter is a 3D array of size [filter_width x filter_height x depth]. It is also called a kernel. The depth of the filter must be the same as the depth of the input volume.
+- **Filters**: A filter is a 3D array of size $\text([filter_width \times filter_height \times depth])$. It is also called a kernel. The depth of the filter must be the same as the depth of the input volume.
     - Smaller in width and height than the input volume, but has the same depth.
     - Filters slide (or convolve) across the width and height of the input volume.
     - The convolution operation is element-wise multiplication of the filter and the input volume, then summing up the results into a single number.
@@ -16,10 +16,10 @@ Convolutional Neural Networks (CNNs) are a type of neural networks that are used
 
 - **Activation Function**: The activation function is applied to the activation map. It is usually a non-linear function such as ReLU.
 
-- **Activation Map**: The activation map is the output of the activation function. It is a 2D array of size [activation_map_width x activation_map_height x 1].
+- **Activation Map**: The activation map is the output of the activation function. It is a 2D array of size $\text([activation_map_width \times activation_map_height \times 1])$.
     - The size of the activation map is calculated as follows:
-        - (input_volume_width - filter_width + 1) x (input_volume_height - filter_height + 1) x 1
-        - $Size = (W - F + 1) x (H - F + 1) x 1$
+        - $\text((input_volume_width - filter_width + 1) \times (input_volume_height - filter_height + 1) \times 1)$
+        - $Size = (W - F + 1) \times (H - F + 1) \times 1$
     - The depth of the activation map is always 1.
 
 - **Multiple Convolutional Layers**: A CNN usually has multiple convolutional layers. The output of one convolutional layer is the input of the next convolutional layer.
@@ -28,9 +28,9 @@ Convolutional Neural Networks (CNNs) are a type of neural networks that are used
     - It determines the size of the output activation map.
     - The output dimension is calculated as follows:
         - $Dimension = \frac{N - F}{S} + 1$
-    - For example, for an input size of $7x7x3$, a filter size of $3x3x3$:
-        - Stride $S = 1$: Output size is $5x5x1$.
-        - Stride $S = 2$: Output size is $3x3x1$.
+    - For example, for an input size of $7 \times 7 \times 3$, a filter size of $3 \times 3 \times 3$:
+        - Stride $S = 1$: Output size is $5 \times 5 \times 1$.
+        - Stride $S = 2$: Output size is $3 \times 3 \times 1$.
         - Stride $S = 3$: Output size is $2.33$? (does not fit properly).
 
 - **Padding**: Padding is the number of pixels that are added to the input volume to make sure that the filter fits properly. The default padding is 0.
@@ -38,44 +38,44 @@ Convolutional Neural Networks (CNNs) are a type of neural networks that are used
     - Helps control the spatial size of the output volume.
     - The output dimension is calculated as follows:
         - $Padding = \frac{F - 1}{2}$
-    - Given a $7x7x3$ input volume and a $3x3x3$ filter:
-        - Padding $P = 0$: Output size is $5x5x1$.
-        - Padding $P = 1$: Output size is $7x7x1$.
+    - Given a $7 \times 7 \times 3$ input volume and a $3 \times 3 \times 3$ filter:
+        - Padding $P = 0$: Output size is $5 \times 5 \times 1$.
+        - Padding $P = 1$: Output size is $7 \times 7 \times 1$.
 
 - **Common Practices:**
 - Conv layers often have stride = 1.
-- Filters are usually small: 3x3, 5x5, 7x7.
+- Filters are usually small: $3 \times 3$, $5 \times 5$, $7 \times 7$.
 - Padding is often used to preserve the spatial size of the input volume.
 - Without padding, the size of the output volume reduces after every convolution. Padding preserves the spatial dimensions.
 - In practice, it is common to zero pad the border. For filter size (F):
-    - 3x3 → Padding of 1
-    - 5x5 → Padding of 2
-    - 7x7 → Padding of 3
+    - $3 \times 3$ → Padding of 1
+    - $5 \times 5$ → Padding of 2
+    - $7 \times 7$ → Padding of 3
 
 
 - **Example Calculation:**
-    - Input volume: $32x32x3$
-    - Filter size: $5x5x3$
+    - Input volume: $32 \times 32 \times 3$
+    - Filter size: $5 \times 5 \times 3$
     - Stride: $1$
     - Padding: $2$
     - Output volume:
         - $\frac{32 - 5 + 2(2)}{1} + 1 = 32$
-        - $32x32x10$ (10 filters)
-    - Parameters per filter: $5x5x3 + 1 = 76$
-    - Total parameters: $76x10 = 760$
+        - $32 \times 32 \times 10$ (10 filters)
+    - Parameters per filter: $5 \times 5 \times 3 + 1 = 76$
+    - Total parameters: $76 \times 10 = 760$
 
 - **Conv Layer Summary:**
-    - Input volume: $W_1xH_1xD_1$
+    - Input volume: $W_1 \times H_1 \times D_1$
     - Hyperparameters:
         - Filter size: $F$
         - Number of filters: $K$
         - Stride: $S$
         - Padding: $P$
-    - Output volume: $W_2xH_2xD_2$ where:
+    - Output volume: $W_2 \times H_2 \times D_2$ where:
         - $W_2 = \frac{W_1 - F + 2P}{S} + 1$
         - $H_2 = \frac{H_1 - F + 2P}{S} + 1$ (width and height are computed eqaully by symmetry)
         - $D_2 = K$
-    - Number of parameters: $(FxFxD_1 + 1) x K$
+    - Number of parameters: $(F \times F \times D_1 + 1)  \times  K$
     - Common Settings:
         - $F = 3, S = 1, P = 1$
         - $F = 5, S = 1, P = 2$
@@ -86,8 +86,8 @@ Convolutional Neural Networks (CNNs) are a type of neural networks that are used
     - Often used to reduce the size of the input volume and to control overfitting.
     - Operates on each activation map independently.
 
-    - **Max Pooling**: The max pooling operation is applied to each activation map independently. It slides a window of size $FxF$ across the activation map and outputs the maximum value in each window.
-        - Input volume: $W_1xH_1xD_1$
+    - **Max Pooling**: The max pooling operation is applied to each activation map independently. It slides a window of size $F \times F$ across the activation map and outputs the maximum value in each window.
+        - Input volume: $W_1 \times H_1 \times D_1$
         - Hyperparameters:
             - Spatial extent: $F$
             - Stride: $S$
@@ -101,20 +101,20 @@ Convolutional Neural Networks (CNNs) are a type of neural networks that are used
             - $F = 2, S = 2$ (this is quite standard and reduces each spatial dimension by half) 
             - $F = 3, S = 2$
 
-    - **Average Pooling**: The average pooling operation is applied to each activation map independently. It slides a window of size $FxF$ across the activation map and outputs the average value in each window. It is not used very often.
+    - **Average Pooling**: The average pooling operation is applied to each activation map independently. It slides a window of size $F \times F$ across the activation map and outputs the average value in each window. It is not used very often.
 
 - **Fully Connected Layer**: The fully connected layer is used to compute the class scores. It is usually the last layer in a CNN.
 
     - **Flattening**: The input to the fully connected layer is a 3D array. It needs to be converted to a 1D array. This process is called flattening.
-        - Input volume: $W_1xH_1xD_1$
-        - Output volume: $W_1xH_1xD_1$
-        - Flattened volume: $W_1xH_1xD_1$
+        - Input volume: $W_1 \times H_1 \times D_1$
+        - Output volume: $W_1 \times H_1 \times D_1$
+        - Flattened volume: $W_1 \times H_1 \times D_1$
         - The flattened volume is the input to the fully connected layer.
 
     - **Fully Connected Layer**: The fully connected layer is a linear layer. It is used to compute the class scores. It is usually the last layer in a CNN.
-        - Input volume: $W_1xH_1xD_1$
-        - Output volume: $1x1xK$
-        - Parameters: $(W_1xH_1xD_1 + 1) x K$
+        - Input volume: $W_1 \times H_1 \times D_1$
+        - Output volume: $1 \times 1 \times K$
+        - Parameters: $(W_1 \times H_1 \times D_1 + 1)  \times  K$
         - Common Settings:
             - $K = 10$ for CIFAR-10
             - $K = 1000$ for ImageNet
