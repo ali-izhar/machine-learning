@@ -5,9 +5,9 @@ Convolutional Neural Networks (CNNs) are a type of neural networks that are used
     - Layers aren't vectors but have spatial dimensions: width, height, depth.
     - A CNN is composed of a sequence of convolutional layers, mixed with activation functions.
 
-- **Input Volume**: The input volume is the image that we want to classify. It is a 3D array of size $\text([width \times height \times depth])$.
+- **Input Volume**: The input volume is the image that we want to classify. It is a 3D array of size $[\verb(width) \times \verb(height) \times \verb(depth)]$.
 
-- **Filters**: A filter is a 3D array of size $\text([filter_width \times filter_height \times depth])$. It is also called a kernel. The depth of the filter must be the same as the depth of the input volume.
+- **Filters**: A filter is a 3D array of size $[\verb(filter_width) \times \verb(filter_height) \times \verb(depth)]$. It is also called a kernel. The depth of the filter must be the same as the depth of the input volume.
     - Smaller in width and height than the input volume, but has the same depth.
     - Filters slide (or convolve) across the width and height of the input volume.
     - The convolution operation is element-wise multiplication of the filter and the input volume, then summing up the results into a single number.
@@ -16,9 +16,9 @@ Convolutional Neural Networks (CNNs) are a type of neural networks that are used
 
 - **Activation Function**: The activation function is applied to the activation map. It is usually a non-linear function such as ReLU.
 
-- **Activation Map**: The activation map is the output of the activation function. It is a 2D array of size $\text([activation_map_width \times activation_map_height \times 1])$.
+- **Activation Map**: The activation map is the output of the activation function. It is a 2D array of size $[\verb(activation_map_width) \times \verb(activation_map_height) \times 1]$.
     - The size of the activation map is calculated as follows:
-        - $\text((input_volume_width - filter_width + 1) \times (input_volume_height - filter_height + 1) \times 1)$
+        - $\verb(input_volume_width - filter_width + 1) \times \verb(input_volume_height - filter_height + 1) \times 1$
         - $Size = (W - F + 1) \times (H - F + 1) \times 1$
     - The depth of the activation map is always 1.
 
