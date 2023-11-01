@@ -44,13 +44,20 @@ $$\ell(y)=max(0,1-y.f(x))$$
 ## SVM Loss
 The SVM loss is a hinge loss plus a regularization term. The regularization term is used to penalize large weights and is defined as the squared L2 norm of the weight vector:
 
-$$R(W)=\sum_{k}\sum_{l\neq y_k}max(0,f(x_k)_l - f(x_k) - {y_k}+\Delta)$$
+The hinge loss for a single data point $x_k$ and its true lable $y_k$ is defined as:
 
-where $f(x_k)_l$ is the score for the $l$-th class for the $k$-th input and $f(x_k)_{y_k}$ is the score for the true class of the $k$-th input. The SVM loss is defined as:
+$$\ell_k=\sum_{l\neq y_k}max(0,f(x_k)_l-f(x_k)_{y_k}+\Delta)$$
 
-$$L(W)=\frac{1}{N}\sum_{k}\sum_{l\neq y_k}max(0,f(x_k)_l-f(x_k)_{y_k}+\Delta)+\lambda R(W)$$
+- $f(x_k)_l$ is the score for the $l$-th class of the $k$-th data point.
+- $f(x_k)_{y_k}$ is the score for the true class of the $k$-th data point.
+- $\Delta$ is the margin parameter.
 
-where $N$ is the number of training examples and $\lambda$ is the regularization strength.
+The total SVM loss is defined as the average of the hinge loss for all data points plus the regularization term:
+
+$$L(W)=\frac{1}{N}\sum_{k=1}^N\ell_k+\lambda\sum_{i,j}W_{i,j}^2$$
+
+- $N$ is the number of data points.
+- $\lambda$ is the regularization strength.
 
 ## SVM Optimization
 The SVM optimization problem is to minimize the SVM loss function $L(W)$ with respect to the weight matrix $W$. The SVM loss function is convex, so the global minimum is guaranteed to be found. The SVM loss function is also differentiable, so gradient descent can be used to find the global minimum.
