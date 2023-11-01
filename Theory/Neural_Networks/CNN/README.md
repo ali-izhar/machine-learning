@@ -12,7 +12,7 @@ As the CNN gets more complex, the more it excels in identifying greater portions
 
 The image below displays the structure of a CNN. We have an input image, followed by Convolutional and Pooling layers, where the feature learning process happens. Later on, we have the layers responsible for the task of classifying whether the vehicle in the input data is a car, truck, van, bicycle, etc.
 
-<img src="media/cnn.png" width="400" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="media/cnn.png">
 
 Notice that CNNs operate on volumes.
 - Layers aren't vectors but have spatial dimensions: width, height, depth.
@@ -31,7 +31,9 @@ Notice that CNNs operate on volumes.
     - The output of the convolution operation is a 2D array called the **activation map**.
     - For example, if the input volume is $32 \times 32 \times 3$ and the filter is $5 \times 5 \times 3$, then the output activation map will be $28 \times 28 \times 1$. If we use $10$ filters, then the output will be $28 \times 28 \times 10$ ($10$ activation maps stacked on top of each other).
 
-<img src="media/mapping.gif" width="400" style="display: block; margin-left: auto; margin-right: auto;">
+<div align="center">
+    <img src="media/mapping.gif" width="600">
+</div>
 
 <hr>
 
@@ -139,7 +141,9 @@ Notice that CNNs operate on volumes.
 
     - **Average Pooling**: The average pooling operation is applied to each activation map independently. It slides a window of size $F \times F$ across the activation map and outputs the average value in each window. It is not used very often.
 
-<img src="media/pooling.png" width="400" style="display: block; margin-left: auto; margin-right: auto;">
+<div align="center">
+    <img src="media/pooling.png" width="500">
+</div>
 
 <hr>
 
