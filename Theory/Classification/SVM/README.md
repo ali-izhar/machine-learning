@@ -46,7 +46,10 @@ The SVM loss is a hinge loss plus a regularization term. The regularization term
 
 The hinge loss for a single data point $x_k$ and its true lable $y_k$ is defined as:
 
-$$\ell_k=\sum_{l\neq y_k}max(0,f(x_k)_l-f(x_k)_{y_k}+\Delta)$$
+$$
+\ell\_k=\sum_{l\neq y\_k} \max(0,f(x\_k)\_l-f(x\_k)\_{y\_k}+\Delta)
+$$
+
 
 - $f(x_k)_l$ is the score for the $l$-th class of the $k$-th data point.
 - $f(x_k)_{y_k}$ is the score for the true class of the $k$-th data point.
