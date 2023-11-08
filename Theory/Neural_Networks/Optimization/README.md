@@ -82,3 +82,55 @@ Given the loss function $L(w)$, we want to find the parameters $w$ that minimize
 - Challenges:
     - Not suitable for mini-batch settings, where the loss function is stochastic.
     - Not suitable for non-deterministic settings, where the loss function is non-deterministic.
+
+## Regularization
+- Purpose: Prevent overfitting by reducing the model's capacity.
+- Formula: $L_{reg} = L + \lambda \Omega(w)$, where $L$ is the loss function, $\lambda$ is the regularization strength, and $\Omega(w)$ is the regularization term.
+- Note: Regularization is only applied during training, not during testing.
+
+### L2 Regularization
+- Formula: $\Omega(w) = \frac{1}{2} \sum_{i=1}^{n} w_i^2$, where $w_i$ is the $i$th parameter of the model.
+- Intuition: Penalizes large weights, making the model more robust to outliers.
+
+### L1 Regularization
+- Formula: $\Omega(w) = \sum_{i=1}^{n} |w_i|$, where $w_i$ is the $i$th parameter of the model.
+- Intuition: Encourages sparsity, making the model more interpretable.
+
+### Dropout Regularization
+- Intuition: Randomly drop units (along with their connections) from the neural network during training. This prevents units from co-adapting too much.
+- Formula: $L_{reg} = L + \lambda \sum_{i=1}^{n} \mathbb{1}_{\{d_i = 0\}} w_i^2$, where $d_i$ is the dropout mask for the $i$th unit, and $\mathbb{1}_{\{d_i = 0\}}$ is the indicator function that returns 1 if $d_i = 0$ and 0 otherwise.
+
+### Data Augmentation
+- Intuition: Increase the size of the training set by applying transformations to the data, such as flipping, rotating, cropping, etc.
+
+### Early Stopping
+- Intuition: Stop training when the validation loss starts to increase, as this is a sign of overfitting.
+
+## Hyperparameter Tuning
+- Purpose: Find the best hyperparameters for the model.
+- Note: Hyperparameters are not learned during training, but are set before training.
+
+### Grid Search
+- Intuition: Try all possible combinations of hyperparameters and choose the best one.
+- Challenges:
+    - Computationally expensive.
+    - Not suitable for continuous hyperparameters.
+
+### Random Search
+- Intuition: Try random combinations of hyperparameters and choose the best one.
+- Advantages:
+    - Computationally efficient.
+    - Suitable for continuous hyperparameters.
+
+### Bayesian Optimization
+- Intuition: Build a probabilistic model of the loss function and use it to choose the next hyperparameters to try.
+- Advantages:
+    - Computationally efficient.
+    - Suitable for continuous hyperparameters.
+    - Can handle noisy loss functions.
+
+## Gradient Checking
+- Purpose: Check if the gradients are being calculated correctly.
+- Formula: $gradapprox = \frac{J(\theta + \epsilon) - J(\theta - \epsilon)}{2 \epsilon}$, where $J$ is the loss function, $\theta$ is the parameters of the model, and $\epsilon$ is a small number.
+- Note: Gradient checking is computationally expensive, so it should only be used to check the gradients, not to train the model.
+
