@@ -3,64 +3,91 @@ Linear regression is a supervised learning algorithm used for predicting a conti
 
 Linear regression can be categorized into two types based on the number of predictor variables used: simple linear regression (one predictor) and multiple linear regression (more than one predictor).
 
-## Loss Function (Cost Function)
-A loss function measures the difference between the model's predictions and the actual values. In linear regression, we typically use the Mean Squared Error (MSE) as the loss function, defined as:
-
-$$J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2$$
-
-This is called the `squared error cost function` or `mean squared error (MSE)`. The goal of training a model is to find the optimal values for the parameters that minimize the loss function. That is $\text{minimize } J(w, b)$.
-
 ## Simple Linear Regression
-In simple linear regression, we have one predictor variable. The function $f$ is defined as:
+Given an independent variable $X$ and dependent variable $Y$ such that we have reasons to believe that there exists a linear relationship between $X$ and $Y$, then the linear model is:
 
-$$\hat{y}^{(i)} = f(x^{(i)}) = w x^{(i)} + b$$
+$$Y = \beta_0 + \beta_1 X + \epsilon$$
 
-Here, $\hat{y}^{(i)}$ is the predicted value, $x^{(i)}$ is the predictor variable, $w$ is the weight or coefficient, and $b$ is the bias or intercept. The weight and bias are the parameters of the model, which are learned during the training process.
+where $\beta_0$ is the intercept, $\beta_1$ is the slope, and $\epsilon$ is the error term. The goal of linear regression is to find the best fit line that minimizes the sum of squared errors (SSE) between the actual and predicted values of $Y$.
+
+## Simple Linear Regression Objective Function
+In linear regression, the objective function is the sum of squared errors (SSE) between the actual and predicted values of $Y$:
+
+$$\text{minimize } \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
+
+where $y_i$ is the actual value of $Y$ and $\hat{y}_i$ is the predicted value of $Y$. The error term $\epsilon$ is assumed to be normally distributed with mean 0 and variance $\sigma^2$. To minimize the SSE, we need to find the optimal values for the intercept $\beta_0$ and slope $\beta_1$.
+
+$$\text{minimize } \sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1 x_i))^2$$
+
+$$b_1 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} = \frac{Cov(x, y)}{Var(x)} = r_{xy} \frac{s_y}{s_x}$$
+
+$$b_0 = \bar{y} - b_1 \bar{x}$$
+
+where $\bar{x}$ is the mean of $X$ and $\bar{y}$ is the mean of $Y$. The slope $b_1$ is the change in $Y$ divided by the change in $X$. The intercept $b_0$ is the mean of $Y$ minus the slope times the mean of $X$.
+
+## Partitioning Variability
+The total variability in $Y$ can be partitioned into two components: the variability explained by the regression line and the unexplained variability. The total sum of squares (SST) is the sum of the squared differences between the actual values of $Y$ and the mean of $Y$:
+
+$$SST = \sum_{i=1}^{n} (y_i - \bar{y})^2$$
+
+The regression sum of squares (SSR) is the sum of the squared differences between the predicted values of $Y$ and the mean of $Y$:
+
+$$SSR = \sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2$$
+
+The error sum of squares (SSE) is the sum of the squared differences between the actual and predicted values of $Y$:
+
+$$SSE = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
+
+The total sum of squares can be partitioned into the regression sum of squares and the error sum of squares:
+
+$$SST = SSR + SSE$$
+
+The coefficient of determination $R^2$ is the proportion of the total variability in $Y$ that is explained by the regression line:
+
+$$R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST}$$
+
+The coefficient of determination $R^2$ is a measure of the strength of the linear relationship between $X$ and $Y$. It is the square of the correlation coefficient $r$ between $X$ and $Y$:
+
+$$R^2 = r^2$$
+
+## ANOVA Table
+The ANOVA table is a table that summarizes the results of the analysis of variance. It is used to test the significance of the regression line. The ANOVA table is as follows:
+
+| Source of Variation | Sum of Squares | Degrees of Freedom | Mean Square | F-Statistic |
+| :--- | :--- | :--- | :--- | :--- |
+| Regression | SSR | $k$ | $MSR = \frac{SSR}{k}$ | $F = \frac{MSR}{MSE}$ |
+| Error | SSE | $n - k - 1$ | $MSE = \frac{SSE}{n - k - 1}$ | |
+| Total | SST | $n - 1$ | | |
+
+where $k$ is the number of predictor variables and $n$ is the number of observations. The F-statistic is the ratio of the mean square for regression to the mean square for error. The null hypothesis $H_0$ is that the regression line does not explain a significant amount of the variability in $Y$. The alternative hypothesis $H_a$ is that the regression line explains a significant amount of the variability in $Y$. If the F-statistic is greater than the critical value, then we reject the null hypothesis and conclude that the regression line explains a significant amount of the variability in $Y$. Otherwise, we fail to reject the null hypothesis and conclude that the regression line does not explain a significant amount of the variability in $Y$.
 
 ## Multiple Linear Regression
-In multiple linear regression, we have multiple predictor variables. The function $f$ then takes the form:
+Given $k$ independent variables $X_1, X_2, ..., X_k$ and a dependent variable $Y$ such that we have reasons to believe that there exists a linear relationship between $X_1, X_2, ..., X_k$ and $Y$, then the linear model is:
 
-$$\hat{y}^{(i)} = f(x^{(i)}) = w_1 x_1^{(i)} + w_2 x_2^{(i)} + ... + w_n x_n^{(i)} + b$$
+$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_k X_k + \epsilon$$
 
-Here, $x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)}$ are the predictor variables and $w_1, w_2, ..., w_n$ are their respective weights. We aim to find the optimal values for these parameters that minimize the loss function.
+where $\beta_0$ is the intercept, $\beta_1, \beta_2, ..., \beta_k$ are the slopes, and $\epsilon$ is the error term. The goal of linear regression is to find the best fit hyperplane that minimizes the sum of squared errors (SSE) between the actual and predicted values of $Y$. The hyperplane is a $k$-dimensional plane in a $k$-dimensional space.
 
+## Multiple Linear Regression Objective Function
+In multiple linear regression, the objective function is the sum of squared errors (SSE) between the actual and predicted values of $Y$:
 
-## Vector Notation and Vectorization
-In the previous sections, we expressed the linear regression model and multiple linear regression model as summations of the product of weights and features, and included an additional bias term:
+$$\text{minimize } \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
 
-$$\hat{y}^{(i)} = f(x^{(i)}) = w_1 x_1^{(i)} + w_2 x_2^{(i)} + ... + w_n x_n^{(i)} + b$$
+where $y_i$ is the actual value of $Y$ and $\hat{y}_i$ is the predicted value of $Y$. The error term $\epsilon$ is assumed to be normally distributed with mean 0 and variance $\sigma^2$. To minimize the SSE, we need to find the optimal values for the intercept $\beta_0$ and slopes $\beta_1, \beta_2, ..., \beta_k$. The optimal values can be found using the normal equation or gradient descent.
 
-In a non-vectorized implementation, this could be expressed in code as:
+Question: Are all of the variables 
 
-```python
-def predict(x, w, b):
-    y_hat = 0
-    for i in range(len(x)):
-        y_hat += w[i] * x[i]
-    y_hat += b
-    return y_hat
-```
+## Multiple Linear Regression Normal Equation
+The normal equation is a closed-form solution for finding the optimal parameters of a linear regression model. It is given by:
 
-However, this form isn't very computationally efficient, especially for large datasets and high-dimensional feature spaces. It requires iterating over each feature individually to compute the summation.
+$$\beta = (X^T X)^{-1} X^T y$$
 
-To improve efficiency, we can utilize the concept of `vectorization.` Vectorization is a powerful concept in linear algebra and data science that allows operations to be performed on entire arrays (vectors, matrices) instead of individual elements. This leverages low-level optimizations and parallelism that lead to significant speed improvements.
+Here, $X$ is the feature matrix, $y$ is the target vector, and $\beta$ is the weight vector. The normal equation can be derived by setting the gradient of the loss function $J(\beta)$ to zero and solving for $\beta$.
 
-In Python, we can use the NumPy library to perform vectorized operations. The previous function can be rewritten in a vectorized form as:
+The normal equation is computationally efficient for small datasets, but it is not suitable for large datasets because the matrix $X^T X$ is a square matrix of size $k \times k$, where $k$ is the number of features. The computational complexity of inverting such a matrix is $O(k^3)$. For large datasets, we can use gradient descent to find the optimal parameters.
 
-```python
-def predict(x, w, b):
-    y_hat = np.dot(w, x) + b
-    return y_hat
-```
-
-In this vectorized version, `np.dot(w, x)` computes the dot product of the weight vector `w` and the feature vector `x`, effectively performing the summation of the product of weights and features.
-
-## Expressing the Model in Vector Notation
-For convenience and to express our models more succinctly, we often use vector notation. Let's define the weight vector $W=[w_1, w_2, ..., w_n]$ and the feature vector for a given sample $X^{(i)}=[x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)}]$. Then, we can express the model as:
-
-$$\hat{y}^{(i)} = f(x^{(i)}) = W X^{(i)T} + b$$
-
-Here, $X^{(i)T}$ denotes the transpose of the feature vector, making it a column vector and aligning it for the dot product operation with the row vector of weights $W$. This compact form is equivalent to the previous summation. The goal remains to minimize the loss function $J(W, b)$ in order to find the optimal parameters for our model.
+## Multiple Linear Regression Gradient Descent
+Gradient descent is an optimization algorithm used in machine learning and deep learning models to minimize a function iteratively. It's frequently used to find the optimal solution to many problems.
 
 ## Performing Linear Regression with Normal Equation
 The `normal equation` is a closed-form solution for finding the optimal parameters of a linear regression model. It is given by:
