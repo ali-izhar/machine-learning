@@ -3,7 +3,6 @@ Linear regression is a supervised learning algorithm for predicting a continuous
 
 - [Simple Linear Regression](#simple-linear-regression)
 - [Multiple Linear Regression](#multiple-linear-regression)
-- [Polynomial Regression](#polynomial-regression)
 
 ## Simple Linear Regression
 Simple linear regression is a statistical method that allows us to summarize and study relationships between two continuous (quantitative) variables:
@@ -31,7 +30,7 @@ $$SSR = \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - \hat{y}_i)^2$$
 
 The least squares estimates of the regression coefficients $\beta_0$ and $\beta_1$ are the values that minimize the SSR.
 
-$$\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}} = r_{xy}\frac{S_y}{S_x}$$
+$$\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2} = r_{xy}\frac{S_y}{S_x}$$
 
 $$\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x}$$
 
