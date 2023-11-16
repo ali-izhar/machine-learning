@@ -1,28 +1,64 @@
 # Logistic Regression
 Logistic regression is a statistical technique capable of predicting a binary outcome. It's a classification algorithm that is used for the prediction of the probability of a categorical dependent variable. The dependent variable is a binary variable that contains data coded as 1 (yes, success, etc.) or 0 (no, failure, etc.).
 
-## Concept
-In its essence, logistic regression models the probability that an input (or set of inputs) belongs to a particular class. The logistic function, also called the `sigmoid function`, is used for this purpose, allowing the model to output a value between 0 and 1, which can be interpreted as a probability.
+## Background
+Out of 10 students, 8 of them passed the exam and 2 of them failed. The probability of passing the exam is 0.8 and the probability of failing the exam is 0.2. Alternatively, the `odds` of passing the exam is 4 (0.8/0.2). The formula for odds is:
 
-The formula for logistic regression hypothesis is:
+$$odds = \frac{p}{1-p}$$
 
-$$f_{w,b}(x) = \sigma(w^Tx + b)$$
+where $p$ is the probability of success. The formula for probability is:
 
-where:
-- $f_{w,b}(x)$ is the hypothesis
-- $\sigma$ is the sigmoid function
-- $w$ is the weight vector
-- $b$ is the bias
-- $x$ is the input vector of features
+$$p = \frac{odds}{1+odds}$$
 
-The sigmoid function can map any value to a value from 0 to 1, making it useful for models that need to predict probabilities.
+**Odds Ratio (OR)** is the ratio of the odds of success in one group to the odds of success in another group. The formula for odds ratio is:
 
-The sigmoid function is defined as:
+$$odds\_ratio = \frac{odds\_group\_1}{odds\_group\_2}$$
+
+Note that:
+- $0 < p < 1$
+- $0 < odds < \infty$
+- $0 < odds\_ratio < \infty$
+- $-\infty < ln(odds) < \infty$
+- If $O = 1$, then $p = q = 0.5$
+- $O_{success} = \frac{1}{O_{failure}}$
+
+## Simple Logistic Regression
+The simple logistic regression model is used to model probability that the response variable Y belongs to a particular category of two possible categories. 
+
+Given a set of predictors $X_1, X_2, ..., X_n$, the model estimates the probability that $Y = 1$ given the values of $X_1, X_2, ..., X_n$. An inital thought might be to use linear regression to model the probability of $Y = 1$:
+
+$$P(Y=1|X) = \beta_0 + \beta_1X + \beta_2X + ... + \beta_nX + \epsilon$$
+
+However, this model is not appropriate because the left-hand side of the equation is a probability, and probabilities must always be between 0 and 1; while the right-hand side of the equation can take on any real value. Therefore, we must model $P(Y=1|X)$ using a function that gives outputs between 0 and 1 for all values of $X$.
+
+We transform the left-hand side of the equation using the `logit function`:
+
+$$P(Y=1|X) \in [0,1] \rightarrow Odds \in [0,\infty] \rightarrow ln(Odds) \in [-\infty,\infty]$$
+
+Where the logit function is defined as:
+
+$$ln(odds) = ln(\frac{p}{1-p}) = logit(p)$$
+
+Therefore, following these transformations, the model becomes:
+
+$$ln(\frac{p}{1-p}) = \beta_0 + \beta_1X + \beta_2X + ... + \beta_nX + \epsilon$$
+
+$$p = \frac{e^{z}}{1+e^{(\beta_0 + \beta_1X + \beta_2X + ... + \beta_nX)}}
+
+Let $Z = \beta_0 + \beta_1X + \beta_2X + ... + \beta_nX$, then:
+
+$$p = \frac{e^{z}}{1+e^{z}}$$
+
+Multiplying the numerator and denominator by $e^{-z}$, we get:
+
+$$p = \frac{1}{1+e^{-z}}$$
+
+This is the `sigmoid function` or `logistic function`:
 
 $$\sigma(z) = \frac{1}{1+e^{-z}}$$
 
 ## Cost Function
-In contrast to linear regression, which uses mean squared error as the cost function, logistic regression uses a `logarithmic loss function`, also known as the cost function. This is due to the fact that in logistic regression, the decision boundary is not a straight line and the output values are not continuous but lie between 0 and 1.
+In contrast to linear regression, which uses mean squared error as the cost function, logistic regression uses a `logarithmic loss function` or `cross entropy loss function`. This is because the output of logistic regression is a probability between 0 and 1, while the output of linear regression is a continuous value. 
 
 The loss function for a single training example is defined as:
 
