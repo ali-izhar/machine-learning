@@ -12,7 +12,7 @@ $$p = \frac{odds}{1+odds}$$
 
 **Odds Ratio (OR)** is the ratio of the odds of success in one group to the odds of success in another group. The formula for odds ratio is:
 
-$$odds\_ratio = \frac{odds\_group\_1}{odds\_group\_2}$$
+$$odds\_ratio = \frac{odds_{group_1}}{odds_{group_2}}$$
 
 Note that:
 - $0 < p < 1$
