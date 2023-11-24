@@ -56,3 +56,7 @@ $$c(1 | 2)p_2f_2(x) - c(2 | 1)p_1f_1(x) \leq 0$$
 $$c(1 | 2)p_2f_2(x) \leq c(2 | 1)p_1f_1(x)$$
 
 $$\frac{c(1 | 2) p_2}{c(2 | 1) p_1} \leq \frac{f_1(x)}{f_2(x)}$$
+
+Where $\frac{c(1 | 2) p_2}{c(2 | 1) p_1}$ is the `cost ratio`, $\frac{p_1}{p_2}$ is the `prior ratio`, and $\frac{f_1(x)}{f_2(x)}$ is the `density ratio`.
+
+The left-hand side of the inequality is a threshold value. If the density ratio is greater than the threshold value, then $x \in \pi_1$. If the density ratio is less than the threshold value, then $x \in \pi_2$.
