@@ -35,8 +35,8 @@ $$H(X) = -0.8 \log_2 0.8 - 0.2 \log_2 0.2 = 0.72$$
 
 The entropy of $X$ became smaller, since we have less uncertainty about the outcome of the coin toss. Every time we toss the coin, we are more likely to get heads than tails. We can actually plot the entropy of $X$ as a function of $p(H)$:
 
-<div style="text-align: center;">
-    <img src="../media/entropy_curve.png" width="400"/>
+<div style="align: center">
+    <img src="media/entropy_curve.png" width="600"/>
 </div>
 
 > Uniform probability $(p = 0.5)$ corresponds to the maximum entropy. As we move away from uniform probability towards $p = 0$ or $p = 1$, the entropy decreases since we have more information about the outcome of the $X$.
@@ -71,8 +71,8 @@ $$IG(v) = H(v) - \sum_{i=1}^{k} \frac{n_i}{n} H(v_i)$$
 
 In other words, information gain is the difference between the entropy at the parent node $v$ and the weighted average of the entropies at the child nodes $v_1, v_2, \dots, v_k$, where the weight of each child node is the fraction of samples that went from the parent node to that node.
 
-<div style="text-align: center;">
-    <img src="../media/information_gain.png" width="400"/>
+<div style="align: center">
+    <img src="media/information_gain.png" width="400"/>
 </div>
 
 Our goal is to find an attribute that maximizes the information gain, i.e., an attribute that achieves the highest reduction in the entropy. This means that in every node of the tree, we need to go over all the attributes and compute for each one its information gain.
@@ -94,4 +94,86 @@ For example, assume that a node $v$ contains 10 samples, 2 of which belong to cl
 
 $$G(v) = 1 - \left(\frac{2}{10}\right)^2 - \left(\frac{4}{10}\right)^2 - \left(\frac{4}{10}\right)^2 = 0.64$$
 
-<i>Practice has shown that there is no much difference in the performance of decision trees when using Gini index instead of entropy. However, Gini index is sometimes preferred because its computation is a bit faster (since it doesn’t involve any logarithm computations).</i>
+<i>Practice has shown that there is no much difference in the performance of decision trees when using Gini index instead of entropy. However, Gini index is sometimes preferred because its computation is a bit faster (since it doesn't involve any logarithm computations).</i>
+
+## Decision Tree Construction
+Assume that we have the following data set with information on 14 employees in some fictitious company:
+
+<div style="align: center">
+    <img src="media/decision_tree_data.png" width="600"/>
+</div>
+
+Our objective is to predict whether an employee will get a promotion based on four attributes: the employee's gender (Male or Female), marital status (Single or Married), seniority at the workplace (Low, Medium or High), and whether they have an academic degree (Yes or No).
+
+First, we need to select the attribute for the first split at the root node. To that end, we compute the information gain for each of the four attributes:
+
+<div style="align: center">
+    <img src="media/decision_tree_ig1.png" width="600"/>
+</div>
+
+> Information gain of Gender and Martital Status
+
+<div style="align: center">
+    <img src="media/decision_tree_ig2.png" width="600"/>
+</div>
+
+> Information gain of Seniority and Degree
+
+The Seniority attribute leads to the highest information gain, therefore we use it for the split at the root of the tree. The training samples are then split into three subsets according to their value in the Seniority attribute:
+
+<div style="align: center">
+    <img src="media/decision_tree_split1.png" width="600"/>
+</div>
+
+The second child node (the one that corresponds to Seniority = Medium) doesn't need any further splitting, since all the samples in that node have the same label (Promotion = Yes), so we can turn it into a leaf node with that label.
+
+Let's now handle the left child node (the one that corresponds to Seniority = Low). The records that belong to this node are:
+
+<div style="align: center">
+    <img src="media/decision_tree_split2.png" width="600"/>
+</div>
+
+We can clearly see that there is a total correspondence between the attributes Gender and Academic Degree and the Promotion label, so we can select either of these attributes for our split. For example, if we choose the Gender attribute, we will get the following tree:
+
+<div style="align: center">
+    <img src="media/decision_tree_split3.png" width="600"/>
+</div>
+
+Now, we need to take care of the third child node (the one that corresponds to Seniority = High). Let's look at the records that belong to this node:
+
+<div style="align: center">
+    <img src="media/decision_tree_split4.png" width="600"/>
+</div>
+
+This time there is no attribute that has a total correspondence with the label, so we need to compute the information gain for all the attributes in this node except for Seniority (which was already used at the root node).
+
+<div style="align: center">
+    <img src="media/decision_tree_ig3.png" width="600"/>
+</div>
+
+The attribute Marital Status leads to the highest information gain, so we will use it for the split. Hence, we get the following tree:
+
+<div style="align: center">
+    <img src="media/decision_tree_split5.png" width="600"/>
+</div>
+
+Lastly, we need to classify the four samples that belong to Seniority = High and Marital Status = Married. Only one of these samples has Promotion = Yes (sample no. 11), and the other three have Promotion = No. If we examine the Degree column, we can see that only sample no. 11 has Degree = Yes, and all the other three have Degree = No. Therefore, we can use the Degree attribute to correctly classify all the four samples.
+
+Therefore, the final decision tree is:
+
+<div style="align: center">
+    <img src="media/decision_tree_final.png" width="600"/>
+</div>
+
+This tree classifies all the samples in our training set perfectly!
+
+By constructing the entire tree and splitting all the nodes until we are left with only leaf nodes, we can almost always get a tree that has 100% accuracy on the training set (unless we have two samples with exactly the same attribute values but different labels). However, such trees usually suffer from overfitting and have poor performance on the test set.
+
+## Time Complexity
+Let $n$ be the number of training samples and $m$ be the number of attributes. For the sake of simplicity, we will assume that all the features are continuous valued.
+
+The time complexity of building a decision tree is:
+
+- In each node of the tree, for each continuous feature we need to sort the values of the training samples according to that feature, which takes in the worst case $O(n \log n)$ time. After the sort, we linearly scan the values in order to find the best splitting point, which takes only $O(n)$ time. Therefore, the total time complexity for finding the best split in a node is $O(m n \log n)$.
+
+- The decision tree contains $O(n)$ internal nodes, since in a fully-grown tree each leaf node contains exactly one sample, thus the number of leaves is $n$. We also know that in a full binary tree (a binary tree where each internal node has exactly two child nodes), the number of leaves is one more than the number of internal nodes. Therefore, the number of internal nodes in a decision tree is at most $n - 1$. Hence, the total time complexity for building the decision tree is $O(m n^2 \log n)$.

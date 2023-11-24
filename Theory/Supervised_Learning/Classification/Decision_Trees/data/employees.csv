@@ -1,0 +1,15 @@
+No.,Gender,Marital Status,Seniority,Academic Degree,Promotion
+1,M,Married,High,No,No
+2,F,Married,High,No,No
+3,M,Married,Medium,No,Yes
+4,M,Single,Low,No,Yes
+5,M,Single,Low,No,Yes
+6,F,Single,Low,Yes,No
+7,F,Single,Medium,Yes,Yes
+8,M,Married,High,No,No
+9,M,Single,High,No,Yes
+10,M,Married,Low,No,Yes
+11,F,Married,High,Yes,Yes
+12,F,Married,Medium,Yes,Yes
+13,M,Married,Medium,No,Yes
+14,F,Married,Low,Yes,No
