@@ -8,8 +8,8 @@ A `cost matrix` is used to quantify the cost of misclassification.
 
 |  | $\pi_{1}$ | $\pi_{2}$ |
 | --- | --- | --- |
-| $\pi_{1}$ | 0 | $c(1 | 2)$ |
-| $\pi_{2}$ | $c(2 | 1)$ | 0 |
+| $\pi_{1}$ | 0 | $c(1 \mid 2)$ |
+| $\pi_{2}$ | $c(2 \mid 1)$ | 0 |
 
 Where $c(1 | 2)$ is the cost of misclassifying a $\pi_{1}$ observation as $\pi_{2}$ and $c(2 | 1)$ is the cost of misclassifying a $\pi_{2}$ observation as $\pi_{1}$.
 
@@ -17,7 +17,7 @@ The expected cost of misclassification is given by:
 
 $$ECM = c(1 | 2) P(x \rightarrow \pi_{1} \wedge x \in \pi_{2}) + c(2 | 1) P(x \rightarrow \pi_{2} \wedge x \in \pi_{1})$$
 
-Read as: The expected cost of misclassification is the cost of misclassifying a $\pi_{1}$ observation as $\pi_{2}$ times the probability of misclassifying a $\pi_{1}$ observation as $\pi_{2}$ plus the cost of misclassifying a $\pi_{2}$ observation as $\pi_{1}$ times the probability of misclassifying a $\pi_{2}$ observation as $\pi_{1}$.
+<i>Read as: The expected cost of misclassification is the cost of misclassifying a $\pi_{1}$ observation as $\pi_{2}$ times the probability of misclassifying a $\pi_{1}$ observation as $\pi_{2}$ plus the cost of misclassifying a $\pi_{2}$ observation as $\pi_{1}$ times the probability of misclassifying a $\pi_{2}$ observation as $\pi_{1}$</i>
 
 The goal is to minimize the expected cost of misclassification.
 
