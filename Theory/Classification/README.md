@@ -2,47 +2,55 @@
 Classification algorithms are used for predicting the category of given data. They are used in various real-world applications like spam detection, image recognition, and disease prediction, among others. In binary classification problems, the model predicts one of two possible classes, while in multiclass classification, the model can predict more than two classes.
 
 ## Separation and Classification of 2 Populations
-**Goal:** Given features from observations $X= \{x_1, x_2, ..., x_n\}$, we want to classify them into two populations $C_1$ and $C_2$.
+**Goal:** Given features from observations $X= \{x_1, x_2, ..., x_n\}$, we want to classify them into two populations $\pi_{1}$ and $\pi_{2}$.
 
 A `cost matrix` is used to quantify the cost of misclassification. 
 
-|  | $C_1$ | $C_2$ |
+|  | $\pi_{1}$ | $\pi_{2}$ |
 | --- | --- | --- |
-| $C_1$ | 0 | $C_{12}$ |
-| $C_2$ | $C_{21}$ | 0 |
+| $\pi_{1}$ | 0 | $\pi_{12}$ |
+| $\pi_{2}$ | $\pi_{21}$ | 0 |
 
-Where $C_{12}$ is the cost of misclassifying a $C_1$ observation as $C_2$ and $C_{21}$ is the cost of misclassifying a $C_2$ observation as $C_1$. 
+Where $\pi_{12}$ is the cost of misclassifying a $\pi_{1}$ observation as $\pi_{2}$ and $\pi_{21}$ is the cost of misclassifying a $\pi_{2}$ observation as $\pi_{1}$. 
 
 The expected cost of misclassification is given by:
 
-$$ECM = C_{12}P(x \rightarrow C_1 \wedge x \in C_2) + C_{21}P(x \rightarrow C_2 \wedge x \in C_1)$$
+$$ECM = \pi_{12}P(x \rightarrow \pi_{1} \wedge x \in \pi_{2}) + \pi_{21}P(x \rightarrow \pi_{2} \wedge x \in \pi_{1})$$
 
-Read as: The expected cost of misclassification is the cost of misclassifying a $C_1$ observation as $C_2$ times the probability of misclassifying a $C_1$ observation as $C_2$ plus the cost of misclassifying a $C_2$ observation as $C_1$ times the probability of misclassifying a $C_2$ observation as $C_1$.
+Read as: The expected cost of misclassification is the cost of misclassifying a $\pi_{1}$ observation as $\pi_{2}$ times the probability of misclassifying a $\pi_{1}$ observation as $\pi_{2}$ plus the cost of misclassifying a $\pi_{2}$ observation as $\pi_{1}$ times the probability of misclassifying a $\pi_{2}$ observation as $\pi_{1}$.
 
 The goal is to minimize the expected cost of misclassification.
 
-Let $R_1$ be the region where $x \rightarrow C_1$ and $R_2$ be the region where $x \rightarrow C_2$.
+Let $R_1$ be the region where $x \rightarrow \pi_{1}$ and $R_2$ be the region where $x \rightarrow \pi_{2}$.
 - $R_1 \cap R_2 = \emptyset$
 - $R_1 \cup R_2 = X$
 
-$$p(x \rightarrow C_1 \wedge x \in C_2) = p(x \in R_1 \wedge x \in C_2) = p(x \in R_1 \mid x \in C_2)p(x \in C_2) = \int_{R_1} f_2(x)dx \cdot P(C_2)$$
+$$
+p(x \rightarrow \pi_1 \wedge x \in \pi_2) = p(x \in R_1 \wedge x \in \pi_2) = p(x \in R_1 | x \in \pi_2)p(x \in \pi_2) = \int_{R_1} f_2(x) dx \times p_2
 
-$$p(x \rightarrow C_2 \wedge x \in C_1) = p(x \in R_2 \wedge x \in C_1) = p(x \in R_2 \mid x \in C_1)p(x \in C_1) = \int_{R_2} f_1(x)dx \cdot P(C_1)$$
+p(x \rightarrow \pi_2 \wedge x \in \pi_1) = p(x \in R_2 \wedge x \in \pi_1) = p(x \in R_2 | x \in \pi_1)p(x \in \pi_1) = \int_{R_2} f_1(x) dx \times p_1
 
-Therefore, the expected cost of misclassification is given by:
+\text{Therefore,}
 
-$$ECM = C_{12} \int_{R_1} f_2(x)dx \cdot P(C_2) + C_{21} \int_{R_2} f_1(x)dx \cdot P(C_1)$$
+\text{ECM} = c(1 | 2) \int_{R_1} f_2(x) dx \times p_2 + c(2 | 1) \int_{R_2} f_1(x) dx \times p_1
 
-Since,
+\text{Since,}
 
-$$\int_{R_1} f_1(x)dx + \int_{R_2} f_1(x)dx = 1$$
+\int_{R_1} f_1(x) dx + \int_{R_2} f_1(x) dx = 1
 
-$$ECM = C_{12} \int_{R_1} f_2(x)dx \cdot P(C_2) + C_{21} (1 - \int_{R_1} f_1(x)dx) \cdot P(C_1)$$
+\text{ECM} = c(1 | 2) \times p_2 \int_{R_1} f_2(x) dx + c(2 | 1) \times p_1 \left[ 1 - \int_{R_1} f_1(x) dx \right]
 
-$$ECM = C_{12} \int_{R_1} f_2(x)dx \cdot P(C_2) + C_{21} \cdot P(C_1) - C_{21} \int_{R_1} f_1(x)dx \cdot P(C_1)$$
+\text{ECM} = c(1 | 2) \times p_2 \int_{R_1} f_2(x) dx + c(2 | 1)p_1 - c(2 | 1)p_1 \int_{R_1} f_1(x) dx
 
-$$ECM = C_{12} \times P(C_2) \times \int_{R_1} f_2(x)dx + C_{21} \times P(C_1) \times \int_{R_2} f_1(x)dx$$
+\text{ECM} = c(2 | 1)p_1 + c(1 | 2)p_2 \int_{R_1} f_2(x) dx - c(2 | 1)p_1 \int_{R_1} f_1(x) dx
 
-$$ECM = C_{12} \times P(C_2) \times \int_{R_1} f_2(x)dx + C_{21} \times P(C_1) \times (1 - \int_{R_1} f_1(x)dx)$$
+\text{ECM} = c(2 | 1)p_1 + \left[ c(1 | 2)p_2f_2(x) - c(2 | 1)p_1f_1(x) \right] dx
 
-$$ECM = C_{12} \times P(C_2) \times \int_{R_1} f_2(x)dx + C_{21} \times P(C_1) - C_{21} \times P(C_1) \times \int_{R_1} f_1(x)dx$$
+\text{To minimize ECM, we want the integral term to be less than or equal to zero.}
+
+c(1 | 2)p_2f_2(x) - c(2 | 1)p_1f_1(x) \leq 0
+
+c(1 | 2)p_2f_2(x) \leq c(2 | 1)p_1f_1(x)
+
+\frac{c(1 | 2) p_2}{c(2 | 1) p_1} \leq \frac{f_1(x)}{f_2(x)}
+$$
