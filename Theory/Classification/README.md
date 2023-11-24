@@ -25,32 +25,32 @@ Let $R_1$ be the region where $x \rightarrow \pi_{1}$ and $R_2$ be the region wh
 - $R_1 \cap R_2 = \emptyset$
 - $R_1 \cup R_2 = X$
 
-$$
-p(x \rightarrow \pi_1 \wedge x \in \pi_2) = p(x \in R_1 \wedge x \in \pi_2) = p(x \in R_1 | x \in \pi_2)p(x \in \pi_2) = \int_{R_1} f_2(x) dx \times p_2
+$$p(x \rightarrow \pi_1 \wedge x \in \pi_2) = p(x \in R_1 \wedge x \in \pi_2) = p(x \in R_1 | x \in \pi_2)p(x \in \pi_2) = \int_{R_1} f_2(x) dx \times p_2$$
 
-p(x \rightarrow \pi_2 \wedge x \in \pi_1) = p(x \in R_2 \wedge x \in \pi_1) = p(x \in R_2 | x \in \pi_1)p(x \in \pi_1) = \int_{R_2} f_1(x) dx \times p_1
+$$p(x \rightarrow \pi_1 \wedge x \in \pi_2) = p(x \in R_1 \wedge x \in \pi_2) = p(x \in R_1 | x \in \pi_2)p(x \in \pi_2) = \int_{R_1} f_2(x) dx \times p_2$$
 
-\text{Therefore,}
+$$p(x \rightarrow \pi_2 \wedge x \in \pi_1) = p(x \in R_2 \wedge x \in \pi_1) = p(x \in R_2 | x \in \pi_1)p(x \in \pi_1) = \int_{R_2} f_1(x) dx \times p_1$$
 
-\text{ECM} = c(1 | 2) \int_{R_1} f_2(x) dx \times p_2 + c(2 | 1) \int_{R_2} f_1(x) dx \times p_1
+$$\text{Therefore,}$$
 
-\text{Since,}
+$$\text{ECM} = c(1 | 2) \int_{R_1} f_2(x) dx \times p_2 + c(2 | 1) \int_{R_2} f_1(x) dx \times p_1$$
 
-\int_{R_1} f_1(x) dx + \int_{R_2} f_1(x) dx = 1
+$$\text{Since,}$$
 
-\text{ECM} = c(1 | 2) \times p_2 \int_{R_1} f_2(x) dx + c(2 | 1) \times p_1 \left[ 1 - \int_{R_1} f_1(x) dx \right]
+$$\int_{R_1} f_1(x) dx + \int_{R_2} f_1(x) dx = 1$$
 
-\text{ECM} = c(1 | 2) \times p_2 \int_{R_1} f_2(x) dx + c(2 | 1)p_1 - c(2 | 1)p_1 \int_{R_1} f_1(x) dx
+$$\text{ECM} = c(1 | 2) \times p_2 \int_{R_1} f_2(x) dx + c(2 | 1) \times p_1 \left[ 1 - \int_{R_1} f_1(x) dx \right]$$
 
-\text{ECM} = c(2 | 1)p_1 + c(1 | 2)p_2 \int_{R_1} f_2(x) dx - c(2 | 1)p_1 \int_{R_1} f_1(x) dx
+$$\text{ECM} = c(1 | 2) \times p_2 \int_{R_1} f_2(x) dx + c(2 | 1)p_1 - c(2 | 1)p_1 \int_{R_1} f_1(x) dx$$
 
-\text{ECM} = c(2 | 1)p_1 + \left[ c(1 | 2)p_2f_2(x) - c(2 | 1)p_1f_1(x) \right] dx
+$$\text{ECM} = c(2 | 1)p_1 + c(1 | 2)p_2 \int_{R_1} f_2(x) dx - c(2 | 1)p_1 \int_{R_1} f_1(x) dx$$
 
-\text{To minimize ECM, we want the integral term to be less than or equal to zero.}
+$$\text{ECM} = c(2 | 1)p_1 + \left[ c(1 | 2)p_2f_2(x) - c(2 | 1)p_1f_1(x) \right] dx$$
 
-c(1 | 2)p_2f_2(x) - c(2 | 1)p_1f_1(x) \leq 0
+$$\text{To minimize ECM, we want the integral term to be less than or equal to zero.}$$
 
-c(1 | 2)p_2f_2(x) \leq c(2 | 1)p_1f_1(x)
+$$c(1 | 2)p_2f_2(x) - c(2 | 1)p_1f_1(x) \leq 0$$
 
-\frac{c(1 | 2) p_2}{c(2 | 1) p_1} \leq \frac{f_1(x)}{f_2(x)}
-$$
+$$c(1 | 2)p_2f_2(x) \leq c(2 | 1)p_1f_1(x)$$
+
+$$\frac{c(1 | 2) p_2}{c(2 | 1) p_1} \leq \frac{f_1(x)}{f_2(x)}$$
