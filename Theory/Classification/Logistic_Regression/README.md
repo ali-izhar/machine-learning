@@ -12,7 +12,7 @@ $$p = \frac{odds}{1+odds}$$
 
 **Odds Ratio (OR)** is the ratio of the odds of success in one group to the odds of success in another group. The formula for odds ratio is:
 
-$$odds\_ratio = \frac{odds\_group\_1}{odds\_group\_2}$$
+$$odds_{ratio} = \frac{odds_{group_1}}{odds_{group_2}}$$
 
 Note that:
 - $0 < p < 1$
@@ -43,7 +43,7 @@ Therefore, following these transformations, the model becomes:
 
 $$ln(\frac{p}{1-p}) = \beta_0 + \beta_1X + \beta_2X + ... + \beta_nX + \epsilon$$
 
-$$p = \frac{e^{z}}{1+e^{(\beta_0 + \beta_1X + \beta_2X + ... + \beta_nX)}}
+$$p = \frac{e^{(\beta_0 + \beta_1X + \beta_2X + ... + \beta_nX)}}{1+e^{(\beta_0 + \beta_1X + \beta_2X + ... + \beta_nX)}}$$
 
 Let $Z = \beta_0 + \beta_1X + \beta_2X + ... + \beta_nX$, then:
 
