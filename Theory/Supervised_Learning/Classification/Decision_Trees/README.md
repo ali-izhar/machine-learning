@@ -36,7 +36,7 @@ $$H(X) = -0.8 \log_2 0.8 - 0.2 \log_2 0.2 = 0.72$$
 The entropy of $X$ became smaller, since we have less uncertainty about the outcome of the coin toss. Every time we toss the coin, we are more likely to get heads than tails. We can actually plot the entropy of $X$ as a function of $p(H)$:
 
 <div style="align: center">
-    <img src="media/entropy_curve.png" width="600"/>
+    <img src="media/entropy_curve.png" width="400"/>
 </div>
 
 > Uniform probability $(p = 0.5)$ corresponds to the maximum entropy. As we move away from uniform probability towards $p = 0$ or $p = 1$, the entropy decreases since we have more information about the outcome of the $X$.
@@ -72,7 +72,7 @@ $$IG(v) = H(v) - \sum_{i=1}^{k} \frac{n_i}{n} H(v_i)$$
 In other words, information gain is the difference between the entropy at the parent node $v$ and the weighted average of the entropies at the child nodes $v_1, v_2, \dots, v_k$, where the weight of each child node is the fraction of samples that went from the parent node to that node.
 
 <div style="align: center">
-    <img src="media/information_gain.png" width="400"/>
+    <img src="media/information_gain.png" width="600"/>
 </div>
 
 Our goal is to find an attribute that maximizes the information gain, i.e., an attribute that achieves the highest reduction in the entropy. This means that in every node of the tree, we need to go over all the attributes and compute for each one its information gain.
@@ -100,7 +100,7 @@ $$G(v) = 1 - \left(\frac{2}{10}\right)^2 - \left(\frac{4}{10}\right)^2 - \left(\
 Assume that we have the following data set with information on 14 employees in some fictitious company:
 
 <div style="align: center">
-    <img src="media/decision_tree_data.png" width="600"/>
+    <img src="media/decision_tree_data.png" width="500"/>
 </div>
 
 Our objective is to predict whether an employee will get a promotion based on four attributes: the employee's gender (Male or Female), marital status (Single or Married), seniority at the workplace (Low, Medium or High), and whether they have an academic degree (Yes or No).
@@ -108,13 +108,13 @@ Our objective is to predict whether an employee will get a promotion based on fo
 First, we need to select the attribute for the first split at the root node. To that end, we compute the information gain for each of the four attributes:
 
 <div style="align: center">
-    <img src="media/decision_tree_ig1.png" width="600"/>
+    <img src="media/decision_tree_ig1.png" width="500"/>
 </div>
 
 > Information gain of Gender and Martital Status
 
 <div style="align: center">
-    <img src="media/decision_tree_ig2.png" width="600"/>
+    <img src="media/decision_tree_ig2.png" width="500"/>
 </div>
 
 > Information gain of Seniority and Degree
@@ -122,39 +122,39 @@ First, we need to select the attribute for the first split at the root node. To 
 The Seniority attribute leads to the highest information gain, therefore we use it for the split at the root of the tree. The training samples are then split into three subsets according to their value in the Seniority attribute:
 
 <div style="align: center">
-    <img src="media/decision_tree_split1.png" width="600"/>
+    <img src="media/decision_tree_split1.png" width="500"/>
 </div>
 
-The second child node (the one that corresponds to Seniority = Medium) doesn't need any further splitting, since all the samples in that node have the same label (Promotion = Yes), so we can turn it into a leaf node with that label.
+> The second child node (the one that corresponds to Seniority = Medium) doesn't need any further splitting, since all the samples in that node have the same label (Promotion = Yes), so we can turn it into a leaf node with that label.
 
 Let's now handle the left child node (the one that corresponds to Seniority = Low). The records that belong to this node are:
 
 <div style="align: center">
-    <img src="media/decision_tree_split2.png" width="600"/>
+    <img src="media/decision_tree_split2.png" width="500"/>
 </div>
 
-We can clearly see that there is a total correspondence between the attributes Gender and Academic Degree and the Promotion label, so we can select either of these attributes for our split. For example, if we choose the Gender attribute, we will get the following tree:
+> We can clearly see that there is a total correspondence between the attributes Gender and Academic Degree and the Promotion label, so we can select either of these attributes for our split. For example, if we choose the Gender attribute, we will get the following tree:
 
 <div style="align: center">
-    <img src="media/decision_tree_split3.png" width="600"/>
+    <img src="media/decision_tree_split3.png" width="500"/>
 </div>
 
 Now, we need to take care of the third child node (the one that corresponds to Seniority = High). Let's look at the records that belong to this node:
 
 <div style="align: center">
-    <img src="media/decision_tree_split4.png" width="600"/>
+    <img src="media/decision_tree_split4.png" width="500"/>
 </div>
 
-This time there is no attribute that has a total correspondence with the label, so we need to compute the information gain for all the attributes in this node except for Seniority (which was already used at the root node).
+> This time there is no attribute that has a total correspondence with the label, so we need to compute the information gain for all the attributes in this node except for Seniority (which was already used at the root node).
 
 <div style="align: center">
-    <img src="media/decision_tree_ig3.png" width="600"/>
+    <img src="media/decision_tree_ig3.png" width="500"/>
 </div>
 
-The attribute Marital Status leads to the highest information gain, so we will use it for the split. Hence, we get the following tree:
+> The attribute Marital Status leads to the highest information gain, so we will use it for the split. Hence, we get the following tree:
 
 <div style="align: center">
-    <img src="media/decision_tree_split5.png" width="600"/>
+    <img src="media/decision_tree_split5.png" width="500"/>
 </div>
 
 Lastly, we need to classify the four samples that belong to Seniority = High and Marital Status = Married. Only one of these samples has Promotion = Yes (sample no. 11), and the other three have Promotion = No. If we examine the Degree column, we can see that only sample no. 11 has Degree = Yes, and all the other three have Degree = No. Therefore, we can use the Degree attribute to correctly classify all the four samples.
@@ -162,7 +162,7 @@ Lastly, we need to classify the four samples that belong to Seniority = High and
 Therefore, the final decision tree is:
 
 <div style="align: center">
-    <img src="media/decision_tree_final.png" width="600"/>
+    <img src="media/decision_tree_final.png" width="500"/>
 </div>
 
 This tree classifies all the samples in our training set perfectly!
