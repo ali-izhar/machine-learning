@@ -25,6 +25,8 @@ Let $R_1$ be the region where $x \rightarrow \pi_{1}$ and $R_2$ be the region wh
 - $R_1 \cap R_2 = \emptyset$
 - $R_1 \cup R_2 = X$
 
+Let $p_1$ be the probability of $x \in \pi_{1}$ and $p_2$ be the probability of $x \in \pi_{2}$. Let $f_1(x)$ be the probability density function of $x$ given $x \in \pi_{1}$ and $f_2(x)$ be the probability density function of $x$ given $x \in \pi_{2}$. Then:
+
 $$p(x \rightarrow \pi_1 \wedge x \in \pi_2) = p(x \in R_1 \wedge x \in \pi_2) = p(x \in R_1 | x \in \pi_2)p(x \in \pi_2) = \int_{R_1} f_2(x) dx \times p_2$$
 
 $$p(x \rightarrow \pi_1 \wedge x \in \pi_2) = p(x \in R_1 \wedge x \in \pi_2) = p(x \in R_1 | x \in \pi_2)p(x \in \pi_2) = \int_{R_1} f_2(x) dx \times p_2$$
