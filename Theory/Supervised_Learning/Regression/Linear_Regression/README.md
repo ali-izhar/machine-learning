@@ -16,7 +16,7 @@ Where $w_0, w_1,...,w_m$ are the parameters of the model. The parameter $w_0$ is
 
 To simplify $h(x)$, we add a constant feature $x_0$ that is always equal to 1. This allows us to write $h(x)$ as the dot product between the feature vector $x=(x_0,x_1,...,x_m)^t$ and the parameter vector $w=(w_0,w_1,...,w_m)^t$:
 
-$$h(x)= w^tx = \sum_{j=0}^{m}w_jx_j$$
+$$h(x)= W^tX = \sum_{j=0}^{m}w_jx_j$$
 
 ## Ordinary Least Squares (OLS)
 Our goal in linear regression is to find the parameters $w$ that will make our model's predictions $h(x)$ be as close as possible to the true labels $y$. In other words, we would like to find the model's parameters that best fit the data set. To that end, we define a **cost function** (sometimes also called an error function) that measures how far our model's predictions are from the true labels.
@@ -27,7 +27,7 @@ $$r_i=y_i-h(x_i)$$
 
 **Ordinary least squares (OLS)** regression finds the optimal parameter values that minimize the sum of squared residuals:
 
-$$J(w)=\sum_{i=1}^{n}r_i^2=\sum_{i=1}^{n}(y_i-h(x_i))^2=\sum_{i=1}^{n}(y_i-w^tx_i)^2$$
+$$J(w)=\sum_{i=1}^{n}r_i^2=\sum_{i=1}^{n}(y_i-h(x_i))^2=\sum_{i=1}^{n}(y_i-W^tX_i)^2$$
 
 Note that a loss function calculates the error per observation and in OLS it is called the squared loss, while a cost function (typically denoted by $J$) calculates the error over the whole data set, and in OLS it is called the sum of squared residuals (SSR) or sum of squared errors (SSE).
 
@@ -35,7 +35,7 @@ Note that a loss function calculates the error per observation and in OLS it is 
 When the data set has only one feature (i.e., when it consists of two-dimensional points $(x_i,y_i)$), the regression problem is called simple linear regression. Geometrically, in simple linear regression, we are trying to find a straight line that goes as close as possible through all the data points:
 
 <div style="align: center">
-    <img src="images/simple_linear_regression.png" width="500">
+    <img src="media/simple_linear_regression.png" width="500">
 </div>
 
 In this case, the model’s hypothesis is simply the equation of the line:
@@ -102,12 +102,9 @@ $$
 
 Therefore, the optimal values for $w_0$ and $w_1$ are:
 
-$$
-\begin{align*}
-w_0 &= \frac{\sum_{i=1}^{n} y_i - w_1\sum_{i=1}^{n} x_i}{n} \\
-w_1 &= \frac{n\sum_{i=1}^{n} x_iy_i - \sum_{i=1}^{n} x_i \sum_{i=1}^{n} y_i}{n\sum_{i=1}^{n} x_i^2 - (\sum_{i=1}^{n} x_i)^2}
-\end{align*}
-$$
+$$w_0 &= \frac{\sum_{i=1}^{n} y_i - w_1\sum_{i=1}^{n} x_i}{n}$$
+
+$$w_1 &= \frac{n\sum_{i=1}^{n} x_iy_i - \sum_{i=1}^{n} x_i \sum_{i=1}^{n} y_i}{n\sum_{i=1}^{n} x_i^2 - (\sum_{i=1}^{n} x_i)^2}$$
 
 ## Evaluation Metrics
 There are several evaluation metrics that are used to evaluate the performance of regression models. The two most common ones are RMSE (Root Mean Squared Error) and $R^2$ (R-squared) score.
