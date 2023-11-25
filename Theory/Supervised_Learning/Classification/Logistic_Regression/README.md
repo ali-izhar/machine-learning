@@ -76,7 +76,7 @@ The sigmoid function is used to convert the log-odds $W^tX$ into probabilities. 
     <img src="media/sigmoid.png" width=400px>
 </div>
 
-As can be seen, the function maps real numbers in (-$\infty$, $\infty$) into probabilities in (0, 1). The sigmoid function has some nice mathematical properties that will be useful later:
+As can be seen, the function maps real numbers in $(-\infty$, $\infty)$ into probabilities in (0, 1). The sigmoid function has some nice mathematical properties that will be useful later:
 
 $$\sigma(-z) = 1-\sigma(z)$$
 $$\frac{d\sigma(z)}{dz} = \sigma(z)(1-\sigma(z))$$
@@ -84,11 +84,11 @@ $$\frac{d\sigma(z)}{dz} = \sigma(z)(1-\sigma(z))$$
 The following diagram summarizes the computational process of logistic regression starting from the inputs until the final prediction:
 
 <div style="align:"center>
-    <img src="media/logistic_regression.png" width=400px>
+    <img src="media/logistic_regression.png" width=600px>
 </div>
 
 ## Log Loss
-Our goal is to find the parameters $w$ that will make the model’s predictions $p = \sigma(W^tX)$ as close as possible to the true labels $y$. To that end, we need to define a loss function that will measure how far our model’s predictions are from the true labels. This function needs to be differentiable, so it can be optimized using techniques such as gradient descent.
+Our goal is to find the parameters $w$ that will make the model's predictions $p = \sigma(W^tX)$ as close as possible to the true labels $y$. To that end, we need to define a loss function that will measure how far our model's predictions are from the true labels. This function needs to be differentiable, so it can be optimized using techniques such as gradient descent.
 
 The loss function used by logistic regression is called log loss (or logistic loss). It is defined as follows:
 
@@ -109,12 +109,12 @@ The negative log function is a convex function shown below. This means that grad
 
 - **Case 1:** $y=1$
 The graph of $-log(f_{w,b}(x^{(i)}))$ is shown below:
-<img src="../media/negative_log1.png" width=250px>
+<img src="media/negative_log1.png" width=250px>
 
 In this case, if $f_{w,b}(x) = 1$, the loss is 0. If $f_{w,b}(x) \rightarrow 0$, the loss goes to infinity. Therefore, the model will try to predict a probability close to 1 for $y=1$ and penalize the model heavily if it predicts a probability close to 0.
 
 - **Case 2:** $y=0$
 The graph of $-log(1-f_{w,b}(x^{(i)}))$ is shown below:
-<img src="../media/negative_log2.png" width=250px>
+<img src="media/negative_log2.png" width=250px>
 
 In this case, if $f_{w,b}(x) = 0$, the loss is 0. If $f_{w,b}(x) \rightarrow 1$, the loss goes to infinity. Therefore, the model will try to predict a probability close to 0 for $y=0$ and penalize the model heavily if it predicts a probability close to 1.
