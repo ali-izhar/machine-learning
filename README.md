@@ -1,5 +1,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/ali-izhar/machine-learning) ![GitHub stars](https://img.shields.io/github/stars/ali-izhar/machine-learning?style=social) ![GitHub forks](https://img.shields.io/github/forks/ali-izhar/machine-learning?style=social)
 
+<i>**Note:** Repository contents are regularly updated with the latest materials.</i>
+
 # Machine Learning Theory and Practice 🚀
 
 Welcome to a deep dive into the world of machine learning algorithms and their efficient implementations! This repository provides a well-structured collection of machine learning algorithms designed in Python, leveraging the robust capabilities of the Numpy, Scikit-learn, and Tensorflow libraries.
