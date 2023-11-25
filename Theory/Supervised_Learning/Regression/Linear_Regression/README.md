@@ -102,9 +102,13 @@ $$
 
 Therefore, the optimal values for $w_0$ and $w_1$ are:
 
-$$w_0 &= \frac{\sum_{i=1}^{n} y_i - w_1\sum_{i=1}^{n} x_i}{n}$$
+$$
+w_0 = \frac{\sum_{i=1}^{n} y_i - w_1\sum_{i=1}^{n} x_i}{n}
+$$
 
-$$w_1 &= \frac{n\sum_{i=1}^{n} x_iy_i - \sum_{i=1}^{n} x_i \sum_{i=1}^{n} y_i}{n\sum_{i=1}^{n} x_i^2 - (\sum_{i=1}^{n} x_i)^2}$$
+$$
+w_1 = \frac{n\sum_{i=1}^{n} x_iy_i - \sum_{i=1}^{n} x_i \sum_{i=1}^{n} y_i}{n\sum_{i=1}^{n} x_i^2 - (\sum_{i=1}^{n} x_i)^2}
+$$
 
 ## Evaluation Metrics
 There are several evaluation metrics that are used to evaluate the performance of regression models. The two most common ones are RMSE (Root Mean Squared Error) and $R^2$ (R-squared) score.
