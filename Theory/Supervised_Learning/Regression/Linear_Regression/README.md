@@ -5,6 +5,12 @@ We assume that there is a correlation between the label $y$ and the input vector
 
 $$y=f(x)+\epsilon$$
 
+Where $\epsilon$ is the error term that is assumed to have the following properties:
+- $\epsilon$ is a random variable that is normally distributed.
+- $E(\epsilon)=0$ (the mean of $\epsilon$ is 0).
+- $Var(\epsilon)=\sigma^2$ (the variance of $\epsilon$ is $\sigma^2$).
+- $\text{Cov}(\epsilon_i,\epsilon_j)=0$ (the covariance between any two error terms is 0).
+
 Our goal is to find the function $f(x)$, since knowing this function will allow us to predict the labels for any new sample. However, since we have a limited number of training samples from which to learn the function $f(x)$, we can only approximate it. The function that our model estimates from the given data is called the model's hypothesis and is typically denoted by $h(x)$.
 
 ## Linear Regression
@@ -103,19 +109,21 @@ $$
 Therefore, the optimal values for $w_0$ and $w_1$ are:
 
 $$
-w_0 = \frac{\sum_{i=1}^{n} y_i - w_1\sum_{i=1}^{n} x_i}{n}
+w_1 = \frac{n\sum_{i=1}^{n} x_iy_i - \sum_{i=1}^{n} x_i \sum_{i=1}^{n} y_i}{n\sum_{i=1}^{n} x_i^2 - (\sum_{i=1}^{n} x_i)^2} = r_{xy}\frac{s_y}{s_x}
 $$
 
 $$
-w_1 = \frac{n\sum_{i=1}^{n} x_iy_i - \sum_{i=1}^{n} x_i \sum_{i=1}^{n} y_i}{n\sum_{i=1}^{n} x_i^2 - (\sum_{i=1}^{n} x_i)^2}
+w_0 = \frac{\sum_{i=1}^{n} y_i - w_1\sum_{i=1}^{n} x_i}{n} = \bar{y} - w_1\bar{x}
 $$
+
+Where $r_{xy}$ is the Pearson correlation coefficient between $x$ and $y$, $s_x$ is the standard deviation of $x$, and $s_y$ is the standard deviation of $y$. Note that $r_{xy}$ is a measure of the strength of the linear relationship between $x$ and $y$, and it is always between -1 and 1. If $r_{xy}$ is close to 1, then $x$ and $y$ have a strong positive linear relationship. If $r_{xy}$ is close to -1, then $x$ and $y$ have a strong negative linear relationship. If $r_{xy}$ is close to 0, then $x$ and $y$ have a weak linear relationship.
 
 ## Evaluation Metrics
 There are several evaluation metrics that are used to evaluate the performance of regression models. The two most common ones are RMSE (Root Mean Squared Error) and $R^2$ (R-squared) score.
 
 Note the difference between an evaluation metric and a cost function. A cost function is used to define the objective of the model’s learning process and is computed on the training set. Conversely, an evaluation metric is used after the training process to evaluate the model on a holdout data set (a validation or a test set).
 
-### Root Mean Squared Error (RMSE)
+## Root Mean Squared Error (RMSE)
 RMSE is defined as the square root of the mean of the squared errors (the differences between the model’s predictions and the true labels):
 
 $$RMSE=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-h(x_i))^2}$$
@@ -124,7 +132,16 @@ Note that what we called residuals during the model’s training are typically c
 
 RMSE is always non-negative, and a lower RMSE means the model has a better fit to the data (a perfect model has an RMSE of 0).
 
-### R-squared ($R^2$) Score
+### Advantages of RMSE
+- Provides a measure for the average magnitude of the model’s errors.
+- Since the errors are squared before they are averaged, RMSE gives a relatively higher weight to large errors.
+- Can be used to compare the performance of different models on the same data set.
+
+### Disadvantages of RMSE
+- Cannot be used to compare the model’s performance across different data sets, because it depends on the scale of the input features.
+- Sensitive to outliers, since the effect of each error on the RMSE is proportional to the size of the squared error.
+
+## R-squared ($R^2$) Score
 The $R^2$ score (also called the coefficient of determination) is a measure of the goodness of fit of a model. It computes the ratio between the sum of squared errors of the regression model and the sum of squared errors of a baseline model that always predicts the mean value of $y$, and subtracts the result from 1:
 
 $$R^2=1-\frac{\sum_{i=1}^{n}(y_i-h(x_i))^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}$$
@@ -134,3 +151,46 @@ Where $\bar{y}$ is the mean value of $y$:
 $$\bar{y}=\frac{1}{n}\sum_{i=1}^{n}y_i$$
 
 The $R^2$ score is always between 0 and 1, and a higher $R^2$ score means the model has a better fit to the data (a perfect model has an $R^2$ score of 1).
+
+### Advantages of $R^2$ Score
+- Does not depend on the scale of the features.
+- Can be used to compare the performance of different models across different data sets.
+
+### Disadvantages of $R^2$ Score
+- Does not provide information on the magnitude of the model’s errors.
+- $R^2$ score is monotonically increasing with the number of features the model has, thus it cannot be used to compare models with very different numbers of features.
+
+## Partitioning the Variance
+The total sum of squares (SST) is divided into two parts: the regression sum of squares (SSR) and the residual sum of squares (SSE). The regression sum of squares measures the amount of variation in the response that is explained by the regression model. The residual sum of squares measures the amount of variation in the response that is not explained by the regression model.
+
+| Sum of Squares | Formula | Degrees of Freedom |
+| --- | --- | --- |
+| Total sum of squares (SST) | $\sum_{i=1}^{n}(y_i-\bar{y})^2$ | $n-1$ |
+| Regression sum of squares (SSR) | $\sum_{i=1}^{n}(h(x_i)-\bar{y})^2$ | $1$ |
+| Residual sum of squares (SSE) | $\sum_{i=1}^{n}(y_i-h(x_i))^2$ | $n-2$ |
+
+The $R^2$ score can be computed as the ratio between the regression sum of squares and the total sum of squares:
+
+$$R^2=\frac{SSR}{SST}$$
+
+$$R^2=1-\frac{SSE}{SST}$$
+
+**Question:** How important is $x$ in predicting $y$?
+
+**Answer:** We can use a $t$-test to determine whether the slope of the regression line is significantly different from 0.
+
+$$H_0: \beta_1 = 0 \text{ (the slope of the regression line is 0)}$$
+
+$$H_1: \beta_1 \neq 0 \text{ (the slope of the regression line is not 0)}$$
+
+The test statistic is:
+
+$$t = \frac{\hat{\beta}_1}{\text{SE}(\hat{\beta}_1)}$$
+
+Where $\hat{\beta}_1$ is the estimated value of the slope and $\text{SE}(\hat{\beta}_1)$ is the standard error of the slope. The $t$-statistic is a measure of how many standard deviations $\hat{\beta}_1$ is away from 0. If the $t$-statistic is large, then the slope is significantly different from 0.
+
+The $p$-value is the probability of observing a $t$-statistic as extreme as the one observed, assuming the null hypothesis is true. If the $p$-value is small, then the slope is significantly different from 0.
+
+$$p = P(|T| > |t|)$$
+
+Where $T$ is a $t$-distribution with $n-2$ degrees of freedom.
