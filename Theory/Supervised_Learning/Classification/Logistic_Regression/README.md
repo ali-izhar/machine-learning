@@ -76,7 +76,7 @@ The sigmoid function is used to convert the log-odds $W^tX$ into probabilities. 
     <img src="media/sigmoid.png" width=400px>
 </div>
 
-As can be seen, the function maps real numbers in $(-\infty$, $\infty)$ into probabilities in (0, 1). The sigmoid function has some nice mathematical properties that will be useful later:
+As can be seen, the function maps real numbers in $(-\infty, \infty)$ into probabilities in (0, 1). The sigmoid function has some nice mathematical properties that will be useful later:
 
 $$\sigma(-z) = 1-\sigma(z)$$
 $$\frac{d\sigma(z)}{dz} = \sigma(z)(1-\sigma(z))$$
