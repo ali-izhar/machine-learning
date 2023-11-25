@@ -3,22 +3,18 @@ Supervised machine learning is a subfield of machine learning (ML) that deals wi
 
 In supervised machine learning problems, we are given a data set of $n$ labeled samples (also called examples, instances, observations, or data points). Each sample in the data set is a pair consisting of a vector $x$ that contains the features (or attributes) of that sample and its label $y$ (or target output). If we denote by $m$ the number of features in the data set, then $x$ is a m-dimensional vector (we assume that all vectors are column vectors, unless stated otherwise):
 
-$$x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_m \end{bmatrix}$$
-
-Or using the transpose operator:
-
-$$x^T = \begin{bmatrix} x_1 & x_2 & \cdots & x_m \end{bmatrix}$$
+$$x = \begin{bmatrix} x_1 & x_2 & \cdots & x_m \end{bmatrix} ^ T$$
 
 ## Regression vs. Classification
 We distinguish between two types of supervised learning problems:
 
 1. In regression problems, the label $y$ is a continuous value within some range. For example, in a house price prediction task, $y \in (0, \infty)$ is a real positive value that represents the price of the house.
-2. In classification problems, the label $y$ is a discrete value from a finite set of possible values. For example, in a spam detection task, $y \in \{0, 1\}$ is a binary value that represents whether the email is spam ($y = 1$) or not ($y = 0$). In multi-class classification problems, $y$ can take one of $k$ possible values, where $k$ is the number of classes. For example, in a handwritten digit recognition task, $y \in \{0, 1, \cdots, 9\}$ is a value that represents the digit that was written.
+2. In classification problems, the label $y$ is a discrete value from a finite set of possible values. For example, in a spam detection task, $y \in \{0, 1\}$ is a binary value that represents whether the email is spam $(y = 1)$ or not $(y = 0)$. In multi-class classification problems, $y$ can take one of $k$ possible values, where $k$ is the number of classes. For example, in a handwritten digit recognition task, $y \in \{0, 1, \cdots, 9\}$ is a value that represents the digit that was written.
 
 The main difference between regression and classification tasks is that in regression we try to find a function that fits to the data points as closely as possible, while in classification we try to find the boundaries between the classes:
 
 <div style="align="center>
-    <img src="media/types.png" width="500">
+    <img src="Z-images/types.png" width="500">
 </div>
 
 ## Model Hypothesis
