@@ -41,7 +41,7 @@ class LinearRegressor:
             params_history.append((self.w, self.b))
             if self.verbose and i % (self.num_iterations // 10) == 0:
                 print(f"Iteration {i}: Cost {round(cost, 3)}")
-        return self.w, self.b, cost_history
+        return self.w, self.b, params_history, cost_history
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         y_pred = np.dot(X, self.w) + self.b

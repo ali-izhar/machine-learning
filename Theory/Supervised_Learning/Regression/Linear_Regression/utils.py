@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from typing import List
-from .regressor import LinearRegressor
+from regressor import LinearRegressor
 
 
 def plot_scatter_data(X: np.ndarray, Y: np.ndarray, size=(8, 6)) -> None:

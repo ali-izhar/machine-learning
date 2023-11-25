@@ -38,7 +38,7 @@ $$J(w)=\sum_{i=1}^{n}r_i^2=\sum_{i=1}^{n}(y_i-h(x_i))^2=\sum_{i=1}^{n}(y_i-W^tX_
 Note that a loss function calculates the error per observation and in OLS it is called the squared loss, while a cost function (typically denoted by $J$) calculates the error over the whole data set, and in OLS it is called the sum of squared residuals (SSR) or sum of squared errors (SSE).
 
 ## Simple Linear Regression
-When the data set has only one feature (i.e., when it consists of two-dimensional points $(x_i,y_i)$), the regression problem is called simple linear regression. Geometrically, in simple linear regression, we are trying to find a straight line that goes as close as possible through all the data points:
+When the data set has only one feature i.e., when it consists of two-dimensional points $(x_i,y_i)$, the regression problem is called simple linear regression. Geometrically, in simple linear regression, we are trying to find a straight line that goes as close as possible through all the data points:
 
 <div style="align: center">
     <img src="media/simple_linear_regression.png" width="500">

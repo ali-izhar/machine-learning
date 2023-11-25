@@ -1,2 +1,0 @@
-# Regression Algorithms
-Regression is a type of supervised machine learning algorithm which is used to predict continuous values. Regression analysis is a form of predictive modelling technique which investigates the relationship between a dependent (target) and independent variable (s) (predictor). This technique is used for forecasting, time series modelling and finding the causal effect relationship between the variables. For example, relationship between rash driving and number of road accidents by a driver is best studied through regression.
