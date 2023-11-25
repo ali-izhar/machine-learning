@@ -53,9 +53,25 @@ $$p_i = \frac{\exp(w_i^t x)}{\sum_{j=1}^{k} \exp(w_j^t x)}, \quad i=1,\dots,k$$
 
 The function that converts the linear functions $w_i^t x$ into probabilities $p_i$ is called the **softmax function**:
 
-The softmax function, $\sigma(z): \mathbb{R}^k \rightarrow \mathbb{R}^k$, converts a vector of $k$ real values into a vector of $k$ real values in the range $(0, 1)$ that add up to 1.
+For a multiclass classification, the softmax function $\sigma : \mathbb{R}^K \rightarrow \mathbb{R}^K$ is defined as follows:
 
-$$\sigma(z)_i = \frac{\exp(z_i)}{\sum_{j=1}^{k} \exp(z_j)}, \quad i=1,\dots,k$$
+$$a_1 = \sigma(z)_1 = \frac{e^{z_1}}{e^{z_1} + e^{z_2} + \ldots + e^{z_K}} = P(y = 1 | x)$$
+
+$$a_2 = \sigma(z)_2 = \frac{e^{z_2}}{e^{z_1} + e^{z_2} + \ldots + e^{z_K}} = P(y = 2 | x)$$
+
+$$\vdots$$
+
+$$a_K = \sigma(z)_K = \frac{e^{z_K}}{e^{z_1} + e^{z_2} + \ldots + e^{z_K}} = P(y = K | x)$$
+
+$$L(a_1, a_2, \ldots, a_K, y) = 
+\begin{cases}
+-\log(a_1) & \text{if } y = 1 \\
+-\log(a_2) & \text{if } y = 2 \\
+\vdots \\
+-\log(a_K) & \text{if } y = K
+\end{cases}$$
+
+Notice that $\text{loss} = -\log(a_i) \text{ if } y = i$. If we plot the graph of $-\log(x)$, we can see that the loss is high when $x$ is close to $0$ and low when $x$ is close to $1$. This is called the **cross-entropy loss**.
 
 The name "softmax" derives from the fact that the function is a smooth approximation of the argmax function. For example, the softmax of the vector (1, 2, 6) is approximately (0.007, 0.018, 0.976), which puts almost all of the unit weight on the maximum element of the vector. The softmax function is an extension of the sigmoid (logistic) function to the multi-class case. In other words, it can be shown that when there are only two classes softmax becomes the sigmoid function. The following diagram summarizes the computational process of the softmax regression model:
 
