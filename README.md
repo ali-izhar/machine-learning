@@ -25,7 +25,7 @@ Welcome to a deep dive into the world of machine learning algorithms and their e
 | [Machine Learning Specialization by Andrew Ng](https://www.coursera.org/specializations/machine-learning-introduction?) | Coursera                      |
 | [Mathematics for Machine Learning and Data Science Specialization by DeepLearning.AI](https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science?) | Coursera                      |
 | [Introduction to Deep Learning by MIT](http://introtodeeplearning.com)                        | MIT                           |
-| [Medium Articles](https://medium.com/@roiyeho)                                                 | Medium                        |
+| [Dr. Roi Yehoshua on Medium](https://medium.com/@roiyeho)                                     | Medium                        |
 
 ## 💡 Personal Motivation
 As an avid learner of computer science and mathematics, the intriguing cross-section of programming and predictive modeling has captivated my attention. This fascination for understanding how machines interpret data to make decisions has led me to embark on this Machine Learning journey. I am eager to unravel these concepts and apply them to solve real-world problems, thereby building upon my solid foundation in programming and mathematical thinking.
