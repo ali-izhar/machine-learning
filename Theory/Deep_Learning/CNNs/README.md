@@ -31,7 +31,7 @@ Notice that CNNs operate on volumes.
     - The output of the convolution operation is a 2D array called the **activation map**.
     - For example, if the input volume is $32 \times 32 \times 3$ and the filter is $5 \times 5 \times 3$, then the output activation map will be $28 \times 28 \times 1$. If we use $10$ filters, then the output will be $28 \times 28 \times 10$ ($10$ activation maps stacked on top of each other).
 
-<div align="center">
+<div style="align:center">
     <img src="media/mapping.gif" width="600">
 </div>
 
@@ -141,7 +141,7 @@ Notice that CNNs operate on volumes.
 
     - **Average Pooling**: The average pooling operation is applied to each activation map independently. It slides a window of size $F \times F$ across the activation map and outputs the average value in each window. It is not used very often.
 
-<div align="center">
+<div style="align:center">
     <img src="media/pooling.png" width="500">
 </div>
 
