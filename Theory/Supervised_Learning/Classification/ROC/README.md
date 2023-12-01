@@ -58,12 +58,20 @@ F1 Score is a useful metric when there is an imbalance between positive and nega
 > The F1 score is a balanced metric that considers both precision and recall. If the F1 score is 82%, it shows a good balance between correctly identifying spam emails and avoiding false positives.
 
 ### 6️⃣ False Positive Rate (FPR) or Fall-Out
-This metric measures the proportion of negative instances that were incorrectly classified as positive. It is calculated as $\frac{FP}{FP + TN}$. FPR is useful when you want to evaluate the classifier's ability to avoid false alarms in negative instances.
+This metric measures the proportion of negative instances that were incorrectly classified as positive. It is calculated as:
+
+$$\frac{\text{FP}}{\text{FP + TN}}$$
+
+FPR is useful when you want to evaluate the classifier's ability to avoid false alarms in negative instances.
 
 > If the FPR is 5%, it means that 5% of the non-spam emails were incorrectly classified as spam. A lower FPR indicates that the classifier has fewer false alarms for non-spam emails.
 
 ### 7️⃣ False Negative Rate (FNR) or Miss Rate
-This metric measures the proportion of positive instances that were incorrectly classified as negative. It is calculated as $\frac{FN}{FN + TP}. FNR is valuable when you want to assess the classifier's ability to avoid missing positive instances.
+This metric measures the proportion of positive instances that were incorrectly classified as negative. It is calculated as:
+
+$$\frac{\text{FN}}{\text{FN + TP}}$$
+
+FNR is valuable when you want to assess the classifier's ability to avoid missing positive instances.
 
 > If the FNR is 15%, it means that 15% of the spam emails were incorrectly classified as non-spam. A lower FNR indicates that the classifier misses fewer actual spam emails.
 
