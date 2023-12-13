@@ -138,6 +138,7 @@ Projects/classifiers/movies_reviews_classification/models/
 Projects/recommenders/Coursera_embeddings/data/
 Theory/Probability/naive_bayes_classifier/data/
 *.pt 
+Theory/**/data/
 
 #api keys
 api.json
