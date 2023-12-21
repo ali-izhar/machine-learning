@@ -1,11 +1,175 @@
 import numpy as np
+import scipy
 import matplotlib.pyplot as plt
-from .Generators import Generator
-from .Simulations import Dice
-
-__all__ = ['plot_gaussian_distributions', 'plot_binomial_distributions', 'plot_dice_hist', 'plot_dice_stats']
+from .generators import Generator
+from .simulations import Dice
 
 generator = Generator()
+
+__all__ = ["plot_uniform", "plot_exponential", "plot_normal", "plot_gamma", "plot_beta"]
+
+
+def plot_uniform(a, b):
+    """Plots the PDF and CDF of a Uniform Distribution.
+    a (float): Lower bound of the distribution
+    b (float): Upper bound of the distribution
+    """
+    # Generating values for the uniform distribution
+    x = np.linspace(a, b, 1000)
+    y = [1 / (b - a) for _ in x]
+
+    # Set up the figure and axes for a 2-column layout
+    _, axes = plt.subplots(1, 2, figsize=(15, 6))
+
+    # Plotting the Probability Density Function (PDF) on the first subplot
+    axes[0].plot(x, y, label='PDF', color='blue')
+    axes[0].fill_between(x, y, color='blue', alpha=0.3)
+    axes[0].axhline(1 / (b - a), color='red', linestyle='--')
+    axes[0].set_ylim(0, 1 / (b - a) + 0.05)
+    axes[0].set_xlim(a, b)
+    axes[0].set_title('Probability Density Function of a Uniform Distribution')
+    axes[0].set_xlabel('x')
+    axes[0].set_ylabel('Density')
+    axes[0].legend()
+    axes[0].grid(True)
+
+    # Plotting the Cumulative Distribution Function (CDF) on the second subplot
+    y_cdf = np.linspace(0, 1, 1000)
+    x_cdf = a + (b - a) * y_cdf
+    axes[1].plot(x_cdf, y_cdf, label='CDF', color='green')
+    axes[1].set_title('Cumulative Distribution Function of a Uniform Distribution')
+    axes[1].set_xlabel('x')
+    axes[1].set_ylabel('Cumulative Probability')
+    axes[1].set_xlim(a, b)
+    axes[1].set_ylim(0, 1)
+    axes[1].legend()
+    axes[1].grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_exponential(lambdas):
+    """Plots the PDF and CDF of an Exponential Distribution for multiple lambda values on a single graph.
+    lambdas (list of float): List of rate parameters (lambda) of the distribution
+    """
+    colors = plt.cm.viridis(np.linspace(0, 1, len(lambdas))) # Color map for different lambdas
+    _, axes = plt.subplots(1, 2, figsize=(15, 6))
+
+    # Plotting PDF for each lambda
+    for i, lambda_param in enumerate(lambdas):
+        x = np.linspace(0, 10 / lambda_param, 1000)
+        pdf = lambda_param * np.exp(-lambda_param * x)
+        axes[0].plot(x, pdf, color=colors[i], label=f'λ = {lambda_param}')
+
+    axes[0].set_title('Exponential Distribution PDFs')
+    axes[0].set_xlabel('x')
+    axes[0].set_ylabel('Density')
+    axes[0].legend()
+    axes[0].grid(True)
+
+    # Plotting CDF for each lambda
+    for i, lambda_param in enumerate(lambdas):
+        x = np.linspace(0, 10 / lambda_param, 1000)
+        cdf = 1 - np.exp(-lambda_param * x)
+        axes[1].plot(x, cdf, color=colors[i], label=f'λ = {lambda_param}')
+
+    axes[1].set_title('Exponential Distribution CDFs')
+    axes[1].set_xlabel('x')
+    axes[1].set_ylabel('Cumulative Probability')
+    axes[1].legend()
+    axes[1].grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_normal(mu, sigma):
+    """Plots the PDF and CDF of a Normal Distribution.
+    mu (float): Mean of the distribution
+    sigma (float): Standard deviation of the distribution
+    """
+    x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
+    pdf = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma)**2)
+    cdf = 0.5 * (1 + scipy.special.erf((x - mu) / (sigma * np.sqrt(2))))
+
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1)
+    plt.plot(x, pdf, label='PDF', color='blue')
+    plt.title('Normal Distribution PDF')
+    plt.xlabel('x')
+    plt.ylabel('Density')
+    plt.grid(True)
+
+    plt.subplot(1, 2, 2)
+    plt.plot(x, cdf, label='CDF', color='green')
+    plt.title('Normal Distribution CDF')
+    plt.xlabel('x')
+    plt.ylabel('Cumulative Probability')
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_gamma(alpha, beta):
+    """Plots the PDF and CDF of a Gamma Distribution.
+    alpha (float): Shape parameter (alpha/k)
+    beta (float): Rate parameter (beta/theta)
+    """
+    x = np.linspace(0, 20 / beta, 1000)
+    pdf = (beta**alpha) * (x**(alpha-1)) * np.exp(-beta*x) / scipy.special.gamma(alpha)
+    cdf = scipy.special.gammainc(alpha, beta * x)
+
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1)
+    plt.plot(x, pdf, label='PDF', color='blue')
+    plt.title('Gamma Distribution PDF')
+    plt.xlabel('x')
+    plt.ylabel('Density')
+    plt.grid(True)
+
+    plt.subplot(1, 2, 2)
+    plt.plot(x, cdf, label='CDF', color='green')
+    plt.title('Gamma Distribution CDF')
+    plt.xlabel('x')
+    plt.ylabel('Cumulative Probability')
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_beta(alpha, beta):
+    """
+    Plots the PDF and CDF of a Beta Distribution.
+
+    Parameters:
+    alpha (float): Alpha parameter
+    beta (float): Beta parameter
+    """
+    x = np.linspace(0, 1, 1000)
+    pdf = scipy.stats.beta.pdf(x, alpha, beta)
+    cdf = scipy.stats.beta.cdf(x, alpha, beta)
+
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1)
+    plt.plot(x, pdf, label='PDF', color='blue')
+    plt.title('Beta Distribution PDF')
+    plt.xlabel('x')
+    plt.ylabel('Density')
+    plt.grid(True)
+
+    plt.subplot(1, 2, 2)
+    plt.plot(x, cdf, label='CDF', color='green')
+    plt.title('Beta Distribution CDF')
+    plt.xlabel('x')
+    plt.ylabel('Cumulative Probability')
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
 
 def plot_gaussian_distributions(gaussian_distributions):
     """
