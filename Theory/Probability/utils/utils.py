@@ -53,7 +53,7 @@ def plot_exponential(lambdas):
     """Plots the PDF and CDF of an Exponential Distribution for multiple lambda values on a single graph.
     lambdas (list of float): List of rate parameters (lambda) of the distribution
     """
-    colors = plt.cm.viridis(np.linspace(0, 1, len(lambdas))) # Color map for different lambdas
+    colors = plt.cm.viridis(np.linspace(0, 1, len(lambdas)))
     _, axes = plt.subplots(1, 2, figsize=(15, 6))
 
     # Plotting PDF for each lambda
@@ -84,29 +84,38 @@ def plot_exponential(lambdas):
     plt.show()
 
 
-def plot_normal(mu, sigma):
-    """Plots the PDF and CDF of a Normal Distribution.
-    mu (float): Mean of the distribution
-    sigma (float): Standard deviation of the distribution
+def plot_normal(mus, sigmas):
+    """Plots the PDFs and CDFs of Normal Distributions for multiple mean (mu) 
+    and standard deviation (sigma) values.
+    mus (list of float): List of means (mu) of the distributions
+    sigmas (list of float): List of standard deviations (sigma) of the distributions
     """
-    x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
-    pdf = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma)**2)
-    cdf = 0.5 * (1 + scipy.special.erf((x - mu) / (sigma * np.sqrt(2))))
+    _, axes = plt.subplots(1, 2, figsize=(15, 6))
+    colors = plt.cm.viridis(np.linspace(0, 1, len(mus)))
 
-    plt.figure(figsize=(12, 6))
-    plt.subplot(1, 2, 1)
-    plt.plot(x, pdf, label='PDF', color='blue')
-    plt.title('Normal Distribution PDF')
-    plt.xlabel('x')
-    plt.ylabel('Density')
-    plt.grid(True)
+    # Plotting PDF for each (mu, sigma)
+    for i, (mu, sigma) in enumerate(zip(mus, sigmas)):
+        x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
+        pdf = scipy.stats.norm.pdf(x, mu, sigma)
+        axes[0].plot(x, pdf, color=colors[i], label=f'μ = {mu}, σ = {sigma}')
 
-    plt.subplot(1, 2, 2)
-    plt.plot(x, cdf, label='CDF', color='green')
-    plt.title('Normal Distribution CDF')
-    plt.xlabel('x')
-    plt.ylabel('Cumulative Probability')
-    plt.grid(True)
+    axes[0].set_title('Normal Distribution PDFs')
+    axes[0].set_xlabel('x')
+    axes[0].set_ylabel('Density')
+    axes[0].legend()
+    axes[0].grid(True)
+
+    # Plotting CDF for each (mu, sigma)
+    for i, (mu, sigma) in enumerate(zip(mus, sigmas)):
+        x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
+        cdf = scipy.stats.norm.cdf(x, mu, sigma)
+        axes[1].plot(x, cdf, color=colors[i], label=f'μ = {mu}, σ = {sigma}')
+
+    axes[1].set_title('Normal Distribution CDFs')
+    axes[1].set_xlabel('x')
+    axes[1].set_ylabel('Cumulative Probability')
+    axes[1].legend()
+    axes[1].grid(True)
 
     plt.tight_layout()
     plt.show()
