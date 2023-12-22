@@ -56,11 +56,14 @@ def plot_exponential(lambdas):
     colors = plt.cm.viridis(np.linspace(0, 1, len(lambdas)))
     _, axes = plt.subplots(1, 2, figsize=(15, 6))
 
+    # Adjusting x range for better visibility of the exponential distribution
+    x_max = max([5 / lambda_param for lambda_param in lambdas])
+    x_values = np.linspace(0, x_max, 1000)
+
     # Plotting PDF for each lambda
     for i, lambda_param in enumerate(lambdas):
-        x = np.linspace(0, 10 / lambda_param, 1000)
-        pdf = lambda_param * np.exp(-lambda_param * x)
-        axes[0].plot(x, pdf, color=colors[i], label=f'λ = {lambda_param}')
+        pdf = lambda_param * np.exp(-lambda_param * x_values)
+        axes[0].plot(x_values, pdf, color=colors[i], label=f'λ = {lambda_param}')
 
     axes[0].set_title('Exponential Distribution PDFs')
     axes[0].set_xlabel('x')
@@ -70,9 +73,8 @@ def plot_exponential(lambdas):
 
     # Plotting CDF for each lambda
     for i, lambda_param in enumerate(lambdas):
-        x = np.linspace(0, 10 / lambda_param, 1000)
-        cdf = 1 - np.exp(-lambda_param * x)
-        axes[1].plot(x, cdf, color=colors[i], label=f'λ = {lambda_param}')
+        cdf = 1 - np.exp(-lambda_param * x_values)
+        axes[1].plot(x_values, cdf, color=colors[i], label=f'λ = {lambda_param}')
 
     axes[1].set_title('Exponential Distribution CDFs')
     axes[1].set_xlabel('x')
@@ -93,12 +95,16 @@ def plot_normal(mus, sigmas):
     _, axes = plt.subplots(1, 2, figsize=(15, 6))
     colors = plt.cm.viridis(np.linspace(0, 1, len(mus)))
 
+    # Adjusting x range for better visibility of the normal distribution
+    x_max = max([mu + 4*sigma for mu, sigma in zip(mus, sigmas)])
+    x_values = np.linspace(-x_max, x_max, 1000)
+
     # Plotting PDF for each (mu, sigma)
     for i, (mu, sigma) in enumerate(zip(mus, sigmas)):
-        x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
-        pdf = scipy.stats.norm.pdf(x, mu, sigma)
-        axes[0].plot(x, pdf, color=colors[i], label=f'μ = {mu}, σ = {sigma}')
+        pdf = scipy.stats.norm.pdf(x_values, mu, sigma)
+        axes[0].plot(x_values, pdf, color=colors[i], label=f'μ = {mu}, σ = {sigma}')
 
+    axes[0].set_title('Normal Distribution PDFs')
     axes[0].set_title('Normal Distribution PDFs')
     axes[0].set_xlabel('x')
     axes[0].set_ylabel('Density')
@@ -107,9 +113,8 @@ def plot_normal(mus, sigmas):
 
     # Plotting CDF for each (mu, sigma)
     for i, (mu, sigma) in enumerate(zip(mus, sigmas)):
-        x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
-        cdf = scipy.stats.norm.cdf(x, mu, sigma)
-        axes[1].plot(x, cdf, color=colors[i], label=f'μ = {mu}, σ = {sigma}')
+        cdf = scipy.stats.norm.cdf(x_values, mu, sigma)
+        axes[1].plot(x_values, cdf, color=colors[i], label=f'μ = {mu}, σ = {sigma}')
 
     axes[1].set_title('Normal Distribution CDFs')
     axes[1].set_xlabel('x')
@@ -121,60 +126,117 @@ def plot_normal(mus, sigmas):
     plt.show()
 
 
-def plot_gamma(alpha, beta):
-    """Plots the PDF and CDF of a Gamma Distribution.
-    alpha (float): Shape parameter (alpha/k)
-    beta (float): Rate parameter (beta/theta)
+def plot_gamma(alphas, betas):
+    """Plots the PDFs and CDFs of Gamma Distributions for multiple alpha and beta values.
+    alphas (list of float): List of shape parameters (alpha) of the distributions
+    betas (list of float): List of rate parameters (beta) of the distributions
     """
-    x = np.linspace(0, 20 / beta, 1000)
-    pdf = (beta**alpha) * (x**(alpha-1)) * np.exp(-beta*x) / scipy.special.gamma(alpha)
-    cdf = scipy.special.gammainc(alpha, beta * x)
+    _, axes = plt.subplots(1, 2, figsize=(15, 6))
+    colors = plt.cm.viridis(np.linspace(0, 1, len(alphas)))
 
-    plt.figure(figsize=(12, 6))
-    plt.subplot(1, 2, 1)
-    plt.plot(x, pdf, label='PDF', color='blue')
-    plt.title('Gamma Distribution PDF')
-    plt.xlabel('x')
-    plt.ylabel('Density')
-    plt.grid(True)
+    # Adjusting x range for better visibility of the gamma distribution
+    x_max = max([5 / beta for beta in betas])
+    x_values = np.linspace(0, x_max, 1000)
 
-    plt.subplot(1, 2, 2)
-    plt.plot(x, cdf, label='CDF', color='green')
-    plt.title('Gamma Distribution CDF')
-    plt.xlabel('x')
-    plt.ylabel('Cumulative Probability')
-    plt.grid(True)
+    # Plotting PDF for each (alpha, beta)
+    for i, (alpha, beta) in enumerate(zip(alphas, betas)):
+        pdf = (beta**alpha) * (x_values**(alpha-1)) * np.exp(-beta*x_values) / scipy.special.gamma(alpha)
+        axes[0].plot(x_values, pdf, color=colors[i], label=f'α = {alpha}, β = {beta}')
+
+    axes[0].set_title('Gamma Distribution PDFs')
+    axes[0].set_xlabel('x')
+    axes[0].set_ylabel('Density')
+    axes[0].legend()
+    axes[0].grid(True)
+
+    # Plotting CDF for each (alpha, beta)
+    for i, (alpha, beta) in enumerate(zip(alphas, betas)):
+        cdf = scipy.special.gammainc(alpha, beta * x_values)
+        axes[1].plot(x_values, cdf, color=colors[i], label=f'α = {alpha}, β = {beta}')
+
+    axes[1].set_title('Gamma Distribution CDFs')
+    axes[1].set_xlabel('x')
+    axes[1].set_ylabel('Cumulative Probability')
+    axes[1].legend()
+    axes[1].grid(True)
 
     plt.tight_layout()
     plt.show()
 
 
-def plot_beta(alpha, beta):
+def plot_beta(alphas, betas):
+    """Plots the PDF and CDF of a Beta Distribution for multiple alpha and beta values.
+    alphas (list of float): List of shape parameters (alpha) of the distributions
+    betas (list of float): List of shape parameters (beta) of the distributions
     """
-    Plots the PDF and CDF of a Beta Distribution.
+    _, axes = plt.subplots(1, 2, figsize=(15, 6))
+    colors = plt.cm.viridis(np.linspace(0, 1, len(alphas)))
 
-    Parameters:
-    alpha (float): Alpha parameter
-    beta (float): Beta parameter
+    # Adjusting x range for better visibility of the beta distribution
+    x_max = max([alpha / (alpha + beta) for alpha, beta in zip(alphas, betas)])
+    x_values = np.linspace(0, x_max, 1000)
+
+    # zoom in on the interesting part of the distribution
+    x_values = x_values[x_values > 0.1]
+
+    # Plotting PDF for each (alpha, beta)
+    for i, (alpha, beta) in enumerate(zip(alphas, betas)):
+        pdf = x_values**(alpha-1) * (1-x_values)**(beta-1) / scipy.special.beta(alpha, beta)
+        axes[0].plot(x_values, pdf, color=colors[i], label=f'α = {alpha}, β = {beta}')
+
+    axes[0].set_title('Beta Distribution PDFs')
+    axes[0].set_xlabel('x')
+    axes[0].set_ylabel('Density')
+    axes[0].legend()
+    axes[0].grid(True)
+
+    # Plotting CDF for each (alpha, beta)
+    for i, (alpha, beta) in enumerate(zip(alphas, betas)):
+        cdf = scipy.special.btdtr(alpha, beta, x_values)
+        axes[1].plot(x_values, cdf, color=colors[i], label=f'α = {alpha}, β = {beta}')
+        
+    axes[1].set_title('Beta Distribution CDFs')
+    axes[1].set_xlabel('x')
+    axes[1].set_ylabel('Cumulative Probability')
+    axes[1].legend()
+    axes[1].grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_chi2(dfs):
+    """Plots the PDF and CDF of a Chi-Squared Distribution for multiple degrees of freedom (df).
+    dfs (list of int): List of degrees of freedom (df) of the distributions
     """
-    x = np.linspace(0, 1, 1000)
-    pdf = scipy.stats.beta.pdf(x, alpha, beta)
-    cdf = scipy.stats.beta.cdf(x, alpha, beta)
+    _, axes = plt.subplots(1, 2, figsize=(15, 6))
+    colors = plt.cm.viridis(np.linspace(0, 1, len(dfs)))
 
-    plt.figure(figsize=(12, 6))
-    plt.subplot(1, 2, 1)
-    plt.plot(x, pdf, label='PDF', color='blue')
-    plt.title('Beta Distribution PDF')
-    plt.xlabel('x')
-    plt.ylabel('Density')
-    plt.grid(True)
+    # Adjusting x range for better visibility, especially for large df values
+    x_max = max([2 * df for df in dfs])
+    x_values = np.linspace(0, x_max, 1000)
 
-    plt.subplot(1, 2, 2)
-    plt.plot(x, cdf, label='CDF', color='green')
-    plt.title('Beta Distribution CDF')
-    plt.xlabel('x')
-    plt.ylabel('Cumulative Probability')
-    plt.grid(True)
+    # Plotting PDF for each df
+    for i, df_param in enumerate(dfs):
+        pdf = scipy.stats.chi2.pdf(x_values, df_param)
+        axes[0].plot(x_values, pdf, color=colors[i], label=f'df = {df_param}')
+
+    axes[0].set_title('Chi-Squared Distribution PDFs')
+    axes[0].set_xlabel('x')
+    axes[0].set_ylabel('Density')
+    axes[0].legend()
+    axes[0].grid(True)
+
+    # Plotting CDF for each df
+    for i, df_param in enumerate(dfs):
+        cdf = scipy.stats.chi2.cdf(x_values, df_param)
+        axes[1].plot(x_values, cdf, color=colors[i], label=f'df = {df_param}')
+
+    axes[1].set_title('Chi-Squared Distribution CDFs')
+    axes[1].set_xlabel('x')
+    axes[1].set_ylabel('Cumulative Probability')
+    axes[1].legend()
+    axes[1].grid(True)
 
     plt.tight_layout()
     plt.show()
