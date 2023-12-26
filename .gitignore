@@ -139,6 +139,8 @@ Projects/recommenders/Coursera_embeddings/data/
 Theory/Probability/naive_bayes_classifier/data/
 *.pt 
 Theory/**/data/
+Theory/**/datasets/
+Theory/**/models/
 
 #api keys
 api.json
