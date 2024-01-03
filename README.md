@@ -22,7 +22,8 @@ Welcome to a deep dive into the world of machine learning algorithms and their e
 
 | Course/Resource                                                                                | Provider/Platform             |
 | ---------------------------------------------------------------------------------------------- | ----------------------------- |
-| [Machine Learning Specialization by Andrew Ng](https://www.coursera.org/specializations/machine-learning-introduction?) | Coursera                      |
+| [Machine Learning Specialization by DeepLearning.AI](https://www.coursera.org/specializations/machine-learning-introduction?) | Coursera                      |
+| [Deep Learning Specialization by DeepLearning.AI](https://www.coursera.org/specializations/deep-learning?) | Coursera                      |
 | [Mathematics for Machine Learning and Data Science Specialization by DeepLearning.AI](https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science?) | Coursera                      |
 | [Introduction to Deep Learning by MIT](http://introtodeeplearning.com)                        | MIT                           |
 | [Dr. Roi Yehoshua on Medium](https://medium.com/@roiyeho)                                     | Medium                        |
