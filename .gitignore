@@ -133,15 +133,15 @@ dmypy.json
 
 
 ## ignore data and model files
-Projects/classifiers/movies_reviews_classification/data/
-Projects/classifiers/movies_reviews_classification/models/
-Projects/recommenders/Coursera_embeddings/data/
-Theory/Probability/naive_bayes_classifier/data/
 *.pt 
 Theory/**/data/
 Theory/**/dataset/
 Theory/**/datasets/
 Theory/**/models/
+Projects/**/data/
+Projects/**/dataset/
+Projects/**/datasets/
+Projects/**/models/
 
 #api keys
 api.json
