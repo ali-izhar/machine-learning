@@ -143,5 +143,8 @@ Projects/**/dataset/
 Projects/**/datasets/
 Projects/**/models/
 
+# ignore mp4 files
+*.mp4
+
 #api keys
 api.json
