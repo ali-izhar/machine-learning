@@ -138,10 +138,14 @@ Theory/**/data/
 Theory/**/dataset/
 Theory/**/datasets/
 Theory/**/models/
+Theory/**/pretrained-model/
+Theory/**/pretrained-models/
 Projects/**/data/
 Projects/**/dataset/
 Projects/**/datasets/
 Projects/**/models/
+Projects/**/pretrained-model/
+Projects/**/pretrained-models/
 
 # ignore mp4 files
 *.mp4
