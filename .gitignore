@@ -140,15 +140,25 @@ Theory/**/datasets/
 Theory/**/models/
 Theory/**/pretrained-model/
 Theory/**/pretrained-models/
+Theory/**/audio/
+Theory/**/raw_data/
 Projects/**/data/
 Projects/**/dataset/
 Projects/**/datasets/
 Projects/**/models/
 Projects/**/pretrained-model/
 Projects/**/pretrained-models/
+Projects/**/audio/
+Projects/**/raw_data/
 
 # ignore mp4 files
 *.mp4
+
+# ignore npy files
+*.npy
+
+# .DS_Store
+**/.DS_Store
 
 #api keys
 api.json
