@@ -151,8 +151,15 @@ Projects/**/pretrained-models/
 Projects/**/audio/
 Projects/**/raw_data/
 
-# ignore mp4 files
+# ignore video files
 *.mp4
+*.avi
+*.mov
+*.flv
+*.wmv
+*.mkv
+*.webm
+
 
 # ignore npy files
 *.npy
