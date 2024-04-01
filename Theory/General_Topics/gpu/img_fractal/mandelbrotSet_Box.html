@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+#version 300 es
+precision highp float;
+in vec2 vPosition;
+uniform mat4 P;
+
+void main()
+{
+    gl_Position = P * vec4(vPosition, 0, 1);
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+#version 300 es
+precision highp float;
+
+// GLSL Fragment Shader for Custom Color Gradient Mandelbrot Set Visualization
+
+uniform vec2 viewportDimensions;
+uniform float left;
+uniform float right;
+uniform float bottom;
+uniform float topBound;
+
+out vec4 fColor;
+
+// Function to mix between two colors
+vec3 mixColors(vec3 color1, vec3 color2, float factor) {
+    return mix(color1, color2, factor);
+}
+
+// Linear interpolation for the color based on iteration count
+vec3 getColorForIteration(int iteration, int maxIterations) {
+    vec3 colors[5] = vec3[](vec3(23.0/255.0, 32.0/255.0, 38.0/255.0),   // #172026
+    vec3(159.0/255.0, 193.0/255.0, 49.0/255.0),                         // #9FC131
+    vec3(2.0/255.0, 115.0/255.0, 115.0/255.0),                          // #027373
+    vec3(4.0/255.0, 191.0/255.0, 173.0/255.0),                          // #04BFAD
+    vec3(4.0/255.0, 191.0/255.0, 157.0/255.0));                         // #04BF9D
+    
+    float factor = float(iteration) / float(maxIterations);
+    int index = int(factor * (float(colors.length()) - 1.0));
+    float intraIndexFactor = fract(factor * (float(colors.length()) - 1.0));
+    
+    vec3 colorStart = colors[index];
+    vec3 colorEnd = colors[min(index + 1, colors.length() - 1)];
+    
+    return mixColors(colorStart, colorEnd, intraIndexFactor);
+}
+
+void main() {
+    float a = gl_FragCoord.x / viewportDimensions.x;
+    float b = gl_FragCoord.y / viewportDimensions.y;
+    vec2 c = vec2(left + a * (right - left), bottom + b * (topBound - bottom));
+    
+    vec2 z = vec2(0,0);
+    const int maxIterations = 2000;
+    int i = 0;
+    for (i = 0; i < maxIterations && (z.x*z.x + z.y*z.y <= 4.0); ++i) {
+        float temp = z.x*z.x - z.y*z.y + c.x;
+        z.y = 2.0*z.x*z.y + c.y;
+        z.x = temp;
+    }
+    
+    vec3 color = getColorForIteration(i, maxIterations);
+    fColor = vec4(color, 1.0);
+}
+</script>
+
+<script type="text/javascript" src="js/initShaders.js"></script>
+<script type="text/javascript" src="js//MVnew.js"></script>
+<script type="text/javascript" src="js/mandelbrotSet.js"></script>
+</head>
+
+<body>
+<canvas id="gl-canvas" width="1280" height="720"> <!---- Set canvas to be 720P -->
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Edge Detection</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center">Video Edge Detection</h2>
+    <p id="status" class="alert alert-primary text-center">OpenCV.js is loading...</p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="inputoutput">
+          <video id="videoInput" class="img-fluid" playsinline></video>
+          <div class="caption">Input Video</div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="inputoutput">
+          <canvas id="canvasOutput" class="img-fluid"></canvas>
+          <div class="caption">Canvas Output</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- OpenCV.js -->
+  <script type="text/javascript" src="js/videoTemplateOpenCV.js"></script>
+  <script async src="js/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+</body>
+</html>

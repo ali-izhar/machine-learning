@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Processing</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Computer Vision: Filter Processing</h1>
+        <p>WebGL Video Processing: Filters and Effects</p>
+        <hr>
+    </header>
+
+    <div class="controls">
+        <section>
+            <label for="mymenu">Choose a filter:</label>
+            <select id="mymenu">
+                <option value="0">No Filter</option>
+                <option value="1">Gaussian Blur</option>
+                <option value="2">Gaussian Blur2</option>
+                <option value="3">Gaussian Blur3</option>
+                <option value="4">Unsharpen</option>
+                <option value="5">Sharpness</option>
+                <option value="6">Sharpen</option>
+                <option value="7">Edge Detect 2</option>
+                <option value="8">Edge Detect 3</option>
+                <option value="9">Edge Detect 4</option>
+                <option value="10">Edge Detect 5</option>
+                <option value="11">Edge Detect 6</option>
+                <option value="12">Sobel Horizontal</option>
+                <option value="13">Sobel Vertical</option>
+                <option value="14">Previt Horizontal</option>
+                <option value="15">Previt Vertical</option>
+                <option value="16">Box Blur</option>
+                <option value="17">Triangle Blur</option>
+                <option value="18">Emboss</option>
+            </select>
+            
+            <div class="buttons">
+                <button id="color">Color</button>
+                <button id="blackWhite">GrayScale</button>        
+            </div>
+        </section>
+    </div>
+
+    <canvas id="gl-canvas" width="1280" height="720">Oops... your browser doesn't support the HTML5 canvas element.</canvas>
+    <img id="texImage" src="files/beach.png" alt="beach" hidden>
+
+    <div style="text-align: center;">
+        <label for="myvideo">Select a video file:</label>
+        <input type="file" id="myvideo" name="myvideo" accept="video/*">
+    </div>
+
+    <div class="buttons">
+        <button id="webcam">Open Webcam</button>          
+    </div>
+
+</div>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+    # version 300 es 
+    in vec2 vPosition;
+    in vec2 vTexCoord;
+    out vec2 fTexCoord;
+    uniform mat4 P;
+    
+    void main() {
+        fTexCoord = vTexCoord;
+        gl_Position = P * vec4(vPosition, 0, 1);
+    }
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+    
+    in vec2 fTexCoord;
+    out vec4 fColor;
+    
+    uniform sampler2D texMap;
+    uniform vec3 dimAndKernelWeight;
+    uniform float kernel[9];
+    uniform float kernelFive[25];
+    uniform float kernelSeven[49];
+    uniform bool original;
+    uniform bool blackWhite;
+    uniform int kernelSize;     // 3, 5, 7
+
+    void main() {
+        vec2 onePixel = vec2(1.0 / dimAndKernelWeight[0], 1.0 / dimAndKernelWeight[1]);
+        vec4 color = texture(texMap, fTexCoord);        
+        vec4 colorSum = vec4(0.0);
+        int kernelIndex = 0;
+
+        if (kernelSize == 3) {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    colorSum += texture(texMap, fTexCoord + onePixel * vec2(i, j)) * kernel[kernelIndex];
+                    kernelIndex++;
+                }
+            }
+        } else if (kernelSize == 5) {
+            for (int i = -2; i <= 2; i++) {
+                for (int j = -2; j <= 2; j++) {
+                    colorSum += texture(texMap, fTexCoord + onePixel * vec2(i, j)) * kernelFive[kernelIndex];
+                    kernelIndex++;
+                }
+            }
+        } else if (kernelSize == 7) {
+            for (int i = -3; i <= 3; i++) {
+                for (int j = -3; j <= 3; j++) {
+                    colorSum += texture(texMap, fTexCoord + onePixel * vec2(i, j)) * kernelSeven[kernelIndex];
+                    kernelIndex++;
+                }
+            }
+        }
+
+        if (original) {
+            fColor = color;
+        } else {
+            fColor = vec4((colorSum / dimAndKernelWeight[2]).rgb, 1.0);
+        }
+
+        if (blackWhite) {
+            float i1 = dot(texture(texMap, fTexCoord + onePixel * vec2(-1, -1)).rgb, vec3(0.299, 0.587, 0.114));
+            float i2 = dot(texture(texMap, fTexCoord + onePixel * vec2( 0, -1)).rgb, vec3(0.299, 0.587, 0.114));
+            float i3 = dot(texture(texMap, fTexCoord + onePixel * vec2( 1, -1)).rgb, vec3(0.299, 0.587, 0.114));
+            float i4 = dot(texture(texMap, fTexCoord + onePixel * vec2(-1, 0)).rgb, vec3(0.299, 0.587, 0.114));
+            float i5 = dot(texture(texMap, fTexCoord + onePixel * vec2( 0, 0)).rgb, vec3(0.299, 0.587, 0.114));
+            float i6 = dot(texture(texMap, fTexCoord + onePixel * vec2( 1, 0)).rgb, vec3(0.299, 0.587, 0.114));
+            float i7 = dot(texture(texMap, fTexCoord + onePixel * vec2(-1, 1)).rgb, vec3(0.299, 0.587, 0.114));
+            float i8 = dot(texture(texMap, fTexCoord + onePixel * vec2( 0, 1)).rgb, vec3(0.299, 0.587, 0.114));
+            float i9 = dot(texture(texMap, fTexCoord + onePixel * vec2( 1, 1)).rgb, vec3(0.299, 0.587, 0.114));
+
+            float sum = i1 * kernel[0] + i2 * kernel[1] + i3 * kernel[2] + i4 * kernel[3] + i5 * kernel[4] +
+                        i6 * kernel[5] + i7 * kernel[6] + i8 * kernel[7] + i9 * kernel[8];
+
+            float avg = sum / dimAndKernelWeight[2];
+            vec3 col = vec3(avg, avg, avg);
+
+            fColor = vec4(col.rgb, 1.0);
+        }
+    }
+</script>
+
+<script type="text/javascript" src="js/initShaders.js"></script>
+<script type="text/javascript" src="js/MVnew.js"></script>
+<script type="text/javascript" src="js/videoProcessing.js"></script>
+
+</body>
+</html>

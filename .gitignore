@@ -160,6 +160,15 @@ Projects/**/raw_data/
 *.mkv
 *.webm
 
+# ignore image files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.bmp
+*.ico
+*.webp
 
 # ignore npy files
 *.npy
