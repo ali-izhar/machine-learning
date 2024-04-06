@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachable Machine Image Model</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container py-5">
+        <h2 class="mb-5 text-center">Teachable Machine Image Model</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4 d-flex flex-column align-items-center justify-content-center">
+                <div class="mb-3">
+                    <button type="button" id="webcamButton" onclick="startWebcam()">Start Webcam</button>
+                    <hr>
+                    <label for="imageUpload">Upload Image</label>
+                    <input type="file" id="imageUpload" accept="image/*" class="form-control" onchange="previewImage()">
+                    <div id="imagePreview" class="mb-2"></div>
+                    <button type="button" id="predictButton" onclick="predictUpload()" disabled>Make Prediction</button>
+                </div>
+            </div>            
+            <div class="col-md-6">
+                <div id="webcam-container" class="prediction-container">Webcam Preview</div>
+                <div id="upload-prediction" class="prediction-container mt-4">Upload Prediction</div>
+                <div id="label-container" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="teachable_viewer.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+        });
+    </script>
+</body>
+</html>
