@@ -161,8 +161,6 @@ Projects/**/raw_data/
 *.webm
 
 # ignore image files
-*.jpg
-*.jpeg
 *.png
 *.gif
 *.svg

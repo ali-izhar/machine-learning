@@ -1,0 +1,14 @@
+.input-group input {
+    border-right: none;
+}
+.input-group button {
+    border-left: none;
+}
+.btn-outline-primary {
+    border-color: #5D6D7E;
+    color: #5D6D7E;
+}
+.btn-outline-primary:hover {
+    background-color: #5D6D7E;
+    color: white;
+}
