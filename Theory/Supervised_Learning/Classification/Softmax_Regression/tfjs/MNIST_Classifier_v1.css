@@ -1,0 +1,75 @@
+/*
+Hand Written Digit Classifier trained using the Modified-National Institute of 
+Standards and Technology (M-NIST) data set
+
+Original code base derived from various material from Jason Mayes, tfjs 
+development team https://github.com/jasonmayes
+
+Modified v1.0, 6/12/2023 Prof R CV class
+*/
+
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+h1 {
+  font-style: italic;
+  color: #000dff;
+}
+
+canvas {
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin: 10px auto 5px auto;
+  zoom: 6;
+}
+
+p {
+  margin: 5px;
+}
+
+p#prediction {
+  font-size: 20pt;
+  margin: 10px;
+  text-align: center;
+}
+
+p#prediction.correct {
+  border: 3px solid #00ff00;
+  color: #00ff00;
+  font-size: 100pt;
+}
+
+p#prediction.wrong {
+  border: 3px solid #ff0000;
+  color: #ff0000;
+  font-size: 100pt;
+}
+
+.box {
+  width: 45%;
+  margin: 1%;
+  border: 1px dashed #cdcdcd;
+  display: inline-block;
+  min-height: 400px;
+  text-align: center;
+  float: left;
+}
+
+.blocky {
+  clear: both;
+  text-align: center;
+  font-size: 120%;
+  margin-top: 20px;
+}
+
+.slider {
+  width: 50%;
+  background: #d3d3d3;
+  outline: none;
+  margin: 0 auto;
+  display: block;
+}

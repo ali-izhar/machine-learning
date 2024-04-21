@@ -176,3 +176,6 @@ Projects/**/raw_data/
 
 #api keys
 api.json
+
+#ignore logs
+logs/

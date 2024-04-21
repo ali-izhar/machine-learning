@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hand Written Digits Classifier via TensorFlow.js</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="MNIST_Classifier_v1.css">
+  </head>  
+  <body>
+    <h1>TensorFlow.js Hand Written Digits Classifier</h1>
+    <p>Simple Neural Network to classify handwritten digits from the MNIST dataset.</p>
+    
+    <section class="box">
+      <h2>Input Image</h2>
+      <p>Input image is a 28x28 pixel greyscale image from the MNIST dataset - a real hand drawn digit!</p>
+      <canvas id="canvas" width="28" height="28"></canvas>
+    </section>
+    
+    <section class="box">
+      <h2>Prediction</h2>
+      <p>Red is a wrong prediction, Green is a correct one.</p>
+      <p id="prediction">Training model. Please wait...</p>
+    </section>
+    
+    <div class="blocky">
+      <p id="domSpeed">Change interval between classifications! Currently 1000ms</p>
+      <input id="ranger" type="range" min="15" max="5000" value="2000" class="slider">
+    </div>
+   
+    <!-- Import TensorFlow.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js" type="text/javascript"></script>
+    
+    <!-- Import JS file -->
+    <script type="module" src="MNIST_Classifier_v1.js"></script>
+  </body>
+</html>
