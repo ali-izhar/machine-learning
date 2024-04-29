@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/Hero-Clean-images.css">
+    <!-- MediaPipe and TensorFlow JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md sticky-top py-3 navbar-dark" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bezier">
+                        <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"></path>
+                        <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
+                    </svg></span><span>Izhar Ali</span></a></div>
+    </nav>
+    <header class="bg-dark">
+        <div class="container py-5">
+            <div class="row py-5">
+                <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-end mb-4">
+                    <div style="max-width: 450px;">
+                        <p class="fw-bold text-success mb-2">Computer Vision</p>
+                        <h2 class="fw-bold">Face Landmark Detection</h2>
+                        <p class="my-3">Discover facial features with precision.<strong> Upload an image</strong> or <strong>start your webcam</strong> to explore face landmark detection in real-time.</p>
+                            <a class="btn btn-primary shadow" role="button" href="#upload-image" style="margin: 15px;border-style: none;">Upload Image</a>
+                            <a class="btn btn-primary shadow" href="#webcamButton" style="margin: 15px;background: var(--bs-emphasis-color);border-style: none;border-color: var(--bs-body-color);">Start Webcam</a>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="p-5 mx-lg-5" style="background: url(&quot;assets/img/blob.svg&quot;) center / contain no-repeat;"><img class="rounded img-fluid shadow w-100 fit-cover" style="min-height: 300px;" src="assets/img/index.jpg"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="py-5"></section>
+    <section>
+        <div class="row">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <p class="fw-bold text-success mb-2">Explore Your Options</p>
+                <h3 class="fw-bold">Select a feature and watch the magic happen!</h3>
+            </div>
+        </div>
+        <div class="container py-4 py-xl-5">
+            <div class="row gy-4 gy-md-0">
+                <div class="col-md-6">
+                    <div class="p-xl-5 m-xl-5" style="text-align: center; position: relative;">
+                        <!-- Image upload and detection section -->
+                        <img class="rounded img-fluid w-100 fit-cover" style="min-height: 400px;" id="upload-image" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                        <canvas id="image-canvas" style="position: absolute; top: 0; left: 0; display: none;"></canvas>
+                        <input type="file" id="image-input" style="display: none;" accept="image/*">
+                        <button class="btn btn-primary btn-lg me-2" role="button" style="margin: 10px;font-size: 15px;" onclick="document.getElementById('image-input').click();">Upload</button>
+                        <button class="btn btn-outline-primary btn-lg" role="button" style="margin: 10px;font-size: 15px;" id="detect-image">Detect Now!</button>
+                        <ul id="image-blend-shapes" class="blend-shapes-list"></ul> <!-- Display face blend shapes -->
+                    </div>
+                </div>                
+                <div class="col-md-6">
+                    <div class="p-xl-5 m-xl-5" style="text-align: center;">
+                        <!-- Webcam detection section -->
+                        <video class="rounded img-fluid w-100 fit-cover" style="min-height: 400px; border: 2px solid #ccc; background: #506266" id="webcam" autoplay playsinline></video>
+                        <button class="btn btn-primary btn-lg me-2" role="button" style="margin: 10px;font-size: 15px;" id="webcamButton">Start Webcam</button>
+                        <canvas id="output_canvas" style="position: absolute; left: 0; top: 0; display: none;"></canvas>
+                        <ul id="video-blend-shapes" class="blend-shapes-list"></ul> <!-- Display face blend shapes from webcam -->
+                    </div>
+                </div>
+            </div>
+        </div>                  
+    </section>
+    <section class="py-5"></section>
+    <footer class="bg-dark">
+        <div class="container py-4 py-lg-5">
+            <hr>
+            <div class="text-muted d-flex justify-content-between align-items-center pt-3">
+                <p class="mb-0">Copyright © 2024 CV</p>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bold-and-dark.js"></script>
+    <script type="module" src="index.js"></script>
+</body>
+
+</html>

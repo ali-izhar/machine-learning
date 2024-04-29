@@ -137,6 +137,7 @@ dmypy.json
 Theory/**/data/
 Theory/**/dataset/
 Theory/**/datasets/
+Theory/**/model/
 Theory/**/models/
 Theory/**/pretrained-model/
 Theory/**/pretrained-models/
@@ -145,6 +146,7 @@ Theory/**/raw_data/
 Projects/**/data/
 Projects/**/dataset/
 Projects/**/datasets/
+Projects/**/model/
 Projects/**/models/
 Projects/**/pretrained-model/
 Projects/**/pretrained-models/
@@ -179,3 +181,6 @@ api.json
 
 #ignore logs
 logs/
+
+# assets
+assets/
