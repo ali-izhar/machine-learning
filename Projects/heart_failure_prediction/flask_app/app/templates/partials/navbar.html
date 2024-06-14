@@ -1,0 +1,73 @@
+<header class="header">
+    <div id="mobile-menu" class="mobile-navigation">
+      <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-no9b-1500h.png') }}" class="logo"/>
+      <div class="links">
+        {% if user.is_authenticated %}
+            <span class="Link"><a href="{{ url_for('main_bp.index') }}">Home</a></span>
+            <span class="Link"><a href="{{ url_for('main_bp.dashboard') }}">Dashboard</a></span>
+            <span class="Link"><a href="">Analytics</a></span>
+        {% else %}
+            <span class="Link">Solutions</span>
+            <span class="Link">How it works</span>
+            <span class="Link">Prices</span>
+        {% endif %}
+      </div>
+      <div id="close-mobile-menu" class="close-mobile-menu">
+        <svg viewBox="0 0 804.5714285714286 1024" class="icon"><path d="M741.714 755.429c0 14.286-5.714 28.571-16 38.857l-77.714 77.714c-10.286 10.286-24.571 16-38.857 16s-28.571-5.714-38.857-16l-168-168-168 168c-10.286 10.286-24.571 16-38.857 16s-28.571-5.714-38.857-16l-77.714-77.714c-10.286-10.286-16-24.571-16-38.857s5.714-28.571 16-38.857l168-168-168-168c-10.286-10.286-16-24.571-16-38.857s5.714-28.571 16-38.857l77.714-77.714c10.286-10.286 24.571-16 38.857-16s28.571 5.714 38.857 16l168 168 168-168c10.286-10.286 24.571-16 38.857-16s28.571 5.714 38.857 16l77.714 77.714c10.286 10.286 16 24.571 16 38.857s-5.714 28.571-16 38.857l-168 168 168 168c10.286 10.286 16 24.571 16 38.857z"></path></svg>
+      </div>
+    </div>
+    <div class="desktop-navigation">
+      <nav class="centered">
+        <div class="left">
+          <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-no9b-1500h.png') }}" class="logo1"/>
+          <div class="links1">
+            {% if user.is_authenticated %}
+                <span class="Link"><a href="{{ url_for('main_bp.index') }}">Home</a></span>
+                <span class="Link"><a href="{{ url_for('main_bp.dashboard') }}">Dashboard</a></span>
+                <span class="Link"><a href="">Analytics</a></span>
+            {% else %}
+                <span class="Link">Solutions</span>
+                <span class="Link">How it works</span>
+                <span class="Link">Prices</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="right">
+          {% if user.is_authenticated %}
+            <span class="sign-out Link"><a href="{{ url_for('auth_bp.logout') }}">Sign out</a></span>
+          {% else %}
+          <span class="sign-in Link"><a href="{{ url_for('auth_bp.login') }}">Sign in</a></span>
+          <div class="get-started">
+            <span class="text06"><a href="{{ url_for('auth_bp.signup') }}">Get started</a></span>
+          </div>
+          {% endif %}
+          <div id="open-mobile-menu" class="burger-menu">
+            <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-yxbd.svg') }}" class="mobile-menu-button"/>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div>
+      <div class="container2">
+        <script defer="">
+
+          // Mobile menu
+          const mobileMenu = document.querySelector('#mobile-menu')
+
+          // Buttons
+          const closeButton = document.querySelector('#close-mobile-menu')
+          const openButton = document.querySelector('#open-mobile-menu')
+
+          // On openButton click, set the mobileMenu position left to -100vw
+          openButton.addEventListener('click', function() {
+              mobileMenu.style.transform = 'translateX(0%)'
+          })
+
+          // On closeButton click, set the mobileMenu position to 0vw
+          closeButton.addEventListener('click', function() {
+              mobileMenu.style.transform = 'translateX(100%)'
+          })
+        </script>
+      </div>
+    </div>
+  </header>

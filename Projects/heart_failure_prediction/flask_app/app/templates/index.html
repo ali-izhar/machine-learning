@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block header %}
+<header class="content">
+  <h1 class="text07">Predict Your Heart Health</h1>
+  <p class="text08">Utilizing advanced machine learning to provide early detection and management of heart disease risk.</p>
+  <div class="get-started1"><span class="text09"><a href="{{ url_for('main_bp.dashboard') }}">Get started</a></span></div>
+</header>
+<div class="dashboard-preview">
+  <div class="outline">
+    <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-cdo-1000h.png') }}" loading="lazy" class="image"/>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="features">
+  <div class="title">
+    <span class="text10">Manage Your Heart Health with Confidence</span>
+    <span class="text11">Leveraging advanced AI to help you stay on top of your cardiovascular health.</span>
+  </div>
+  <div class="cards">
+    <div class="container3">
+      <div class="schedule card">
+        <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-fii6m-200h.png') }}" class="icon2"/>
+        <span class="text12">Monitor</span>
+        <span class="text13">Keep track of your heart health with real-time data analysis and personalized insights.</span>
+      </div>
+      <div class="publish card">
+        <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-mimg-200h.png') }}" class="icon3"/>
+        <span class="text14">Act</span>
+        <span class="text15">Get personalized advice and action plans to improve and maintain your heart health.</span>
+      </div>
+    </div>
+    <div class="container4">
+      <div class="analyze card">
+        <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-l6p-200h.png') }}" class="icon4"/>
+        <span class="text16">Analyze</span>
+        <span class="text17">Get reports on your heart health, highlighting risk factors and actionable recommendations.</span>
+      </div>
+      <div class="get-leads card">
+        <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-vyi5-200h.png') }}" class="icon5"/>
+        <span class="text18">Predict</span>
+        <span class="text19">Utilize machine learning to predict potential heart health issues and take preventive measures.</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="quote-container">
+  <div class="quote">
+    <span class="message">“Utilizing advanced machine learning, our app provides real-time heart health predictions, empowering users to take proactive steps towards a healthier life.”</span>
+    <div class="author">
+      <img alt="image" src="{{ url_for('static', filename='public/ze-logo.svg') }}" class="avatar" />
+      <span class="quote1">—&nbsp; Active</span>
+    </div>
+  </div>
+</section>
+<section class="banners">
+  <div class="banner-advanced-analytics">
+    <div class="centered-container">
+      <div class="image-container">
+        <img alt="pastedImage" src="{{ url_for('static', filename='public/test-1200w.png') }}" class="cards-image"/>
+      </div>
+      <div class="right1">
+        <span class="sub-title">Reporting Metrics</span>
+        <h2 class="text21 title">Advanced analytics, easy to understand.</h2>
+        <div class="category">
+          <span class="text22">Comprehensive Reports</span>
+          <span class="text23">Detailed analysis of your heart health metrics, offering insights into potential risk factors and trends.</span>
+          <span class="text24">
+            <span class="text25">Example:</span>
+            <span class="text26">Track your blood pressure, cholesterol levels, and other vital statistics over time to see how your heart health is progressing.</span>
+          </span>
+        </div>
+        <div class="category1">
+          <span class="text27">Personalized Recommendations</span>
+          <span class="text28">Receive tailored advice based on your specific health data to help you make informed decisions about your heart health.</span>
+          <span class="text29">
+            <span class="text30">Example:</span>
+            <span class="text31">&nbsp;</span>
+            <span class="text32">Get custom exercise and diet plans that cater to your unique needs and conditions.</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="how-it-works">
+  <div class="centered-container1">
+    <div class="heading">
+      <span class="text33">How it works</span>
+      <span class="text34 title">Taking control of your heart health has never been easier</span>
+    </div>
+    <div class="category2">
+      <div class="headng">
+        <span class="text35">1 — Sign up</span>
+        <span class="text36">Sign up with your username and password.</span>
+        <div class="get-started2 template-button">
+          <span class="text37"><a href=" {{url_for('main_bp.dashboard')}} ">Get started</a></span>
+        </div>
+      </div>
+      <div class="container5">
+        <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-k5xi1-1200w.png') }}" class="pasted-image"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="category3">
+        <div class="headng1">
+          <span class="text38">2 — Upload</span>
+          <span class="text39">Upload your health data such as blood pressure, cholesterol levels, and lifestyle information.</span>
+        </div>
+        <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-ibg-1200w.png') }}" class="pasted-image1"/>
+      </div>
+      <div class="category4">
+        <div class="headng2">
+          <span class="text40">2 — Analyze</span>
+          <span class="text41">Receive detailed reports on your heart health, highlighting risk factors and actionable recommendations.</span>
+        </div>
+        <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-3c4o-1200w.png') }}" class="pasted-image2"/>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+  <div class="bottom">
+    <img alt="pastedImage" src="{{ url_for('static', filename='public/pastedimage-no9b-1500h.png') }}" class="branding"/>
+    <span class="text42">Copyright © Active - 2024</span>
+  </div>
+</footer>
+{% endblock %}

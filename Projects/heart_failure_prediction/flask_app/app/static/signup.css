@@ -1,0 +1,264 @@
+.signup-container {
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  margin: 2rem 0;
+  background-color: var(--dl-color-theme-neutral-light);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+.signup-max-width {
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.signup-form-root {
+  gap: var(--dl-space-space-unit);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+}
+.signup-container1 {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+}
+.signup-text {
+  align-self: flex-end;
+  font-family: "Inter";
+}
+.signup-form {
+  gap: var(--dl-space-space-twounits);
+  width: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.signup-title-root {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.signup-text01 {
+  font-family: "Inter";
+}
+.signup-have-an-account-login {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-items: flex-start;
+}
+.signup-text02 {
+  font-family: "Inter";
+}
+.signup-form1 {
+  gap: var(--dl-space-space-unit);
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.signup-email {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.signup-text05 {
+  font-family: "Inter";
+}
+.signup-textinput {
+  width: 100%;
+  font-family: "Inter";
+  border-color: var(--dl-color-theme-primary1);
+  background-color: transparent;
+}
+.signup-password {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.signup-textfield {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.signup-container2 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.signup-text06 {
+  font-family: "Inter";
+}
+.signup-hide-password {
+  gap: var(--dl-space-space-halfunit);
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  justify-content: center;
+}
+.signup-icon {
+  fill: var(--dl-color-theme-neutral-dark);
+  width: 24px;
+  height: 24px;
+}
+.signup-text07 {
+  font-family: "Inter";
+}
+.signup-textinput1 {
+  width: 100%;
+  font-family: "Inter";
+  border-color: var(--dl-color-theme-primary1);
+  background-color: transparent;
+}
+.signup-button {
+  width: 100%;
+  font-family: "Inter";
+  border-color: var(--dl-color-template-blue-bg);
+  background-color: var(--dl-color-template-blue-bg);
+}
+.signup-text08 {
+  text-align: center;
+  font-family: "Inter";
+}
+.signup-divider {
+  gap: var(--dl-space-space-oneandhalfunits);
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: center;
+}
+.signup-divider1 {
+  flex: 1;
+  width: var(--dl-size-size-medium);
+  height: 1px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: var(--dl-color-theme-primary1);
+}
+.signup-text09 {
+  font-family: "Inter";
+}
+.signup-divider2 {
+  flex: 1;
+  width: auto;
+  height: 1px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: var(--dl-color-theme-primary1);
+}
+.signup-terms-agree {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  padding: var(--dl-space-space-halfunit);
+  align-items: flex-start;
+}
+.signup-text10 {
+  font-family: "Inter";
+}
+.signup-container3 {
+  gap: var(--dl-space-space-unit);
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.signup-button1 {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  border-color: var(--dl-color-theme-primary1);
+  border-style: solid;
+  border-width: 1px;
+  justify-content: center;
+}
+.signup-icon2 {
+  width: 24px;
+  height: 24px;
+}
+.signup-text13 {
+  font-family: "Inter";
+}
+.signup-button2 {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  border-color: var(--dl-color-theme-primary1);
+  border-style: solid;
+  border-width: 1px;
+  justify-content: center;
+}
+.signup-icon4 {
+  width: 24px;
+  height: 24px;
+}
+.signup-text14 {
+  font-family: "Inter";
+}
+
+@media(max-width: 991px) {
+  .signup-max-width {
+    flex-direction: column;
+  }
+  .signup-form-root {
+    width: 100%;
+  }
+}
+@media(max-width: 767px) {
+  .signup-container1 {
+    align-items: center;
+  }
+}
+@media(max-width: 479px) {
+  .signup-text {
+    text-align: center;
+  }
+  .signup-title-root {
+    align-items: center;
+  }
+  .signup-text01 {
+    text-align: center;
+  }
+  .signup-text02 {
+    text-align: center;
+  }
+  .signup-button {
+    width: 100%;
+  }
+  .signup-text10 {
+    text-align: center;
+  }
+}

@@ -1,0 +1,239 @@
+.signin-container {
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2rem 0;
+  background-color: var(--dl-color-theme-neutral-light);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+.signin-max-width {
+  gap: var(--dl-space-space-oneandhalfunits);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.signin-form-root {
+  gap: var(--dl-space-space-unit);
+  width: 600px;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  max-width: 600px;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: var(--dl-radius-radius-radius4);
+  justify-content: center;
+}
+.signin-form {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: flex;
+  align-self: center;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.signin-title-root {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-self: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.signin-text {
+  font-family: "Inter";
+}
+.signin-have-an-account-login {
+  gap: var(--dl-space-space-halfunit);
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  display: flex;
+  align-items: flex-start;
+}
+.signin-form1 {
+  gap: var(--dl-space-space-unit);
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.signin-email {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.signin-text01 {
+  font-family: "Inter";
+}
+.signin-textinput {
+  width: 100%;
+  font-family: "Inter";
+  background-color: transparent;
+}
+.signin-password {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.signin-container1 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.signin-text02 {
+  font-family: "Inter";
+}
+.signin-hide-password {
+  gap: var(--dl-space-space-halfunit);
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  justify-content: center;
+}
+.signin-icon {
+  fill: var(--dl-color-theme-neutral-dark);
+  width: 24px;
+  height: 24px;
+}
+.signin-text03 {
+  font-family: "Inter";
+}
+.signin-textinput1 {
+  width: 100%;
+  font-family: "Inter";
+  border-color: var(--dl-color-theme-primary1);
+  background-color: transparent;
+}
+.signin-container2 {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.signin-container3 {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.signin-button {
+  width: 100%;
+  align-self: center;
+  font-family: "Inter";
+  border-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-gray-black);
+}
+.signin-text04 {
+  text-align: center;
+  font-family: "Inter";
+}
+.signin-terms-agree {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  padding: var(--dl-space-space-halfunit);
+  align-items: flex-start;
+}
+.signin-text05 {
+  font-family: "Inter";
+}
+.signin-container4 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.signin-text08 {
+  font-family: "Inter";
+  text-decoration: underline none;
+}
+.signin-text09 {
+  font-family: "Inter";
+  text-decoration:  underline none;
+}
+.signin-container5 {
+  gap: var(--dl-space-space-unit);
+  width: 100%;
+  display: flex;
+  max-width: 600px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.signin-divider {
+  gap: var(--dl-space-space-oneandhalfunits);
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: center;
+}
+.signin-divider1 {
+  flex: 1;
+  width: var(--dl-size-size-medium);
+  height: 1px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: var(--dl-color-theme-primary1);
+}
+.signin-text10 {
+  font-family: "Inter";
+}
+.signin-divider2 {
+  flex: 1;
+  width: var(--dl-size-size-medium);
+  height: 1px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: var(--dl-color-theme-primary1);
+}
+.signin-button1 {
+  fill: var(--dl-color-template-blue-bg);
+  color: var(--dl-color-template-blue-bg);
+  width: 100%;
+  align-self: center;
+  border-color: var(--dl-color-template-blue-bg);
+}
+.signin-text11 {
+  text-align: center;
+  font-family: "Inter";
+}
+
+@media(max-width: 991px) {
+  .signin-form-root {
+    width: 100%;
+    padding: var(--dl-space-space-fourunits);
+  }
+}
+@media(max-width: 479px) {
+  .signin-form-root {
+    padding: var(--dl-space-space-oneandhalfunits);
+  }
+  .signin-button {
+    width: 100%;
+  }
+  .signin-button1 {
+    width: 100%;
+  }
+}
