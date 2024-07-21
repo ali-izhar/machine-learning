@@ -184,3 +184,6 @@ logs/
 
 # assets
 assets/
+
+# .pth
+*.pth
