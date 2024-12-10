@@ -4,8 +4,9 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns  # type: ignore
-from typing import Tuple, Optional
+from typing import Tuple, Optional, List
 from dataclasses import dataclass
+from scipy.interpolate import BSpline
 
 
 @dataclass
@@ -139,6 +140,87 @@ class SplineVisualizer:
 
         return fig
 
+    def draw_bspline(self, save_path: Optional[str] = None) -> plt.Figure:
+        """Draw a B-spline with its basis functions."""
+        # Setup plot with two subplots
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+
+        # Define knot vector (clamped B-spline)
+        degree = 3
+        knots = np.array([0] * degree + [0, 1, 2, 3] + [3] * degree)
+
+        # Define control points (x and y coordinates separately)
+        x_points = np.array([0, 0, 1, 2, 3, 3])
+        y_points = np.array([0, 1, 2, 2, 1, 0])
+
+        # Create B-spline objects for x and y coordinates
+        bspline_x = BSpline(knots, x_points, degree)
+        bspline_y = BSpline(knots, y_points, degree)
+
+        # Plot the B-spline curve
+        t = np.linspace(0, 3, 100)
+        x_curve = bspline_x(t)
+        y_curve = bspline_y(t)
+
+        # Upper plot: B-spline curve
+        ax1.plot(
+            x_curve, y_curve, "-", label="B-spline curve", color="#2E86C1", linewidth=2
+        )
+        ax1.plot(x_points, y_points, "o--", label="Control points", color="#E74C3C")
+        ax1.set_title("Cubic B-spline Curve", fontsize=14, pad=20)
+        ax1.grid(True)
+        ax1.legend()
+
+        # Lower plot: Basis functions
+        colors = plt.cm.viridis(np.linspace(0, 1, len(x_points)))
+
+        # Add vertical lines for knot positions
+        unique_knots = np.unique(knots)
+        for k in unique_knots:
+            ax2.axvline(x=k, color="gray", linestyle="--", alpha=0.3)
+
+        # Plot basis functions
+        for i in range(len(x_points)):
+            # Create basis function for each control point
+            basis_coef = np.zeros(len(x_points))
+            basis_coef[i] = 1.0
+            basis = BSpline(knots, basis_coef, degree)
+
+            # Plot basis function
+            t_basis = np.linspace(0, 3, 200)
+            ax2.plot(
+                t_basis,
+                basis(t_basis),
+                "-",
+                color=colors[i],
+                label=f"B_{i}³(t)",
+                alpha=0.7,
+            )
+
+        # Add knot annotations
+        knot_multiplicities = {k: np.sum(knots == k) for k in unique_knots}
+        y_pos = -0.1  # Position for knot labels
+        for k in unique_knots:
+            if knot_multiplicities[k] > 1:
+                label = f"t={k}\n(×{knot_multiplicities[k]})"
+            else:
+                label = f"t={k}"
+            ax2.text(k, y_pos, label, ha="center", va="top")
+
+        ax2.set_title("B-spline Basis Functions", fontsize=14, pad=20)
+        ax2.grid(True)
+        ax2.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+        ax2.set_xlabel("t", fontsize=12)
+        ax2.set_ylabel("Basis value", fontsize=12)
+        ax2.set_ylim(-0.2, 1.1)  # Adjust y-limits to show knot labels
+
+        plt.tight_layout()
+
+        if save_path:
+            plt.savefig(save_path, dpi=300, bbox_inches="tight")
+
+        return fig
+
 
 def main():
     """Main function to handle CLI arguments."""
@@ -147,14 +229,20 @@ def main():
         "-spline", action="store_true", help="Draw a piecewise spline visualization"
     )
     parser.add_argument(
+        "-bspline", action="store_true", help="Draw a B-spline visualization"
+    )
+    parser.add_argument(
         "-o", "--output", type=str, help="Path to save the visualization"
     )
 
     args = parser.parse_args()
 
+    visualizer = SplineVisualizer()
     if args.spline:
-        visualizer = SplineVisualizer()
         fig = visualizer.draw_piecewise_spline(args.output)
+        plt.show()
+    elif args.bspline:
+        fig = visualizer.draw_bspline(args.output)
         plt.show()
     else:
         parser.print_help()
