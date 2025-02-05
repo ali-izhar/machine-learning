@@ -98,9 +98,110 @@ This strategy tests actions sequentially until finding a success, then exploits 
 2. **Softmax (Boltzmann)**:  
    $$\pi(a|s) = \frac{e^{Q(s,a)/\tau}}{\sum_{a'} e^{Q(s,a')/\tau}}$$  
    with temperature $\tau > 0$. Higher temperature means more random exploration.
-3. **Upper Confidence Bound (UCB)**:  
-   $$a_t = \arg\max_a \left[ Q(s,a) + c \sqrt{\frac{\ln t}{N(s,a)}} \right]$$  
-   Balances trying actions that seem good with those that haven't been tried much.
+
+#### 3. Epsilon-Greedy Strategy
+This strategy combines exploration and exploitation using a probability parameter $\epsilon$:
+
+- **Action Selection**:
+  $$a_t = \begin{cases}
+  \text{random action} & \text{with probability } \epsilon \\
+  \arg\max_a Q(a) & \text{with probability } 1-\epsilon
+  \end{cases}$$
+
+- **Value Estimation**: For each action $a$, maintain:
+  - Action count: $N(a)$ = number of times action $a$ was chosen
+  - Reward history: $R(a,t)$ = reward received for action $a$ at trial $t$
+  - Q-value estimate at trial $k$:
+    $$Q_k(a) = \frac{1}{N(a)} \sum_{t=1}^k R(a,t)$$
+
+- **Update Rules**:
+  - On success at trial $k$:
+    $$Q_k(a) = \frac{r + \sum_{t=1}^{k-1} R(a,t)}{N(a)}$$
+  - On failure at trial $k$:
+    $$Q_k(a) = \frac{\sum_{t=1}^{k-1} R(a,t)}{N(a)}$$
+  where $r$ is the reward value (typically 1.0)
+
+- **Tie Breaking**: When multiple actions share maximum Q-value:
+  $$P(a_t = a | a \in \arg\max_a Q(a)) = \frac{1}{|\arg\max_a Q(a)|}$$
+
+- **Expected Return**: For $T$ trials:
+  $$\mathbb{E}[R_T] = T \cdot \left(\epsilon \cdot \sum_{i=1}^{|\mathcal{A}|} \frac{p_i}{|\mathcal{A}|} + (1-\epsilon) \cdot \max_i p_i\right) \cdot r$$
+  where $p_i$ is the success probability of action $i$
+
+- **Regret**: Similar to other strategies:
+  $$\mathcal{L}_{\text{ε-greedy}} = T \cdot \max_i(p_i) \cdot r - \mathbb{E}[R_T]$$
+
+This strategy typically achieves better performance than pure exploration or exploitation
+by balancing between them. The parameter $\epsilon$ controls this trade-off:
+- Higher $\epsilon$: More exploration, slower convergence but better chance of finding optimal action
+- Lower $\epsilon$: More exploitation, faster convergence but risk of suboptimal action selection
+
+#### 4. Upper Confidence Bound (UCB) Strategy
+This strategy addresses a key limitation of ε-greedy: all non-greedy actions are treated equally during exploration.
+UCB instead uses uncertainty in value estimates to guide exploration.
+
+**Intuition**:
+Imagine you're a doctor testing different treatments. For each treatment, you maintain:
+- The average success rate so far (Q(a))
+- How confident you are in this estimate (the uncertainty bonus)
+
+The less you've tried a treatment, the less confident you are about its true effectiveness.
+UCB adds an "optimism bonus" to less-tried actions, following the principle:
+"Be optimistic in the face of uncertainty."
+
+**Hoeffding's Inequality**:
+- Starts with the basic form: $\mathcal{P}(\mathbb{E}[X] > \bar{X}_t + u) \leq e^{-2tu^2}$
+- To apply to our bandit problem, we replace:
+  - $\mathbb{E}[X]$ with $Q(a)$ (true action-value)
+  - $\bar{X}_t$ with $\hat{Q}_t(a)$ (estimated action-value at t)
+  - $u$ with $U_t(a)$ (upper confidence bound)
+
+This gives us:
+$$\mathcal{P}(Q(a) > \hat{Q}_t(a) + U_t(a)) \leq e^{-2tU_t(a)^2}$$
+
+The inequality $Q(a) \leq \hat{Q}_t(a) + U_t(a)$ is crucial because:
+- If true value > optimistic estimate: we're being too pessimistic
+- If true value ≤ optimistic estimate: we have a valid upper bound
+
+This ensures we:
+- Don't underestimate potentially good actions
+- Maintain realistic but optimistic estimates
+- Gradually tighten bounds as we gather more data
+
+Since we want $Q(a) \leq \hat{Q}_t(a) + U_t(a)$ with high probability:
+1. We need $e^{-2tU_t(a)^2}$ to be very small
+2. Using $t \geq N_t(a)$ (current trial ≥ times action chosen):
+   $$e^{-2tU_t(a)^2} \leq e^{-2N_t(a)U_t(a)^2} = p$$
+3. Solving for $U_t(a)$ with $p = t^{-4}$ gives us:
+   $$U_t(a) = \sqrt{\frac{2\ln t}{N_t(a)}}$$
+
+- The UCB formula $c\sqrt{\frac{\ln t}{N(a)}}$ comes from this inequality:
+
+- **Action Selection**: Choose action that maximizes UCB value:
+  $$a_t = \arg\max_a \left[ Q(a) + c\sqrt{\frac{\ln t}{N(a)}} \right]$$
+
+- **Components**:
+  - $Q(a)$: Estimated value of action (exploitation term)
+  - $c\sqrt{\frac{\ln t}{N(a)}}$: Uncertainty bonus (exploration term)
+    - $c$: Exploration parameter controlling confidence level
+    - $\ln t$: Natural log of total trials (grows slowly)
+    - $N(a)$: Number of times action $a$ was chosen
+
+- **Key Properties**:
+  - Actions with high estimated values are favored (exploitation)
+  - Actions with few attempts have high uncertainty bonus (exploration)
+  - Uncertainty bonus decreases as actions are tried more
+  - No random exploration needed (unlike ε-greedy)
+
+- **Theoretical Advantages**:
+  - Provides theoretical guarantees on regret bounds
+  - Automatically reduces exploration over time
+  - Focuses exploration on promising actions
+  - More efficient than ε-greedy in many scenarios
+
+- **Expected Regret**: Grows logarithmically with time:
+  $$\mathbb{E}[\mathcal{L}_{\text{UCB}}] = O(\ln T)$$
+  Much better than ε-greedy's linear regret growth
 
 ## Algorithms
 
