@@ -51,6 +51,57 @@ Maximize the **expected return** $G_t = \sum_{k=0}^\infty \gamma^k r_{t+k}$.
   $$V^*(s) = \max_a \left[ R(s,a) + \gamma \sum_{s'} P(s'|s,a) V^*(s') \right]$$  
   $$Q^*(s,a) = R(s,a) + \gamma \sum_{s'} P(s'|s,a) \max_{a'} Q^*(s',a')$$  
 
+## Exploration vs. Exploitation
+
+### Multi-Armed Bandit Strategies
+
+#### 1. Exploration-Only Strategy
+In this strategy, the agent randomly selects actions with equal probability regardless of past outcomes.
+
+- **Action Selection**: For each trial $t$, select action $a_t$ uniformly:
+  $$P(a_t = i) = \frac{1}{|\mathcal{A}|}, \quad \forall i \in \mathcal{A}$$
+
+- **Expected Return**: For $T$ trials with reward $r$:
+  $$\mathbb{E}[R_T] = \sum_{i=1}^{|\mathcal{A}|} \frac{T}{|\mathcal{A}|} \cdot p_i \cdot r$$
+  where $p_i$ is the success probability of action $i$
+
+- **Regret**: Difference between optimal and actual return:
+  $$\mathcal{L}_{\text{exploration}} = T \cdot \max_i(p_i) \cdot r - \mathbb{E}[R_T]$$
+
+#### 2. Exploitation-Only Strategy
+This strategy tests actions sequentially until finding a success, then exploits that action for remaining trials.
+
+- **Action Selection**: For trial $t$:
+  $$a_t = \begin{cases}
+  i \text{ where } i = (t \bmod |\mathcal{A}|) & \text{if no success yet} \\
+  a_{\text{successful}} & \text{if previous success}
+  \end{cases}$$
+
+- **Theoretical Return**: For trial $k$:
+  $$R_k = P(\text{first success at }k) \cdot \mathbb{E}[\text{future rewards}|k]$$
+  where:
+  $$P(\text{first success at }k) = p_k \prod_{i=1}^{|\mathcal{A}|} (1-p_i)^{q_k + a_i}$$
+  $$\mathbb{E}[\text{future rewards}|k] = 1 + (T-k)p_k$$
+  
+  Here:
+  - $q_k = \lfloor (k-1)/|\mathcal{A}| \rfloor$ (complete cycles)
+  - $a_i$ are adjustment factors based on remainder
+  - $p_k$ is the success probability of the action tried at trial $k$
+
+- **Total Expected Return**:
+  $$\mathbb{E}[R_T] = \sum_{k=1}^T R_k$$
+
+- **Regret**: Similar to exploration-only:
+  $$\mathcal{L}_{\text{exploitation}} = T \cdot \max_i(p_i) \cdot r - \mathbb{E}[R_T]$$
+
+1. **$\epsilon$-Greedy**: Choose random action with probability $\epsilon$, else $a = \arg\max_a Q(s,a)$. Like occasionally trying a new restaurant instead of going to your favorite.
+2. **Softmax (Boltzmann)**:  
+   $$\pi(a|s) = \frac{e^{Q(s,a)/\tau}}{\sum_{a'} e^{Q(s,a')/\tau}}$$  
+   with temperature $\tau > 0$. Higher temperature means more random exploration.
+3. **Upper Confidence Bound (UCB)**:  
+   $$a_t = \arg\max_a \left[ Q(s,a) + c \sqrt{\frac{\ln t}{N(s,a)}} \right]$$  
+   Balances trying actions that seem good with those that haven't been tried much.
+
 ## Algorithms
 
 ### 1. Dynamic Programming (Model-Based)
@@ -85,24 +136,7 @@ Maximize the **expected return** $G_t = \sum_{k=0}^\infty \gamma^k r_{t+k}$.
 - **REINFORCE Gradient**:  
   $$\nabla_\theta J(\theta) = \mathbb{E}_\pi \left[ G_t \nabla_\theta \log \pi_\theta(a_t|s_t) \right]$$  
 - **Actor-Critic**: Combine policy gradient with a value function baseline $V_w(s)$:  
-  $$\nabla_\theta J(\theta) = \mathbb{E}_\pi \left[ \left( Q_w(s_t,a_t) - V_w(s_t) \right) \nabla_\theta \log \pi_\theta(a_t|s_t) \right]$$  
-
-## Exploration vs. Exploitation
-
-1. **$\epsilon$-Greedy**: Choose random action with probability $\epsilon$, else $a = \arg\max_a Q(s,a)$. Like occasionally trying a new restaurant instead of going to your favorite.
-2. **Softmax (Boltzmann)**:  
-   $$\pi(a|s) = \frac{e^{Q(s,a)/\tau}}{\sum_{a'} e^{Q(s,a')/\tau}}$$  
-   with temperature $\tau > 0$. Higher temperature means more random exploration.
-3. **Upper Confidence Bound (UCB)**:  
-   $$a_t = \arg\max_a \left[ Q(s,a) + c \sqrt{\frac{\ln t}{N(s,a)}} \right]$$  
-   Balances trying actions that seem good with those that haven't been tried much.
-
-## Implementation Considerations
-
-- **Computational Complexity**: DP and exact methods scale poorly with $|\mathcal{S}|$ and $|\mathcal{A}|$.  
-- **Sample Efficiency**: TD methods > Monte Carlo; experience replay in DQN.  
-- **Convergence**: Q-Learning converges to $Q^*$ under Robbins-Monro conditions.  
-- **Hyperparameters**: Tune $\alpha$, $\gamma$, $\epsilon$, network architecture, and batch size.  
+  $$\nabla_\theta J(\theta) = \mathbb{E}_\pi \left[ \left( Q_w(s_t,a_t) - V_w(s_t) \right) \nabla_\theta \log \pi_\theta(a_t|s_t) \right]$$    
 
 ## References
 
