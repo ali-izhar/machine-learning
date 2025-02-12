@@ -22,6 +22,69 @@ An MDP is defined by the tuple $(\mathcal{S}, \mathcal{A}, P, R, \gamma)$:
 - **Reward Function**: $R(s_t, a_t) = \mathbb{E}[r_t | s_t, a_t]$.  
 - **Discount Factor**: $\gamma \in [0, 1]$.  
 
+### Finding State Values
+
+To find the value of a state, we theoretically need to follow all possible paths in the state transition tree. However, this becomes practically infeasible as:
+- The tree can grow infinitely due to recursion
+- States can transition back to previously visited states
+- The number of possible paths grows exponentially
+
+This is where the Bellman equation becomes crucial. Instead of computing infinite paths, it breaks down the value into two components:
+1. Immediate reward from the current state-action
+2. Expected discounted return from the successor state
+
+This recursive definition allows us to compute values efficiently:
+$$V(s) = R(s,a) + \gamma \sum_{s'} P(s'|s,a)V(s')$$
+
+### Matrix Form of Bellman Equation
+
+The Bellman equation can be expressed in matrix form as:
+$$\vec{V} = \vec{R} + \gamma \vec{P}\vec{V}$$
+
+Where:
+- $\vec{V}$ is the vector of state values
+- $\vec{R}$ is the vector of rewards
+- $\vec{P}$ is the state transition probability matrix
+- $\gamma$ is the discount factor
+
+#### Example: Consider a student MDP with states: {Facebook, Class1, Class2, Class3, Sleep, Bar, Pass}
+
+The reward vector $\vec{R}$ and state values $\vec{V}$ are:
+
+$\vec{R} = \begin{bmatrix} -1 \\ -2 \\ -2 \\ -2 \\ 0 \\ 1 \\ 10 \end{bmatrix}$
+$\vec{V} = \begin{bmatrix} v_1 \\ v_2 \\ v_3 \\ v_4 \\ v_5 \\ v_6 \\ v_7 \end{bmatrix}$
+
+The transition matrix $\vec{P}$ represents the probability of moving from one state to another:
+
+$\vec{P} = \begin{bmatrix}
+0.9 & 0.1 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
+0.5 & 0.0 & 0.5 & 0.0 & 0.0 & 0.0 & 0.0 \\
+0.0 & 0.0 & 0.0 & 0.8 & 0.2 & 0.0 & 0.0 \\
+0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.4 & 0.6 \\
+0.0 & 0.0 & 0.0 & 0.0 & 1.0 & 0.0 & 0.0 \\
+0.0 & 0.2 & 0.4 & 0.4 & 0.0 & 0.0 & 0.0 \\
+0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 1.0
+\end{bmatrix}$
+
+To solve for the state values, we use:
+$$(I - \gamma P)\vec{V} = \vec{R}$$
+$$\vec{V} = (I - \gamma P)^{-1}\vec{R}$$
+
+For example, with $\gamma = 0.9$, solving this system gives us the value of each state:
+- Facebook: $v_1 = -8.6$
+- Class1: $v_2 = -7.2$
+- Class2: $v_3 = -4.1$
+- Class3: $v_4 = 2.8$
+- Sleep: $v_5 = 0.0$
+- Bar: $v_6 = -2.3$
+- Pass: $v_7 = 10.0$
+
+This shows that:
+1. Passing has the highest value (10.0)
+2. Being in Facebook has the lowest value (-8.6)
+3. Progress through classes (Class1 → Class2 → Class3) shows increasing values
+4. Sleep and Bar states have intermediate values
+
 ### Objective
 Maximize the **expected return** $G_t = \sum_{k=0}^\infty \gamma^k r_{t+k}$.
 
@@ -202,6 +265,57 @@ Since we want $Q(a) \leq \hat{Q}_t(a) + U_t(a)$ with high probability:
 - **Expected Regret**: Grows logarithmically with time:
   $$\mathbb{E}[\mathcal{L}_{\text{UCB}}] = O(\ln T)$$
   Much better than ε-greedy's linear regret growth
+
+#### 5. Thompson Sampling Strategy
+This strategy uses Bayesian inference to balance exploration and exploitation by
+maintaining probability distributions over each action's true reward probability.
+
+**Intuition**:
+Imagine you're a doctor with different treatments:
+- For each treatment, maintain a belief about its success rate
+- More uncertain treatments have wider distributions
+- More certain treatments have narrower distributions
+- Each day:
+  1. Sample one possible success rate from each treatment's distribution
+  2. Use the treatment with highest sampled rate
+  3. Update your belief based on the outcome
+
+**Mathematical Formulation**:
+
+1. **Prior Distribution**:
+   - For each action $a$, maintain Beta distribution $Beta(\alpha_a, \beta_a)$
+   - Initially: $\alpha_a = 1, \beta_a = 1$ (uniform distribution)
+   - Mean of Beta: $\mathbb{E}[p_a] = \frac{\alpha_a}{\alpha_a + \beta_a}$
+
+2. **Action Selection**:
+   - Sample $\theta_a \sim Beta(\alpha_a, \beta_a)$ for each action
+   - Choose action: $a_t = \arg\max_a \theta_a$
+
+3. **Posterior Update**:
+   After observing reward $r_t$:
+   $$(\alpha_a, \beta_a) \leftarrow \begin{cases}
+   (\alpha_a + 1, \beta_a) & \text{if } r_t = 1 \text{ and } a = a_t \\
+   (\alpha_a, \beta_a + 1) & \text{if } r_t = 0 \text{ and } a = a_t \\
+   (\alpha_a, \beta_a) & \text{if } a \neq a_t
+   \end{cases}$$
+
+**Key Properties**:
+- Automatically balances exploration/exploitation through uncertainty
+- More exploration when uncertain (wide distributions)
+- More exploitation when confident (narrow distributions)
+- Asymptotically optimal in many scenarios
+
+**Alternative Formulation**:
+For non-binary rewards, can use Normal distribution:
+- Maintain $\mathcal{N}(\mu_a, \sigma^2/n_a)$ for each action
+- $\mu_a$: Sample mean of rewards
+- $n_a$: Number of times action chosen
+- $\sigma^2$: Reward variance (fixed)
+
+**Expected Regret**:
+- Grows logarithmically: $\mathbb{E}[\mathcal{L}_{\text{TS}}] = O(\ln T)$
+- Matches theoretical lower bound for many bandit problems
+- Often outperforms UCB empirically
 
 ## Algorithms
 
