@@ -6,10 +6,7 @@ import seaborn as sn
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.animation import FuncAnimation
 
-# Use newer seaborn style
 plt.style.use("seaborn-v0_8")
-
-# Create a white colormap for visualization
 W = LinearSegmentedColormap.from_list("w", ["w", "w"], N=256)
 
 # Define possible actions as directional movements
@@ -152,12 +149,12 @@ def policy_evaluation_animated(
         env.update_plot(iteration)
 
     # Create animation with specific frames
-    frames = [1, 2, 3, 5, 10, 20, 30, 50, 100, 200, 500, 1000]
+    frames = [1, 2, 3, 1000]
     anim = FuncAnimation(
         fig,
         update,
         frames=frames,
-        interval=500,  # 0.5 second between frames
+        interval=1000,  # 1 second between frames
         repeat=False,
         blit=False,  # Set to False to ensure proper updates
     )
@@ -170,5 +167,5 @@ def policy_evaluation_animated(
 if __name__ == "__main__":
     env = GridWorld(4)
     final_values = policy_evaluation_animated(
-        env, max_iterations=1000, discount=1.0, in_place=False
+        env, policy=None, max_iterations=1, discount=1.0, in_place=False
     )
