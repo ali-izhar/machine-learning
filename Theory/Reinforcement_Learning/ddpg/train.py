@@ -79,7 +79,7 @@ def train(
         score = 0
 
         # Episode loop
-        for t in range(max_t):
+        for _ in range(max_t):
             # Select an action (with noise for exploration)
             action = agent.act(state)
 

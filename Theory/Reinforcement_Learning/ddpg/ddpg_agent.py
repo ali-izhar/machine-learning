@@ -64,7 +64,7 @@ class Agent:
 
     def step(self, state, action, reward, next_state, done):
         """Save experience in replay memory, and use random sample from buffer to learn."""
-        # Save experience / reward
+        # Save experience in replay memory
         self.memory.add(state, action, reward, next_state, done)
 
         # Learn, if enough samples are available in memory

@@ -14,26 +14,24 @@ DDPG combines DQN and policy gradient methods, using:
 
 **Policy Gradient Update**:
 The actor is updated by applying the chain rule to the expected return J with respect to actor parameters θ^μ:
-```
-∇_θ^μ J ≈ E_s[∇_θ^μ Q(s,a|θ^Q)|a=μ(s|θ^μ)]
-       = E_s[∇_a Q(s,a|θ^Q)|a=μ(s|θ^μ) · ∇_θ^μ μ(s|θ^μ)]
-```
+
+$$\nabla_{\theta^\mu} J \approx \mathbb{E}_s[\nabla_{\theta^\mu} Q(s,a|\theta^Q)|_{a=\mu(s|\theta^\mu)}]$$
+$$= \mathbb{E}_s[\nabla_a Q(s,a|\theta^Q)|_{a=\mu(s|\theta^\mu)} \cdot \nabla_{\theta^\mu} \mu(s|\theta^\mu)]$$
 
 **Critic Update**:
 The critic is updated using temporal difference learning by minimizing the loss:
-```
-L(θ^Q) = E_s,a,r,s'[(Q(s,a|θ^Q) - y)²]
-```
+
+$$L(\theta^Q) = \mathbb{E}_{s,a,r,s'}[(Q(s,a|\theta^Q) - y)^2]$$
+
 where target y is:
-```
-y = r + γ · Q'(s',μ'(s'|θ^μ')|θ^Q') · (1-done)
-```
+
+$$y = r + \gamma \cdot Q'(s',\mu'(s'|\theta^{\mu'})|\theta^{Q'}) \cdot (1-\text{done})$$
 
 **Target Networks**:
 Target networks are updated using Polyak averaging:
-```
-θ' ← τθ + (1-τ)θ'
-```
+
+$$\theta' \leftarrow \tau\theta + (1-\tau)\theta'$$
+
 where τ ≪ 1 is a smoothing parameter.
 
 ## Implementation
